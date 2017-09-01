@@ -1,17 +1,17 @@
-# Project Name
+# Forgotten
 
-The project description
+Forgotten is a logic-centered game in which users must solve puzzles to progress through levels of increasing difficulty. They must complete logic tasks that correspond to the trajectory of the storyline in order to unfold the mystery behind Forgotten.
 
-## Team
+## Ninja Rabbits Team
 
-- teamMember
-- teamMember
-- teamMember
-- teamMember
+- Gregory Susko
+- Matthew Palamos
+- Ryan Attick
+- Yessengerey 'Gary' Bolatov
 
 ## Roadmap
 
-View the project roadmap [here](LINK_TO_DOC)
+View the project roadmap [here](https://docs.google.com/document/d/1bp8A5CfTpHLk4qd1nRYLa5Q8vJ3ekPxDaFk9g7fnPWw/edit?usp=sharing)
 
 ## Contributing
 
@@ -27,7 +27,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
 
 ## Usage
 
-> Some usage instructions
+No specific usage requirements
 
 ## Requirements
 
@@ -41,22 +41,20 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
 ### Installing System Dependencies
 
 ```
-brew install yarn
 brew install redis
 brew install postgresql
 ```
 
-Yarn is a replacement for npm. It's faster and *guarantees* consistency -- as you deploy your code in various environments, you won't run the risk of slight variations in what gets installed.
-
 ### Install Project Dependencies
 
 ```
-yarn global add grunt-cli knex eslint
+npm install --save grunt grunt-cli
+npm install -g grunt-cli knex eslint
 ```
 
 ## App Configuration
 
-Override settings `config/default.json` in any environment by making a copy of `config/ENV.example.json` and naming it `config/ENV.json` and setting the appropriate variable. 
+Override settings `config/default.json` in any environment by making a copy of `config/ENV.example.json` and naming it `config/ENV.json` and setting the appropriate variable.
 
 For environments that require use of environment variables, you can supply variables as defined in `config/custom-environment-variables.json`.
 
@@ -71,7 +69,7 @@ IMPORTANT: ensure `postgres` is running before performing these steps.
 
 Use grunt to create a new database for your development and test environments:
 
-Development envronment: `grunt pgcreatedb:default`
+Development environment: `grunt pgcreatedb:default`
 
 Other environments, specify like so: `NODE_ENV=test grunt pgcreatedb:default`
 
@@ -95,12 +93,10 @@ Note: `--env NODE_ENV` may be omitted for development. For example, `knex migrat
 
 ## Running the App
 
-To run webpack build: `yarn run build`
+To run webpack build: `npm run build`
 
-To run server: `yarn run start`
+To run server: `npm run start`
 
-To run tests: `yarn run test`
+To run tests: `npm run test`
 
 To run your redis server for the session store `redis-server`
-
-

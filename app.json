@@ -1,0 +1,27 @@
+{
+  "name": "forgotten",
+  "scripts": {
+  },
+  "env": {
+    "facebookCallbackURL": "http://ninja-rabbits-forgotten.herokuapp.com/auth/facebook/callback",
+    "facebookClientID": "1944857725728321",
+    "facebookClientSecret": "55bf17eb2392d2cc72b823bf32ec6167",
+    "googleCallbackURL": "http://ninja-rabbits-forgotten.herokuapp.com/auth/google/callback",
+    "googleClientID": "488441054830-nr8j1dk4t158qsfqc8sq1aji8tjgf755.apps.googleusercontent.com",
+    "googleClientSecret": "N7XPYwT5UMVSOHXgbW9LJTKb",
+    "NPM_CONFIG_PRODUCTION": "false",
+    "REDIS_HOST": "ec2-54-86-77-126.compute-1.amazonaws.com",
+    "REDIS_URL": "redis://h:p0eda249b2ef5ba48008502e7fd33ac4fafec4686864da9d483e09dce3346e09f@ec2-52-72-98-112.compute-1.amazonaws.com:38699"
+  },
+  "formation": {
+  },
+  "addons": [
+    "heroku-postgresql",
+    "heroku-redis"
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ]
+}

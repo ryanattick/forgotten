@@ -24,4 +24,9 @@ app.use('/', routes.auth);
 app.use('/api', routes.api);
 app.use('/api/profiles', routes.profiles);
 
+app.use('/account', routes.auth);
+app.use('/maps', routes.auth);
+app.use('/backpack', routes.auth);
+app.use('/about', routes.auth);
+
 module.exports = app;

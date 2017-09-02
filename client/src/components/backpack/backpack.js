@@ -16,6 +16,7 @@ class Backpack extends React.Component {
       <div>
         <Profile />
         <Items items={this.state.items} />
+        <div>You're in backpack</div>
       </div>
     );
   }

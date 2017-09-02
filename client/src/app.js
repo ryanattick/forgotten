@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import View from './components/view.js';
+import Level from './components/level.js';
+import Maps from './components/maps.js';
 import {
   BrowserRouter as Router,
   Route,
@@ -16,13 +18,19 @@ class App extends React.Component {
   }
 
   render() {
+
+    let element = <div>YOURE HOME</div>;
+
     return (
       <Router>
         <div>
-          <Link to='/'><h3>CLICKONE</h3></Link>
-          <Link to='/api/anotherone' className="btn btn-default btn-sm">LOL</Link>
-          <Route exact={true} path='/' render={() => (<div>YOURE HOME</div>)}></Route>
-          <Route exact={true} path='/api/anotherone' component={View}></Route>
+          <Link to='/' className="btn btn-default btn-sm">Home Page</Link>
+          <Link to='/view' className="btn btn-default btn-sm">View</Link>
+          <Link to='/maps' className="btn btn-default btn-sm">Maps</Link>
+
+          <Route exact={true} path='/' render={() => (element)}></Route>
+          <Route exact={true} path='/view' component={View}></Route>
+          <Route exact={true} path='/maps' component={Maps}></Route>
         </div>
       </Router>
     );

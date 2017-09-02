@@ -1,13 +1,9 @@
-import webpack from 'webpack';
-import path from 'path';
+var path = require('path');
 
-const config = {
-  entry: {
-    app: './client/src/app',
-    view: './client/src/components/view'
-  },
+module.exports = {
+  entry: './client/src/app',
   output: {
-    filename: '[name].bundle.js',
+    filename: 'bundle.js',
     path: path.join(__dirname, 'public/dist')
   },
   module: {
@@ -26,5 +22,3 @@ const config = {
     ]
   }
 };
-
-export default config;

@@ -4,10 +4,10 @@ import ReactDOM from 'react-dom';
 const View = (props) => {
   return (
     <div>
-      <a href="/api" className="btn btn-default btn-sm">Index page</a>
+      <a href="/" className="btn btn-default btn-sm">Index page</a>
       <h1>Hello World from VIEW COMPONENT</h1>
     </div>
   );
 };
 
-ReactDOM.render(<View />, document.getElementById('root'));
+export default View;

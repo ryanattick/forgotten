@@ -3,3 +3,5 @@ services:
   - postgresql
 node_js:
 - "stable"
+before_script:
+  - psql -c 'create database thesis;' -U postgres

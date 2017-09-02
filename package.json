@@ -2,10 +2,10 @@
   "name": "course.thesis",
   "version": "1.0.0",
   "scripts": {
-    "postinstall": "curl -s https://raw.githubusercontent.com/reactorcore/pomander/master/bin/install | bash",
-    "start": "nodemon server",
+    "postinstall": "curl -s https://raw.githubusercontent.com/reactorcore/pomander/master/bin/install & knex migrate:latest & knex seed:run",
     "test": "NODE_ENV=test grunt test",
-    "build": "webpack -d --watch"
+    "build": "webpack --watch",
+    "start": "nodemon server & npm run build"
   },
   "author": "Hack Reactor",
   "license": "MIT",
@@ -48,6 +48,7 @@
     "grunt-mocha-test": "^0.13.2",
     "mocha": "^3.2.0",
     "node-mocks-http": "^1.6.1",
+    "nodemon": "^1.11.0",
     "supertest": "^3.0.0",
     "webpack": "^2.3.2",
     "webpack-dev-server": "^2.4.2"

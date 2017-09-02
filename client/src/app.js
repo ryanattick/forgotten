@@ -1,12 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import View from './components/view.js';
-import Level from './components/level.js';
+import Account from './components/account.js';
 import Maps from './components/maps.js';
+import Backpack from './components/backpack.js';
+import About from './components/about.js';
 import {
   BrowserRouter as Router,
   Route,
-  Link
+  Link,
+  IndexRoute
 } from 'react-router-dom';
 
 class App extends React.Component {
@@ -18,19 +20,18 @@ class App extends React.Component {
   }
 
   render() {
-
-    let element = <div>YOURE HOME</div>;
-
     return (
       <Router>
         <div>
-          <Link to='/' className="btn btn-default btn-sm">Home Page</Link>
-          <Link to='/view' className="btn btn-default btn-sm">View</Link>
+          <Link to='/account' className="btn btn-default btn-sm">My Account</Link>
           <Link to='/maps' className="btn btn-default btn-sm">Maps</Link>
+          <Link to='/backpack' className="btn btn-default btn-sm">Backpack</Link>
+          <Link to='/about' className="btn btn-default btn-sm">About</Link>
 
-          <Route exact={true} path='/' render={() => (element)}></Route>
-          <Route exact={true} path='/view' component={View}></Route>
+          <Route exact={true} path='/account' component={Account}></Route>
           <Route exact={true} path='/maps' component={Maps}></Route>
+          <Route exact={true} path='/backpack' component={Backpack}></Route>
+          <Route exact={true} path='/about' component={About}></Route>
         </div>
       </Router>
     );

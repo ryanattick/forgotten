@@ -1,3 +1,4 @@
+<<<<<<< 508e2235aaf3dfc6783bab8f65a07f83ef54de1e
 .currentAvatarChoice {
   margin: 50px;
   height: 200px;
@@ -14,6 +15,18 @@
 .backToAccountButton {
   margin: 10px;
   float: left;
+=======
+.selected {
+  border: 2px solid red;
+}
+
+.notSelected {
+  border: 1px solid black;
+}
+
+.test {
+  color: green;
+>>>>>>> sets up information edit view
 }
 
 .selected {

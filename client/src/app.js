@@ -10,7 +10,7 @@ import { Tabs, Tab } from 'material-ui/Tabs';
 
 // Components
 import Account from './components/account/account.js';
-import Maps from './components/maps.js';
+import Maps from './components/maps/maps.js';
 import Backpack from './components/backpack/backpack.js';
 import About from './components/about.js';
 

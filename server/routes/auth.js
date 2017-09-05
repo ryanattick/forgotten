@@ -5,15 +5,8 @@ const router = express.Router();
 
 router.route('/')
   .get(middleware.auth.verify, (req, res) => {
-    res.render('index.ejs');
-    // res.redirect('/maps');
-  });
-
-router.route('/maps')
-  .get(middleware.auth.verify, (req, res) => {
-    res.render('index.ejs', {
-      user: req.user
-    });
+    // res.render('index.ejs');
+    res.redirect('/maps');
   });
 
 router.route('/login')

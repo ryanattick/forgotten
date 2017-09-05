@@ -9,7 +9,7 @@ import AppBar from 'material-ui/AppBar';
 import { Tabs, Tab } from 'material-ui/Tabs';
 
 // Components
-import Account from './components/account.js';
+import Account from './components/account/account.js';
 import Maps from './components/maps.js';
 import Backpack from './components/backpack/backpack.js';
 import About from './components/about.js';
@@ -53,6 +53,7 @@ class App extends React.Component {
       currentTabIndex: value
     });
   }
+
 
   render() {
     return (

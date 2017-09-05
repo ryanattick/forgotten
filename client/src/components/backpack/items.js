@@ -1,11 +1,14 @@
 import React from 'react';
-import {GridList, GridTile} from 'material-ui/GridList';
-import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
-import StarBorder from 'material-ui/svg-icons/toggle/star-border';
-import IconButton from 'material-ui/IconButton';
-import AutoComplete from 'material-ui/AutoComplete';
+
+// Material UI
+import { GridList } from 'material-ui/GridList';
+import { Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle } from 'material-ui/Toolbar';
+import TextField from 'material-ui/TextField';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
+
+// Components
+import Item from './item.js';
 
 class Items extends React.Component {
   constructor(props) {
@@ -41,9 +44,21 @@ class Items extends React.Component {
     });
   }
 
-  handleSearchChange(input) {
+  handleSearchChange(event, newValue) {
     this.setState({
-      searchTerm: input
+      searchTerm: newValue
+    }, () => {
+      var display = [];
+      var searchText = newValue.toUpperCase();
+      var allItems = this.state.items;
+      for (var i = 0; i < allItems.length; i++) {
+        if (allItems[i].name.toUpperCase().includes(newValue.toUpperCase())) {
+          display.push(this.state.items[i]);
+        }
+      }
+      this.setState({
+        itemsToDisplay: display
+      });
     });
   }
 
@@ -51,18 +66,18 @@ class Items extends React.Component {
 
     return (
       <div>
-        <Toolbar>
+
+        <Toolbar style={{height: 'auto'}}>
+
           <ToolbarGroup>
-            <AutoComplete
-              hintText='Search in a name of an item'
-              filter={AutoComplete.fuzzyFilter}
-              dataSource={this.state.items}
-              onUpdateInput={this.handleSearchChange}>
-            </AutoComplete>
+            <TextField
+              floatingLabelText='Search by name'
+              onChange={this.handleSearchChange}/>
           </ToolbarGroup>
+
           <ToolbarGroup>
             <SelectField
-              floatingLabelText='Filter by'
+              floatingLabelText='Filter by type'
               value={this.state.filterIndex}
               onChange={this.handleFilterChange}>
               {this.state.filters.map((filter, id) => (
@@ -70,20 +85,18 @@ class Items extends React.Component {
               ))}
             </SelectField>
           </ToolbarGroup>
+
         </Toolbar>
+
         <GridList
           cellHeight={180}
           cols={4}
           padding={50}>
           {this.state.itemsToDisplay.map((item, id) => (
-            <GridTile
-              key={id}
-              title={item.title}
-              subtitle={<span><b>{item.description}</b></span>}
-              actionIcon={<IconButton><StarBorder color="white" /></IconButton>}>
-            </GridTile>
+            <Item key={id} item={item}/>
           ))}
         </GridList>
+
       </div>
     );
   }

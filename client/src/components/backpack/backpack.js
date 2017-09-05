@@ -7,8 +7,8 @@ import Profile from './profile.js';
 // Sample data
 var filters = [
   'Name',
-  'Quest',
   'Support',
+  'Storyline',
   'Consumable',
   'Miscellaneous'
 ];
@@ -20,7 +20,7 @@ class Backpack extends React.Component {
       items: [
         {
           id: 0,
-          title: 'Blue Pill',
+          name: 'Blue Pill',
           description: 'Consuming this pill increases the timer on the next quest by 30 seconds',
           type: 'Consumable' /* Miscellaneous, Reward, etc. */,
           equipped: 'Not Possible' /* Yes, No, Not Possible */,
@@ -28,7 +28,7 @@ class Backpack extends React.Component {
         },
         {
           id: 1,
-          title: 'Guide Book #1',
+          name: 'Guide Book #1',
           description: 'This edition of the Guide Book allows you to have a free hint on each quest',
           type: 'Support' /* Miscellaneous, Reward, etc. */,
           equipped: 'No' /* Yes, No, Not Possible */,
@@ -36,23 +36,23 @@ class Backpack extends React.Component {
         },
         {
           id: 2,
-          title: 'Invitation #1',
+          name: 'Invitation #1',
           description: 'Piece of Paper',
-          type: 'Quest' /* Miscellaneous, Reward, etc. */,
+          type: 'Storyline' /* Miscellaneous, Reward, etc. */,
           equipped: 'Not Possible' /* Yes, No, Not Possible */,
           user_id: 0 /* References a user */
         },
         {
           id: 3,
-          title: 'Invitation #3',
+          name: 'Invitation #3',
           description: 'Piece of Paper',
-          type: 'Quest' /* Miscellaneous, Reward, etc. */,
+          type: 'Storyline' /* Miscellaneous, Reward, etc. */,
           equipped: 'Not Possible' /* Yes, No, Not Possible */,
           user_id: 0 /* References a user */
         },
         {
           id: 4,
-          title: 'Lantern',
+          name: 'Lantern',
           description: 'Lights up the righteous path',
           type: 'Support' /* Miscellaneous, Reward, etc. */,
           equipped: 'No' /* Yes, No, Not Possible */,
@@ -60,7 +60,7 @@ class Backpack extends React.Component {
         },
         {
           id: 5,
-          title: 'Vision',
+          name: 'Vision',
           description: 'You had a vision of a goat',
           type: 'Miscellaneous' /* Miscellaneous, Reward, etc. */,
           equipped: 'Not Possible' /* Yes, No, Not Possible */,

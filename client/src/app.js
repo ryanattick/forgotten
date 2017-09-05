@@ -33,7 +33,7 @@ var allReactRoutes = {
 var tabIndexBasedOnURL = (routes, indexTab) => {
   var splitURL = document.URL.split('/');
   var urlTabIndex = routes[splitURL[splitURL.length - 1]];
-  return urlTabIndex ? urlTabIndex : indexTab;
+  return routes.hasOwnProperty(splitURL[splitURL.length - 1]) ? urlTabIndex : indexTab;
 };
 
 // Component responsible for rendering the main control panel (App Bar)

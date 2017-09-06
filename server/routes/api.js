@@ -11,10 +11,4 @@ router.route('/')
     res.status(201).send({ data: 'Posted!' });
   });
 
-// EXAMPLE ROUTE with GET request handling
-router.route('/anotherone')
-  .get((req, res) => {
-    res.render('example.ejs');
-  });
-
 module.exports = router;

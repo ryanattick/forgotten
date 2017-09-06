@@ -7,7 +7,10 @@ import newAvatarStyle from '../../../../styles/account/NewAvatar.css';
 
 
 const buttonStyle = {
-  margin: 10,
+  marginTop: '100px',
+  marginRight: '200px',
+  height: '30px',
+  float: 'right'
 };
 
 const styles = {
@@ -59,15 +62,24 @@ class NewAvatar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      avatarChoice: {}
+      avatarChoice: {},
+      clicked: false,
+      currentChoice: ''
     }
     this.handleAvatarClick = this.handleAvatarClick.bind(this);
     this.handleSubmitClick = this.handleSubmitClick.bind(this);
   }
 
+ componentWillMount() {
+   this.setState({
+     currentChoice: this.props.currentAvatar
+   });
+ }
+
   handleAvatarClick(tile) {
     this.setState({
-      avatarChoice: tile
+      avatarChoice: tile,
+      currentChoice: tile.img
     });
   };
 
@@ -79,22 +91,24 @@ class NewAvatar extends React.Component {
   };
 
   render() {
-    let haveBorder = this.state.border ? "red" : "white"
+    let clicked = this.state.clicked;
     return (
       <MuiThemeProvider>
         <div style={styles.root}><br></br>
         <GridList style={styles.gridList} cols={2.2}>
           {tilesData.map((tile, index) => (
-            <GridTile
-              key={index}
-              title={tile.title}
-              titleStyle={styles.titleStyle}
-              onClick={this.handleAvatarClick.bind(this, tile)}
-              titleBackground="linear-gradient(to top, rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.3) 70%,rgba(0,0,0,0) 100%)">
-              <img src={tile.img} />
-            </GridTile>
+              <GridTile
+                key={index}
+                title={tile.title}
+                titleStyle={styles.titleStyle}
+                onClick={this.handleAvatarClick.bind(this, tile)}
+                titleBackground="linear-gradient(to top, rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.3) 70%,rgba(0,0,0,0) 100%)">
+                <img src={tile.img} />
+              </GridTile>
+            // }
           ))}
-        </GridList><br></br>
+        </GridList>
+      <img src={this.state.currentChoice} style={{margin: '50px', border: '3px solid black'}}/> <br></br>
       <RaisedButton label="Submit" style={buttonStyle} onClick={this.handleSubmitClick}/>
       </div>
     </MuiThemeProvider>

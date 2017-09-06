@@ -15,16 +15,10 @@ class EditAccount extends React.Component {
     super(props);
     this.state = {
       userInfo: {},
-      firstNameTextField: '',
-      lastNameTextField: '',
-      emailTextField: '',
-      passwordTextField: ''
+      usernameTextField: ''
     }
     this.handleSubmitClick = this.handleSubmitClick.bind(this);
-    this.handleFirstNameTextFieldChange = this.handleFirstNameTextFieldChange.bind(this);
-    this.handleLastNameTextFieldChange = this.handleLastNameTextFieldChange.bind(this);
-    this.handleEmailTextFieldChange = this.handleEmailTextFieldChange.bind(this);
-    this.handlePasswordTextFieldChange = this.handlePasswordTextFieldChange.bind(this);
+    this.handleUsernameTextFieldChange = this.handleUsernameTextFieldChange.bind(this);
   }
 
 componentWillMount () {
@@ -33,55 +27,17 @@ componentWillMount () {
   });
 };
 
-handleFirstNameTextFieldChange (e) {
-  this.setState({
-    firstNameTextField: e.target.value
-  });
-}
 
-handleLastNameTextFieldChange (e) {
+handleUsernameTextFieldChange (e) {
   this.setState({
-    lastNameTextField: e.target.value
-  });
-}
-
-handleEmailTextFieldChange (e) {
-  this.setState({
-    emailTextField: e.target.value
-  });
-}
-
-handlePasswordTextFieldChange (e) {
-  this.setState({
-    passwordTextField: e.target.value
-  });
+      usernameTextField: e.target.value
+    });
 }
 
 handleSubmitClick () {
-  if (this.state.firstNameTextField !== '') {
-    // $.post('/updateFirstName', {firstName: this.state.firstNameTextField}, (data) => {
-    //   console.log(data, 'First name update success');
-    // });
-    console.log(this.state.firstNameTextField);
-  };
-  if (this.state.lastNameTextField !== '') {
-    // $.post('/updateLastName', {lastName: this.state.lastNameTextField}, (data) => {
-    //   console.log(data, 'Last name update success');
-    // });
-    console.log(this.state.lastNameTextField);
-  };
-  if (this.state.emailTextField !== '') {
-    // $.post('/updateEmail', {email: this.state.emailTextField}, () => {
-    //   console.log(data, 'Email update success');
-    // });
-    console.log(this.state.emailTextField);
-  };
-  if (this.state.passwordTextField !== '') {
-    // $.post('/updatePassword', {password: this.state.passwordTextField}, () => {
-    //   console.log(data, 'Email update succss');
-    // });
-    console.log(this.state.passwordTextField);
-  }; 
+  // $.post('/updateUsername', {username: this.state.usernameTextField}, () => {
+  //   console.log(data, 'Username update succss');
+  // });
 };
 
 
@@ -92,28 +48,10 @@ handleSubmitClick () {
           <h3><u>Edit Account</u></h3><br></br>
           <form>
             <TextField
-              hintText="First Name"
-              floatingLabelText={this.state.userInfo.firstName}
-              value={this.state.firstNameTextField}
-              onChange={this.handleFirstNameTextFieldChange}
-            /><br />
-            <TextField
-              hintText="Last Name"
-              floatingLabelText={this.state.userInfo.lastName}
-              value={this.state.lastNameTextField}
-              onChange={this.handleLastNameTextFieldChange}
-            /><br />
-            <TextField
-              hintText="Email"
-              floatingLabelText={this.state.userInfo.email}
-              value={this.state.emailTextField}
-              onChange={this.handleEmailTextFieldChange}
-            /><br />
-            <TextField
-              hintText="Password"
-              floatingLabelText={this.state.userInfo.password}
-              value={this.state.passwordTextField}
-              onChange={this.handlePasswordTextFieldChange}
+              hintText="New Username"
+              floatingLabelText={this.state.userInfo.username}
+              value={this.state.usernameTextField}
+              onChange={this.handleUsernameTextFieldChange}
             /><br />
           <RaisedButton label="Submit Changes" style={style} onClick={this.handleSubmitClick}/>
           </form>

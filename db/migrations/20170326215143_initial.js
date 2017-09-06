@@ -8,7 +8,10 @@ exports.up = function (knex, Promise) {
       table.string('display', 100).nullable();
       table.string('email', 100).nullable().unique();
       table.string('phone', 100).nullable();
+      table.text('avatar').nullable();
+      table.string('username', 30).nullable()
       table.timestamps(true, true);
+
     }),
     knex.schema.createTableIfNotExists('auths', function(table) {
       table.increments('id').unsigned().primary();
@@ -17,6 +20,21 @@ exports.up = function (knex, Promise) {
       table.string('password', 100).nullable();
       table.string('salt', 100).nullable();
       table.integer('profile_id').references('profiles.id').onDelete('CASCADE');
+    }),
+    knex.schema.createTableIfNotExists('puzzles', function(table) {
+      table.increments('id').unsigned().primary();
+      table.string('name', 50).nullable().unique();
+      table.text('extra_info', 'longtext').nullable();
+      table.text('problem', 'longtext').nullable();
+      table.text('solution', 'longtext').nullable()
+    }),
+    knex.schema.createTableIfNotExists('items', function(table) {
+      table.increments('id').unsigned().primary();
+      table.text('description', 'longtext').nullable();
+      table.text('img_url').nullable();
+      table.integer('user_id').references('profiles.id').onDelete('CASCADE');
+      table.integer('puzzle_id').references('puzzles.id').onDelete('CASCADE');
+      table.string('equipped', 15).nullable();
     })
   ]);
 };
@@ -24,7 +42,10 @@ exports.up = function (knex, Promise) {
 exports.down = function (knex, Promise) {
   return Promise.all([
     knex.schema.dropTable('auths'),
-    knex.schema.dropTable('profiles')
+    knex.schema.dropTable('profiles'),
+    knex.schema.dropTable('puzzles'),
+    knex.schema.dropTable('items')
+
   ]);
 };
 

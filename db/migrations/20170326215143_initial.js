@@ -9,7 +9,8 @@ exports.up = function (knex, Promise) {
       table.string('email', 100).nullable().unique();
       table.string('phone', 100).nullable();
       table.text('avatar').nullable();
-      table.string('username', 30).nullable()
+      table.string('username', 30).nullable();
+      table.integer('levels').nullable();
       table.timestamps(true, true);
 
     }),
@@ -26,7 +27,7 @@ exports.up = function (knex, Promise) {
       table.string('name', 50).nullable().unique();
       table.text('extra_info', 'longtext').nullable();
       table.text('problem', 'longtext').nullable();
-      table.text('solution', 'longtext').nullable()
+      table.text('solution', 'longtext').nullable();
     }),
     knex.schema.createTableIfNotExists('items', function(table) {
       table.increments('id').unsigned().primary();
@@ -41,10 +42,10 @@ exports.up = function (knex, Promise) {
 
 exports.down = function (knex, Promise) {
   return Promise.all([
+    knex.schema.dropTable('items'),
+    knex.schema.dropTable('puzzles'),
     knex.schema.dropTable('auths'),
     knex.schema.dropTable('profiles'),
-    knex.schema.dropTable('puzzles'),
-    knex.schema.dropTable('items')
 
   ]);
 };

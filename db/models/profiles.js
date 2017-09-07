@@ -7,4 +7,5 @@ const Profile = db.Model.extend({
   }
 });
 
+
 module.exports = db.model('Profile', Profile);

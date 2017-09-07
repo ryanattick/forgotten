@@ -25,6 +25,7 @@ module.exports.getAll = (req, res) => {
 //     });
 // };
 
+
 module.exports.getOne = (req, res) => {
   models.Profile.where({ id: req.params.id }).fetch()
     .then(profile => {

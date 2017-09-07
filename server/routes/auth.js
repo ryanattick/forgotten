@@ -5,7 +5,6 @@ const app = express();
 
 const router = express.Router();
 
-
 router.route('/')
   .get(middleware.auth.verify, (req, res) => {
     // res.render('index.ejs');
@@ -39,18 +38,18 @@ router.route('/profile')
     });
   });
 
-  router.route('/index')
-    .get(middleware.auth.verify, (req, res) => {
-      res.render('index.ejs', {
-        user: req.user
-      });
+router.route('/index')
+  .get(middleware.auth.verify, (req, res) => {
+    res.render('index.ejs', {
+      user: req.user
     });
+  });
 
-  router.route('/logout')
-    .get((req, res) => {
-      req.logout();
-      res.redirect('/');
-    });
+router.route('/logout')
+  .get((req, res) => {
+    req.logout();
+    res.redirect('/');
+  });
 
 router.get('/auth/google', middleware.passport.authenticate('google', {
   scope: ['email', 'profile']

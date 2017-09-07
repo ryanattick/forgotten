@@ -15,30 +15,44 @@ class EditAccount extends React.Component {
     super(props);
     this.state = {
       userInfo: {},
-      usernameTextField: ''
-    }
+      usernameTextField: '',
+      id: ''
+    };
     this.handleSubmitClick = this.handleSubmitClick.bind(this);
     this.handleUsernameTextFieldChange = this.handleUsernameTextFieldChange.bind(this);
   }
 
-componentWillMount () {
-  this.setState({
-    userInfo: this.props.userInfo
-  });
-};
+  componentWillMount () {
+    this.setState({
+      userInfo: this.props.userInfo
+    });
+  }
 
 
-handleUsernameTextFieldChange (e) {
-  this.setState({
+  handleUsernameTextFieldChange (e) {
+    this.setState({
       usernameTextField: e.target.value
     });
-}
+  }
 
-handleSubmitClick () {
+  handleSubmitClick () {
   // $.post('/updateUsername', {username: this.state.usernameTextField}, () => {
   //   console.log(data, 'Username update succss');
   // });
-};
+
+    console.log(this.state.usernameTextField);
+    fetch('/updateUsername', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        username: this.state.usernameTextField,
+        id: this.props.id
+      })
+    });
+  }
 
 
   render() {
@@ -53,11 +67,11 @@ handleSubmitClick () {
               value={this.state.usernameTextField}
               onChange={this.handleUsernameTextFieldChange}
             /><br />
-          <RaisedButton label="Submit Changes" style={style} onClick={this.handleSubmitClick}/>
+            <RaisedButton label="Submit Changes" style={style} onClick={this.handleSubmitClick}/>
           </form>
         </div>
       </MuiThemeProvider>
-    )
+    );
   }
 }
 

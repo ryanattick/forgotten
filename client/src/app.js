@@ -17,6 +17,9 @@ import About from './components/about.js';
 // React Router
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
+// Styling
+import styles from '../../styles/app.css';
+
 // All specified react router routes for the front end rendering
 var allReactRoutes = {
   account: 0,
@@ -60,7 +63,7 @@ class App extends React.Component {
         <Router>
           <div>
             <div>
-              <Tabs initialSelectedIndex={this.state.currentTabIndex} onChange={this.handleTabChange}>
+              <Tabs className={styles.app} initialSelectedIndex={this.state.currentTabIndex} onChange={this.handleTabChange}>
                 <Tab value={0} label='My Account' containerElement={<Link to='/account'/>}/>
                 <Tab value={1} label='Maps' containerElement={<Link to='/maps'/>}/>
                 <Tab value={2} label='Backpack' containerElement={<Link to='backpack'/>}/>

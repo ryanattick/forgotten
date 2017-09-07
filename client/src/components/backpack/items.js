@@ -10,6 +10,9 @@ import MenuItem from 'material-ui/MenuItem';
 // Components
 import Item from './item.js';
 
+// Styling
+import styles from '../../../../styles/backpack/items.css';
+
 class Items extends React.Component {
   constructor(props) {
     super(props);
@@ -23,6 +26,7 @@ class Items extends React.Component {
 
     this.handleFilterChange = this.handleFilterChange.bind(this);
     this.handleSearchChange = this.handleSearchChange.bind(this);
+    this.handleItemPopup = this.handleItemPopup.bind(this);
   }
 
   handleFilterChange(event, index, value) {
@@ -62,12 +66,16 @@ class Items extends React.Component {
     });
   }
 
+  handleItemPopup(item) {
+    this.props.openItemPopUp(item);
+  }
+
   render() {
 
     return (
       <div>
 
-        <Toolbar style={{height: 'auto'}}>
+        <Toolbar className={styles.toolBar}>
 
           <ToolbarGroup>
             <TextField
@@ -93,7 +101,7 @@ class Items extends React.Component {
           cols={4}
           padding={50}>
           {this.state.itemsToDisplay.map((item, id) => (
-            <Item key={id} item={item}/>
+            <Item key={id} item={item} openItemPopUp={this.handleItemPopup}/>
           ))}
         </GridList>
 

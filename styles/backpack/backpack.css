@@ -1,3 +1,22 @@
 .example {
   background-color: blue;
 }
+
+.item_popup_content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.item_popup_content img {
+  max-width: 200px;
+}
+
+.item_popup_content div {
+  margin-top: 20px;
+}
+
+.item_popup_title {
+  text-align: center;
+}

@@ -1,16 +1,28 @@
 import React from 'react';
 
-const Puzzle = (props) => {
-  return (
-    <div>
-      <button onClick={() => props.handleReturntoMapClick()}>Return to Map</button>
+class Puzzle extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+    };
+  }
+
+  componentDidMount() {
+    this.refs.answerInput.focus();
+  }
+
+  render() {
+    return (
       <div>
-        {props.questions[props.currentQuest]}
+        <button onClick={() => this.props.handleReturntoMapClick()}>Return to Map</button>
+        <div>
+          {this.props.questions[this.props.currentQuest]}
+        </div>
+        <input ref="answerInput" onKeyUp={(e) => this.props.handleEnterClick(e)} type="text" id="puzzleAnswer"/>
+        <button onClick={() => this.props.handlePuzzleSubmit()}>Submit</button>
       </div>
-      <input onKeyUp={(e) => props.handleEnterClick(e)} type="text" id="puzzleAnswer"/>
-      <button onClick={() => props.handlePuzzleSubmit()}>Submit</button>
-    </div>
-  );
-};
+    );
+  }
+}
 
 export default Puzzle;

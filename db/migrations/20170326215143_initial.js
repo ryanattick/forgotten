@@ -51,7 +51,3 @@ exports.down = function (knex, Promise) {
     knex.schema.dropTable('profiles')
   ]);
 };
-
-
-
-

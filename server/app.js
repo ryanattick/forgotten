@@ -26,6 +26,15 @@ app.use('/', routes.auth);
 app.use('/api', routes.api);
 app.use('/api/profiles', routes.profiles);
 
+app.get('/mapsData', function(req, res) {
+  // send back user level
+  // res.json(num)
+});
+
+app.post('/mapData', function(req, res) {
+  //post user level to the db
+});
+
 app.use(['/account', '/maps', '/backpack', '/about'], routes.allOtherRoutes);
 
 app.get('/userInfo', function (req, res) {

@@ -34,7 +34,7 @@ class Account extends React.Component {
 
       } //replace with data
     };
-    //{id: 3, first: "Matt", last: "Palamos", display: "Matt Palamos", email: "cki.matt@gmail.com", …}
+    //{id: 3, first: "Matt", last: "Palamos", display: "Matt Palamos", email: "cki.matt@gmail.com", …}
     this.handleChangeAvatar = this.handleChangeAvatar.bind(this);
     this.handleEditClick = this.handleEditClick.bind(this);
     this.handleDeleteAccountClick = this.handleDeleteAccountClick.bind(this);

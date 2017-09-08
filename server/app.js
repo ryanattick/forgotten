@@ -1,3 +1,4 @@
+
 'use strict';
 const express = require('express');
 const path = require('path');
@@ -6,6 +7,7 @@ const routes = require('./routes');
 const app = express();
 const db = require('../db');
 const Profile = require('../db/models/profiles.js');
+const Items = require('../db/models/profiles.js');
 const dbUtils = require('../db/lib/utils.js');
 
 app.use(middleware.morgan('dev'));
@@ -38,9 +40,24 @@ app.post('/mapData', function(req, res) {
 app.use(['/account', '/maps', '/backpack', '/about'], routes.allOtherRoutes);
 
 app.get('/userInfo', function (req, res) {
-  console.log(req.user, 'req.users exists');
+  //console.log(req.user, 'req.users exists');
   res.status(200).send(req.user);
 });
+
+
+// app.get('/playerItems', function (req, res) {
+//   Items.forge().fetchAll()
+//       .then(function (results) {
+//         console.log(results._byId)
+//         res.status(200).send(results._byId);
+//       })
+//       .catch(function (err) {
+//         // If this expect statement is reached, there's an error.
+//         console.log('err')
+//       });
+//   //res.status(200).send(req);
+// });
+
 
 app.post('/updateAvatar', function (req, res) {
   console.log(req.body, 'req.body updateavatar exists');
@@ -63,6 +80,16 @@ app.post('/updateUsername', function (req, res) {
   });
 });
 
+
+
+// Sample Items table data
+// id
+// name
+// description
+// img_url
+// user_id
+// puzzle_id
+// equipped
 
 
 

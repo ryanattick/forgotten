@@ -36,18 +36,39 @@ exports.up = function (knex, Promise) {
       table.string('name', 50).unsigned().nullable();
       table.text('description', 'longtext').nullable();
       table.text('img_url').nullable();
-      table.integer('user_id').references('profiles.id').onDelete('CASCADE');
       table.integer('puzzle_id').references('puzzles.id').onDelete('CASCADE');
+      table.integer('equippable').nullable();
+    }),
+    knex.schema.createTableIfNotExists('users_items', function(table) {
+      table.increments('id').unsigned().primary();
+      table.integer('user_id').references('profiles.id').onDelete('CASCADE');
+      table.integer('item_id').references('items.id').
+        onDelete('CASCADE');
       table.string('equipped', 15).nullable();
-    })
+    }),
+
+
   ]);
 };
 
+//// Sample Items table data
+// id
+// name
+// description
+// img_url
+// user_id
+// puzzle_id
+// equippable
+
+
 exports.down = function (knex, Promise) {
   return Promise.all([
+    knex.schema.dropTable('auths'),
+    knex.schema.dropTable('users_items'),
     knex.schema.dropTable('items'),
     knex.schema.dropTable('puzzles'),
-    knex.schema.dropTable('auths'),
     knex.schema.dropTable('profiles')
+
+
   ]);
 };

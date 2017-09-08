@@ -18,6 +18,8 @@ class EditAccount extends React.Component {
       usernameTextField: '',
       id: ''
     };
+
+
     this.handleSubmitClick = this.handleSubmitClick.bind(this);
     this.handleUsernameTextFieldChange = this.handleUsernameTextFieldChange.bind(this);
   }
@@ -53,6 +55,7 @@ class EditAccount extends React.Component {
       })
     });
   }
+//thesis_devel=# INSERT INTO items (name, description, img_url, puzzle_id, equipped)              VALUES ('Blue Pill', 'Consuming this pill increases the timer on the next quest by 30 seconds', /assets/items/paper.jpg', null, Not Possible');
 
 
   render() {

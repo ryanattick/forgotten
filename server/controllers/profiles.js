@@ -25,6 +25,8 @@ module.exports.getAll = (req, res) => {
 //     });
 // };
 
+// INSERT INTO items (name, description, img_url, puzzle_id, equippable)            VALUES ('Blue Pill', 'Consuming this pill increases the timer on the next quest by 30 seconds', '/assets/items/paper.jpg', null, 'Not Possible')
+
 
 module.exports.getOne = (req, res) => {
   models.Profile.where({ id: req.params.id }).fetch()

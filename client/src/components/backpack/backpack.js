@@ -16,75 +16,11 @@ import FlatButton from 'material-ui/FlatButton';
 // TODO: Make it so items are retrieved from DB in alphabetical order
 // TODO: retrieve filters from db
 
-// Sample Items table data
-// id
-// name
-// description
-// img_url
-// user_id
-// puzzle_id
-// equipped
-
 class Backpack extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      items: [
-        {
-          id: 0,
-          name: 'Blue Pill',
-          description: 'Consuming this pill increases the timer on the next quest by 30 seconds',
-          type: 'Consumable', /* Miscellaneous, Reward, etc. */
-          equipped: 'Not Possible', /* Yes, No, Not Possible */
-          img_url: '/assets/items/paper.jpg',
-          puzzle_id: null
-        },
-        {
-          id: 1,
-          name: 'Guide Book #1',
-          description: 'This edition of the Guide Book allows you to have a free hint on each quest',
-          type: 'Support', /* Miscellaneous, Reward, etc. */
-          equipped: 'No', /* Yes, No, Not Possible */
-          img_url: '/assets/items/paper.jpg',
-          puzzle_id: null
-        },
-        {
-          id: 2,
-          name: 'Invitation #1',
-          description: 'Piece of Paper',
-          type: 'Storyline', /* Miscellaneous, Reward, etc. */
-          equipped: 'Not Possible', /* Yes, No, Not Possible */
-          img_url: '/assets/items/paper.jpg',
-          puzzle_id: null
-        },
-        {
-          id: 3,
-          name: 'Invitation #3',
-          description: 'Piece of Paper',
-          type: 'Storyline', /* Miscellaneous, Reward, etc. */
-          equipped: 'Not Possible', /* Yes, No, Not Possible */
-          img_url: '/assets/items/paper.jpg',
-          puzzle_id: null
-        },
-        {
-          id: 4,
-          name: 'Lantern',
-          description: 'Lights up the righteous path',
-          type: 'Support', /* Miscellaneous, Reward, etc. */
-          equipped: 'No', /* Yes, No, Not Possible */
-          img_url: '/assets/items/paper.jpg',
-          puzzle_id: null
-        },
-        {
-          id: 5,
-          name: 'Vision',
-          description: 'You had a vision of a goat',
-          type: 'Miscellaneous', /* Miscellaneous, Reward, etc. */
-          equipped: 'Not Possible', /* Yes, No, Not Possible */
-          img_url: '/assets/items/paper.jpg',
-          puzzle_id: null
-        }
-      ],
+      items: [],
       filters: [
         'Name',
         'Support',
@@ -115,18 +51,11 @@ class Backpack extends React.Component {
   }
 
   componentWillMount() {
-    // $.ajax({
-    //   url: '/backpack_items',
-    //   type: 'GET',
-    //   success: (data) => {
-    //     this.setState({
-    //       items: data
-    //     });
-    //   },
-    //   error: (data) => {
-    //     console.log('GET request unsuccessful');
-    //   }
-    // });
+    $.get('/playerItems', (data) => {
+      this.setState({
+        items: JSON.parse(data)
+      });
+    });
   }
 
   render() {

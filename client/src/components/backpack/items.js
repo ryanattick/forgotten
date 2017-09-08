@@ -17,8 +17,8 @@ class Items extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      items: this.props.items,
-      itemsToDisplay: this.props.items,
+      items: [],
+      itemsToDisplay: [],
       filterIndex: 0,
       filters: this.props.filters,
       searchTerm: ''
@@ -68,6 +68,15 @@ class Items extends React.Component {
 
   handleItemPopup(item) {
     this.props.openItemPopUp(item);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (JSON.stringify(nextProps) !== JSON.stringify(this.props)) {
+      this.setState({
+        items: nextProps.items,
+        itemsToDisplay: nextProps.items
+      });
+    }
   }
 
   render() {

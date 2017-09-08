@@ -141,7 +141,7 @@ app.get('/playerItems', function(req, res) {
 
   // retrieve all items that are owned by user based on User Id stored in the request
   // send all items back to the backpack
-  res.status(200).send(JSON.stringify(items));
+  res.status(200).send(items);
 });
 
 // Sample Items table data

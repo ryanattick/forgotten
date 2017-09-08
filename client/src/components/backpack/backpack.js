@@ -13,6 +13,9 @@ import styles from '../../../../styles/backpack/backpack.css';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 
+// Helpers
+import Request from '../../../../helpers/requests';
+
 // TODO: Make it so items are retrieved from DB in alphabetical order
 // TODO: retrieve filters from db
 
@@ -51,9 +54,9 @@ class Backpack extends React.Component {
   }
 
   componentWillMount() {
-    $.get('/playerItems', (data) => {
+    Request.get('/playerItems', (data) => {
       this.setState({
-        items: JSON.parse(data)
+        items: data
       });
     });
   }

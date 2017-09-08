@@ -154,5 +154,15 @@ app.get('/playerItems', function(req, res) {
 // equipped
 
 
+// Sample Items table data
+// id
+// name
+// description
+// img_url
+// user_id
+// puzzle_id
+// equipped
+
+
 
 module.exports = app;

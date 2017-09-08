@@ -96,19 +96,6 @@ class NewAvatar extends React.Component {
   //       })
   //   });
 
-
-  // // $.get('/userInfo', (data) => {
-  //     console.log(data, data.first);
-  //       this.setState({
-  //         userInfo: {
-  //           firstName: data.first,
-  //           lastName: data.last,
-  //           display: data.display,
-  //           email: data.email
-  //         }
-  //       })
-  //   });
-
   handleSubmitClick () {
     var postObject = this.state.avatarChoice.img;
     console.log(this.props.id);

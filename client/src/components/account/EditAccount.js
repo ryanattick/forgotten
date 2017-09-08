@@ -19,7 +19,6 @@ class EditAccount extends React.Component {
       id: ''
     };
 
-
     this.handleSubmitClick = this.handleSubmitClick.bind(this);
     this.handleUsernameTextFieldChange = this.handleUsernameTextFieldChange.bind(this);
   }
@@ -42,8 +41,10 @@ class EditAccount extends React.Component {
   //   console.log(data, 'Username update succss');
   // });
 
-    console.log(this.state.usernameTextField);
-    fetch('/updateUsername', {
+  console.log(this.state.usernameTextField);
+  fetch('/updateUsername', {
+
+
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -55,8 +56,10 @@ class EditAccount extends React.Component {
       })
     });
   }
-//thesis_devel=# INSERT INTO items (name, description, img_url, puzzle_id, equipped)              VALUES ('Blue Pill', 'Consuming this pill increases the timer on the next quest by 30 seconds', /assets/items/paper.jpg', null, Not Possible');
 
+
+
+  //thesis_devel=# INSERT INTO items (name, description, img_url, puzzle_id, equipped)              VALUES ('Blue Pill', 'Consuming this pill increases the timer on the next quest by 30 seconds', /assets/items/paper.jpg', null, Not Possible');
 
   render() {
     return (

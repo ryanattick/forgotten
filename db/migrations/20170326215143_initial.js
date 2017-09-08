@@ -45,8 +45,7 @@ exports.up = function (knex, Promise) {
       table.integer('item_id').references('items.id').
         onDelete('CASCADE');
       table.string('equipped', 15).nullable();
-    }),
-
+    })
 
   ]);
 };

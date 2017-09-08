@@ -42,6 +42,8 @@ class Account extends React.Component {
     this.handleOpen = this.handleOpen.bind(this);
     this.handleClose = this.handleClose.bind(this);
   }
+    //{id: 3, first: "Matt", last: "Palamos", display: "Matt Palamos", email: "cki.matt@gmail.com", …}
+
 
   componentWillMount () {
     $.get('/userInfo', (data) => {

@@ -1,28 +1,35 @@
+.flexContainer {
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.avatarMouseOver {
+  max-width: 175px;
+  max-height: 175px;
+  cursor: pointer;
+}
+
+.gridStyle {
+  height: 175px;
+  width: 175px;
+  border: none;
+}
+
 .text {
   font-size: 16px;
   margin: 20px;
 }
 
 .logoutButton {
-  float: right;
-}
-
-.levelText {
-  text-align: right;
-  margin-right: 50px;
+  margin: 10px;
 }
 
 .userInfo {
-  float: right;
-  margin-right: 250px;
   list-style: none;
 }
 
-.deleteAccountButton {
-  background-color: #F44336;
-  float: right;
-  margin-right: 100px;
-}
 
 .changeAvatarButton {
   margin: 10px;

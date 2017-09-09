@@ -1,5 +1,4 @@
 import React from 'react';
-import $ from 'jquery';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {GridList, GridTile} from 'material-ui/GridList';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -58,6 +57,7 @@ class NewAvatar extends React.Component {
         display: 'flex',
         flexWrap: 'nowrap',
         overflowX: 'auto',
+        cursor: 'pointer',
       },
       titleStyle: {
         color: 'rgb(0, 188, 212)',

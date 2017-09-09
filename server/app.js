@@ -137,5 +137,5 @@ app.post('/updateUsername', function (req, res) {
     res.send('201'); //I don't know why this works, but it does.
   });
 });
-      
+
 module.exports = app;

@@ -1,5 +1,4 @@
 import React from 'react';
-import $ from 'jquery';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -32,7 +31,7 @@ class EditAccount extends React.Component {
     this.setState({
       usernameTextField: e.target.value
     });
-  }
+  };
 
   handleUsernameSubmitClick () {
     Request.post('/updateUsername', {
@@ -51,7 +50,7 @@ class EditAccount extends React.Component {
   //thesis_devel=# INSERT INTO items (name, description, img_url, puzzle_id, equipped)              VALUES ('Blue Pill', 'Consuming this pill increases the timer on the next quest by 30 seconds', /assets/items/paper.jpg', null, Not Possible');
 
   render() {
-    return (
+  return (
       <MuiThemeProvider>
         <div>
           <RaisedButton label="Back to Account" onClick={this.props.backToMain}/>

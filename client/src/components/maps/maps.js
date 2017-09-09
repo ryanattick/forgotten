@@ -7,6 +7,8 @@ import {GridList, GridTile} from 'material-ui/GridList';
 import IconButton from 'material-ui/IconButton';
 import Dialog from 'material-ui/Dialog';
 import RaisedButton from 'material-ui/RaisedButton';
+import FlatButton from 'material-ui/FlatButton';
+import Request from '../../../../helpers/requests';
 import $ from 'jquery';
 
 const tilesData = [
@@ -41,33 +43,31 @@ class Maps extends React.Component {
   }
 
   componentWillMount() {
-    // $.get({
-    //   url: '/mapsData',
-    //   success: (data) => {
-    //     var currentLevel;
-    //     if (data < 10) {
-    //       currentLevel = '0';
-    //     } else {
-    //       currentLevel = data.toString()[0];
-    //     }
-    //     this.setState({
-    //       currentLevel: currentLevel,
-    //       currentPuzzleNum: data
-    //     }, () => {
-    //       this.addBorder();
-    //     });
-    //   },
-    //   error: (err) => {
-    //     console.log(err);
-    //   }
-    // });
+    this.updateCurrentPuzzle();
+  }
+
+  updateCurrentPuzzle() {
+    Request.get('/mapsData', (data) => {
+      var currentLevel;
+      if (data < 10) {
+        currentLevel = '0';
+      } else {
+        currentLevel = data.toString()[0];
+      }
+      this.setState({
+        currentLevel: currentLevel,
+        currentPuzzleNum: data
+      }, () => {
+        this.addBorder();
+      });
+    });
   }
 
   componentDidMount() {
-    this.addBorder();
+    // this.addBorder();
   }
 
-  handleLevelClick(e) {
+  handleLevelClick(e, currentLevel) {
     if (e.target.id === this.state.currentLevel) {
       this.setState({
         currentLevel: e.target.id,
@@ -79,6 +79,11 @@ class Maps extends React.Component {
         completedLevelClicked: e.target.id,
         levelClicked: true,
         currentlyPlaying: e.target.id
+      });
+    } else if (currentLevel) {
+      this.setState({
+        levelClicked: true,
+        currentlyPlaying: this.state.currentLevel
       });
     } else {
       this.handleLevelOpen();
@@ -92,6 +97,7 @@ class Maps extends React.Component {
     }, () => {
       this.addBorder();
     });
+    this.updateCurrentPuzzle();
   }
 
   addBorder() {
@@ -113,6 +119,7 @@ class Maps extends React.Component {
         this.addBorder();
       });
       this.handleFinishedMapOpen();
+      this.updateCurrentPuzzle();
     } else {
       this.setState({
         levelClicked: false,
@@ -130,6 +137,12 @@ class Maps extends React.Component {
   handleLevelClose() {
     this.setState({levelOpen: false});
   }
+
+  handleMoveToCurrentLevel(e) {
+    this.setState({levelOpen: false});
+    this.handleLevelClick(e, this.state.currentLevel);
+  }
+
   handleFinishedMapOpen() {
     this.setState({finishedMapOpen: true});
   }
@@ -140,8 +153,13 @@ class Maps extends React.Component {
 
   render() {
     const levelActions = [
-      <RaisedButton
-        label="Ok"
+      <FlatButton
+        label={`Go to level ${parseInt(this.state.currentLevel) + 1}`}
+        primary={true}
+        onClick={this.handleMoveToCurrentLevel.bind(this)}
+      />,
+      <FlatButton
+        label="Return to Maps"
         primary={true}
         onClick={this.handleLevelClose.bind(this)}
       />
@@ -195,25 +213,25 @@ class Maps extends React.Component {
     } else if (this.state.currentLevel === '0' || this.state.completedLevelClicked === '0') {
       return (
         <div>
-          <Map1 handleReturnToMapsClick={this.handleReturnToMapsClick.bind(this)} handleMapFinished={this.handleMapFinished.bind(this)} level={this.state.currentLevel} currentPuzzleNum={this.state.currentPuzzleNum}/>
+          <Map1 handleReturnToMapsClick={this.handleReturnToMapsClick.bind(this)} handleMapFinished={this.handleMapFinished.bind(this)} level={this.state.currentLevel} currentPuzzleNum={this.state.currentPuzzleNum} map={this.state.currentlyPlaying}/>
         </div>
       );
     } else if (this.state.currentLevel === '1' || this.state.completedLevelClicked === '1') {
       return (
         <div>
-          <Map2 handleReturnToMapsClick={this.handleReturnToMapsClick.bind(this)} handleMapFinished={this.handleMapFinished.bind(this)} level={this.state.currentLevel} currentPuzzleNum={this.state.currentPuzzleNum}/>
+          <Map2 handleReturnToMapsClick={this.handleReturnToMapsClick.bind(this)} handleMapFinished={this.handleMapFinished.bind(this)} level={this.state.currentLevel} currentPuzzleNum={this.state.currentPuzzleNum} map={this.state.currentlyPlaying}/>
         </div>
       );
     } else if (this.state.currentLevel === '2' || this.state.completedLevelClicked === '2') {
       return (
         <div>
-          <Map3 handleReturnToMapsClick={this.handleReturnToMapsClick.bind(this)} handleMapFinished={this.handleMapFinished.bind(this)} level={this.state.currentLevel} currentPuzzleNum={this.state.currentPuzzleNum}/>
+          <Map3 handleReturnToMapsClick={this.handleReturnToMapsClick.bind(this)} handleMapFinished={this.handleMapFinished.bind(this)} level={this.state.currentLevel} currentPuzzleNum={this.state.currentPuzzleNum} map={this.state.currentlyPlaying}/>
         </div>
       );
     } else if (this.state.currentLevel === '3' || this.state.completedLevelClicked === '3') {
       return (
         <div>
-          <Map4 handleReturnToMapsClick={this.handleReturnToMapsClick.bind(this)} handleMapFinished={this.handleMapFinished.bind(this)} level={this.state.currentLevel} currentPuzzleNum={this.state.currentPuzzleNum}/>
+          <Map4 handleReturnToMapsClick={this.handleReturnToMapsClick.bind(this)} handleMapFinished={this.handleMapFinished.bind(this)} level={this.state.currentLevel} currentPuzzleNum={this.state.currentPuzzleNum} map={this.state.currentlyPlaying}/>
         </div>
       );
     }

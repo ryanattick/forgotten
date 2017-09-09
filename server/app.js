@@ -29,12 +29,65 @@ app.use('/api', routes.api);
 app.use('/api/profiles', routes.profiles);
 
 app.get('/mapsData', function(req, res) {
-  // send back user level
-  // res.json(num)
+  var id = req.user.id;
+  Profile.forge({id:req.user.id}).fetch({columns: 'level'}).then((results) => {
+    res.send(JSON.stringify(results.attributes.level));
+  }).catch((err) => {
+    throw err;
+  });
+});
+
+app.get('/puzzleData', function(req, res) {
+  // res.send({questions: {
+  //   '0': 'Question1',
+  //   '1': 'Question2',
+  //   '2': 'Question3',
+  //   '3': 'Question4',
+  //   '4': 'Question5',
+  //   '5': 'Question6',
+  //   '6': 'Question7',
+  //   '7': 'Question8',
+  //   '8': 'Question9',
+  //   '9': 'Question10'
+  //   },
+  //   answers: {
+  //     '0': 'notAnswer',
+  //     '1': 'notAnswer',
+  //     '2': 'notAnswer',
+  //     '3': 'notAnswer',
+  //     '4': 'notAnswer',
+  //     '5': 'notAnswer',
+  //     '6': 'notAnswer',
+  //     '7': 'notAnswer',
+  //     '8': 'notAnswer',
+  //     '9': 'notAnswer'
+  //   },
+  //   messages: {
+  //     '0': 'Message goes here',
+  //     '1': 'Message goes here',
+  //     '2': 'Message goes here',
+  //     '3': 'Message goes here',
+  //     '4': 'Message goes here',
+  //     '5': 'Message goes here',
+  //     '6': 'Message goes here',
+  //     '7': 'Message goes here',
+  //     '8': 'Message goes here',
+  //     '9': 'Message goes here'
+  //   }
+  // });
 });
 
 app.post('/mapData', function(req, res) {
-  //post user level to the db
+  Profile.forge({id: req.user.id}).save({level: req.body.level}).then(function() {
+    console.log('level saved!');
+    res.status(200).send(JSON.stringify('success'));
+  }).catch((err) => {
+    throw err;
+  });
+  // retrieve any item from the Items table containing that lvl (puzzle id)
+  // and add that item id along with the user id to the users_items table
+  // and set the users_items table record's 'equipped' column to either
+  // No or Not Possible based on equippable property of the item
 });
 
 app.use(['/account', '/maps', '/backpack', '/about'], routes.allOtherRoutes);
@@ -63,7 +116,6 @@ app.get('/playerItems', function (req, res) {
   //res.status(200).send(req);
 });
 
-
 app.post('/updateAvatar', function (req, res) {
   console.log(req.body, 'req.body updateavatar exists');
   // Profile.forge({first: "John", last: "Smith"}).save().then(function() {
@@ -75,9 +127,6 @@ app.post('/updateAvatar', function (req, res) {
   });
 });
 
-
-
-
 app.post('/updateUsername', function (req, res) {
   console.log(req.body, 'req.body update username exists');
   // Profile.forge({first: "John", last: "Smith"}).save().then(function() {
@@ -88,37 +137,5 @@ app.post('/updateUsername', function (req, res) {
     res.send('201'); //I don't know why this works, but it does.
   });
 });
-
-
-// Sample Items table data
-// id
-// name
-// description
-// img_url
-// user_id
-// puzzle_id
-// equipped
-
-
-// Sample Items table data
-// id
-// name
-// description
-// img_url
-// user_id
-// puzzle_id
-// equipped
-
-
-// Sample Items table data
-// id
-// name
-// description
-// img_url
-// user_id
-// puzzle_id
-// equipped
-
-
-
+      
 module.exports = app;

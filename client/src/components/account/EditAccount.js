@@ -41,14 +41,7 @@ class EditAccount extends React.Component {
       this.props.backToMainFromUsername(this.state.usernameTextField);
     });
   }
-
-
-
-  //thesis_devel=# INSERT INTO items (name, description, img_url, puzzle_id, equipped)              VALUES ('Blue Pill', 'Consuming this pill increases the timer on the next quest by 30 seconds', /assets/items/paper.jpg', null, Not Possible');
-
-
-  //thesis_devel=# INSERT INTO items (name, description, img_url, puzzle_id, equipped)              VALUES ('Blue Pill', 'Consuming this pill increases the timer on the next quest by 30 seconds', /assets/items/paper.jpg', null, Not Possible');
-
+  
   render() {
   return (
       <MuiThemeProvider>

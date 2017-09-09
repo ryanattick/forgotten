@@ -25,58 +25,55 @@ class Account extends React.Component {
       lastName: '',
       email: '',
       username: '',
-      level: '1'
-    }
-
-      this.handleChangeAvatar = this.handleChangeAvatar.bind(this);
-      this.handleEditClick = this.handleEditClick.bind(this);
-      this.handleDeleteAccountClick = this.handleDeleteAccountClick.bind(this);
-      this.handleLogoutClick = this.handleLogoutClick.bind(this);
-      this.handleOpen = this.handleOpen.bind(this);
-      this.handleClose = this.handleClose.bind(this);
-      this.backToMainFromAvatar = this.backToMainFromAvatar.bind(this);
-      this.backToMainFromUsername = this.backToMainFromUsername.bind(this);
-      this.backToMain = this.backToMain.bind(this);
-    };
-    //{id: 3, first: "Matt", last: "Palamos", display: "Matt Palamos", email: "cki.matt@gmail.com", …}
-
+      level: ''
+    }; //replace with data
+    this.handleChangeAvatar = this.handleChangeAvatar.bind(this);
+    this.handleEditClick = this.handleEditClick.bind(this);
+    this.handleDeleteAccountClick = this.handleDeleteAccountClick.bind(this);
+    this.handleLogoutClick = this.handleLogoutClick.bind(this);
+    this.handleOpen = this.handleOpen.bind(this);
+    this.handleClose = this.handleClose.bind(this);
+    this.backToMainFromAvatar = this.backToMainFromAvatar.bind(this);
+    this.backToMainFromUsername = this.backToMainFromUsername.bind(this);
+    this.backToMain = this.backToMain.bind(this);
+  }
 
 
   componentWillMount () {
     $.get('/userInfo', (data) => {
       this.setState({
-          id: data.id,
-          firstName: data.first,
-          lastName: data.last,
-          display: data.display,
-          email: data.email,
-          avatar: data.avatar,
-          username: data.username,
-          level: '1'
+        id: data.id,
+        firstName: data.first,
+        lastName: data.last,
+        display: data.display,
+        email: data.email,
+        avatar: data.avatar,
+        username: data.username,
+        level: data.level
       });
     });
   } //once backend is connected
 
   handleOpen () {
     this.setState({open: true});
-  };
+  }
 
   handleClose () {
     this.setState({open: false});
-  };
+  }
 
   handleChangeAvatar () {
     this.setState({
       page: 'avatar'
     });
-  };
+  }
 
 
   handleEditClick () {
     this.setState({
       page: 'edit'
     });
-  };
+  }
 
   handleDeleteAccountClick () {
     // $.post('/deleteUser', {id: this.state.userInfo.id}, (data) => {
@@ -84,31 +81,31 @@ class Account extends React.Component {
     // });
     console.log('DELETED');
     this.handleClose();
-  };
+  }
 
   backToMain () {
     this.setState({
       page: 'main'
     });
-  };
+  }
 
   backToMainFromAvatar (avatar) {
     this.setState({
       page: 'main',
       avatar: avatar
     });
-  };
+  }
 
   backToMainFromUsername (username) {
     this.setState({
       page: 'main',
       username: username
     });
-  };
+  }
 
   handleLogoutClick () {
     $.get('/logout');
-  };
+  }
 
 
 
@@ -137,13 +134,13 @@ class Account extends React.Component {
         }
         {currentPage === 'avatar' &&
           <NewAvatar backToMainFromAvatar={this.backToMainFromAvatar}
-          backToMain={this.backToMain} currentAvatar={this.state.avatar} id={this.state.id}/>
+            backToMain={this.backToMain} currentAvatar={this.state.avatar} id={this.state.id}/>
         }
         {currentPage === 'main' &&
         <MuiThemeProvider>
           <div className={accountStyle.flexContainer}>
-          <GridTile style={{backgroundImage: `url(${this.state.avatar})`, backgroundSize: 'cover', height: '175px', width: '175px', border: 'none'}}
-          ><IconButton tooltip='Change Avatar' tooltipPosition='bottom-right' onClick={this.handleChangeAvatar}><SettingsIcon color="black" /></IconButton></GridTile>
+            <GridTile style={{backgroundImage: `url(${this.state.avatar})`, backgroundSize: 'cover', height: '175px', width: '175px', border: 'none'}}
+            ><IconButton tooltip='Change Avatar' tooltipPosition='bottom-right' onClick={this.handleChangeAvatar}><SettingsIcon color="black" /></IconButton></GridTile>
             <h4>
             Level {this.state.level}
             </h4>
@@ -158,13 +155,13 @@ class Account extends React.Component {
                 <strong>Email</strong>  {this.state.email}
               </li>
               <li className={accountStyle.text}>
-              <span
+                <span
                 ><strong>Username</strong> {this.state.username} <IconButton tooltip='Change Username' tooltipPosition='bottom-left' onClick={this.handleEditClick}><SettingsIcon color="black" /></IconButton></span>
               </li>
             </ul>
             <br></br>
             <div>
-              <RaisedButton href='/' label="Log Out" secondary={true}  className={accountStyle.logoutButton} onClick={this.handleLogoutClick}/>
+              <RaisedButton href='/' label="Log Out" secondary={true} className={accountStyle.logoutButton} onClick={this.handleLogoutClick}/>
               <RaisedButton label="Delete Account" secondary={true} onClick={this.handleOpen} />
               <Dialog
                 title="Delete Account"

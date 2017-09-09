@@ -6,10 +6,10 @@ exports.seed = function (knex, Promise) {
     models.Items.forge({
       name: items[i].name,
       type: items[i].type,
-      description: items[i].description,
-      img_url: items[i].img_url,
       equippable: items[i].equippable,
-      puzzle_id: items[i].puzzle_id
+      puzzle_id: items[i].puzzle_id,
+      description: items[i].description,
+      img_url: items[i].img_url
     }).save()
       .error(err => {
         console.error('ERROR: failed to create items');
@@ -71,3 +71,4 @@ var items = [
     puzzle_id: null
   }
 ];
+

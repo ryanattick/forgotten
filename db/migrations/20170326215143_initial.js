@@ -27,8 +27,9 @@ exports.up = function (knex, Promise) {
       table.text('extra_info', 'longtext').nullable();
       table.text('problem', 'longtext').nullable();
       table.text('solution', 'longtext').nullable();
-      table.text('pop-up', 'longtext' ).nullable();
-      table.text('pop-up-image', 'url').nullable();
+      table.text('pop_up_image_url', 'url').nullable();
+      table.text('message_pop_up', 'longtext' ).nullable();
+      table.text('story_pop_up', 'longtext' ).nullable();
     }),
     knex.schema.createTableIfNotExists('items', function(table) {
       table.increments('id').unsigned().primary();

@@ -7,6 +7,7 @@ const routes = require('./routes');
 const app = express();
 const db = require('../db');
 const Profile = require('../db/models/profiles.js');
+const Puzzles = require('../db/models/puzzles.js');
 const Items = require('../db/models/Items.js');
 const dbUtils = require('../db/lib/utils.js');
 
@@ -38,6 +39,20 @@ app.get('/mapsData', function(req, res) {
 });
 
 app.get('/puzzleData', function(req, res) {
+  var clean = [];
+  Puzzles.forge().fetchAll()
+    .then(function (results) {
+      for (var i = 0; i < results.models.length; i++) {
+        clean.push(results.models[i].attributes);
+      }
+      var strArr = JSON.stringify(clean);
+      res.status(200).send(strArr);
+    })
+    .catch(function (err) {
+      // If this expect statement is reached, there's an error.
+      console.log('err');
+    });
+
   // res.send({questions: {
   //   '0': 'Question1',
   //   '1': 'Question2',
@@ -116,6 +131,7 @@ app.get('/playerItems', function (req, res) {
   //res.status(200).send(req);
 });
 
+
 app.post('/updateAvatar', function (req, res) {
   console.log(req.body, 'req.body updateavatar exists');
   // Profile.forge({first: "John", last: "Smith"}).save().then(function() {
@@ -127,6 +143,9 @@ app.post('/updateAvatar', function (req, res) {
   });
 });
 
+
+
+
 app.post('/updateUsername', function (req, res) {
   console.log(req.body, 'req.body update username exists');
   // Profile.forge({first: "John", last: "Smith"}).save().then(function() {
@@ -137,5 +156,7 @@ app.post('/updateUsername', function (req, res) {
     res.send('201'); //I don't know why this works, but it does.
   });
 });
+
+
 
 module.exports = app;

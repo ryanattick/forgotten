@@ -25,14 +25,14 @@ class NewAvatar extends React.Component {
     this.setState({
       currentChoice: this.props.currentAvatar
     });
-  };
+  }
 
   handleAvatarClick(tile) {
     this.setState({
       avatarChoice: tile,
       currentChoice: tile.img
     });
-  };
+  }
 
   handleSubmitClick () {
     Request.post('/updateAvatar', {
@@ -41,7 +41,7 @@ class NewAvatar extends React.Component {
     }, () => {
       this.props.backToMainFromAvatar(this.state.avatarChoice.img);
     });
-  };
+  }
 
 
   render() {
@@ -94,8 +94,8 @@ class NewAvatar extends React.Component {
     return (
       <MuiThemeProvider>
         <div style={styles.root}><br></br>
-      <h3><u>Change Avatar</u></h3><br></br>
-        <RaisedButton label="Back to Account" className={newAvatarStyle.backToAccountButton}onClick={this.props.backToMain}/>
+          <h3><u>Change Avatar</u></h3><br></br>
+          <RaisedButton label="Back to Account" className={newAvatarStyle.backToAccountButton}onClick={this.props.backToMain}/>
           <GridList style={styles.gridList} cols={2.2}>
             {tilesData.map((tile, index) => (
               <GridTile
@@ -110,7 +110,7 @@ class NewAvatar extends React.Component {
             ))}
           </GridList>
           <img src={this.state.currentChoice} className={newAvatarStyle.currentAvatarChoice}/> <br></br>
-        <RaisedButton label="Submit" className={newAvatarStyle.buttonStyle} onClick={this.handleSubmitClick}/>
+          <RaisedButton label="Submit" className={newAvatarStyle.buttonStyle} onClick={this.handleSubmitClick}/>
         </div>
       </MuiThemeProvider>
     );

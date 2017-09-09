@@ -88,17 +88,12 @@ class Map1 extends React.Component {
         this.colorPuzzles();
       });
     }
-    // $.get({
-    //   url: '/puzzleData',
-    //   success: (data) => {
-    //     this.setState({
-    //       puzzles: data
-    //     });
-    //   },
-    //   error: (err) => {
-    //     console.log(data);
-    //   }
-    // });
+    Request.get('/puzzleData', (data) => {
+      console.log(data);
+      // this.setState({
+      //   puzzles: data
+      // });
+    });
   }
 
   componentDidMount() {

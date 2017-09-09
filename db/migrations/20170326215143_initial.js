@@ -12,7 +12,6 @@ exports.up = function (knex, Promise) {
       table.string('username', 30).nullable();
       table.integer('level').nullable().defaultTo(0);
       table.timestamps(true, true);
-
     }),
     knex.schema.createTableIfNotExists('auths', function(table) {
       table.increments('id').unsigned().primary();
@@ -35,6 +34,7 @@ exports.up = function (knex, Promise) {
       table.increments('id').unsigned().primary();
       table.string('name', 50).unsigned().nullable();
       table.text('description', 'longtext').nullable();
+      table.string('type', 20).nullable();
       table.text('img_url').nullable();
       table.integer('puzzle_id').references('puzzles.id').onDelete('CASCADE');
       table.integer('equippable').nullable();
@@ -49,16 +49,6 @@ exports.up = function (knex, Promise) {
 
   ]);
 };
-
-//// Sample Items table data
-// id
-// name
-// description
-// img_url
-// user_id
-// puzzle_id
-// equippable
-
 
 exports.down = function (knex, Promise) {
   return Promise.all([

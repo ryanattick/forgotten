@@ -5,9 +5,11 @@ exports.seed = function (knex, Promise) {
   for (var i = 0; i < items.length; i++) {
     models.Items.forge({
       name: items[i].name,
+      type: items[i].type,
       description: items[i].description,
       img_url: items[i].img_url,
-      equippable: 1
+      equippable: items[i].equippable,
+      puzzle_id: items[i].puzzle_id
     }).save()
       .error(err => {
         console.error('ERROR: failed to create items');
@@ -24,7 +26,7 @@ var items = [
     name: 'Blue Pill',
     description: 'Consuming this pill increases the timer on the next quest by 30 seconds',
     type: 'Consumable', /* Miscellaneous, Reward, etc. */
-    equipped: 'Not Possible', /* Yes, No, Not Possible */
+    equippable: 0, /* Yes, No, Not Possible */
     img_url: '/assets/items/paper.jpg',
     puzzle_id: null
   },
@@ -32,7 +34,7 @@ var items = [
     name: 'Guide Book #1',
     description: 'This edition of the Guide Book allows you to have a free hint on each quest',
     type: 'Support', /* Miscellaneous, Reward, etc. */
-    equipped: 'No', /* Yes, No, Not Possible */
+    equippable: 1, /* Yes, No, Not Possible */
     img_url: '/assets/items/paper.jpg',
     puzzle_id: null
   },
@@ -40,7 +42,7 @@ var items = [
     name: 'Invitation #1',
     description: 'Piece of Paper',
     type: 'Storyline', /* Miscellaneous, Reward, etc. */
-    equipped: 'Not Possible', /* Yes, No, Not Possible */
+    equippable: 0, /* Yes, No, Not Possible */
     img_url: '/assets/items/paper.jpg',
     puzzle_id: null
   },
@@ -48,7 +50,7 @@ var items = [
     name: 'Invitation #3',
     description: 'Piece of Paper',
     type: 'Storyline', /* Miscellaneous, Reward, etc. */
-    equipped: 'Not Possible', /* Yes, No, Not Possible */
+    equippable: 0, /* Yes, No, Not Possible */
     img_url: '/assets/items/paper.jpg',
     puzzle_id: null
   },
@@ -56,7 +58,7 @@ var items = [
     name: 'Lantern',
     description: 'Lights up the righteous path',
     type: 'Support', /* Miscellaneous, Reward, etc. */
-    equipped: 'No', /* Yes, No, Not Possible */
+    equippable: 1, /* Yes, No, Not Possible */
     img_url: '/assets/items/paper.jpg',
     puzzle_id: null
   },
@@ -64,7 +66,7 @@ var items = [
     name: 'Vision',
     description: 'You had a vision of a goat',
     type: 'Miscellaneous', /* Miscellaneous, Reward, etc. */
-    equipped: 'Not Possible', /* Yes, No, Not Possible */
+    equippable: 0, /* Yes, No, Not Possible */
     img_url: '/assets/items/paper.jpg',
     puzzle_id: null
   }

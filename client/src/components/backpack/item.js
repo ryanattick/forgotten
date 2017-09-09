@@ -16,10 +16,8 @@ const Item = (props) => {
 
   let iconButtonEquip = <div></div>;
 
-  if (props.item.equipped === 'No' || props.item.equipped === 'Yes') {
+  if (props.item.equippable) {
     iconButtonEquip = <IconButton tooltip='Equip' tooltipPosition='top-left'><PanToolIcon color="white" /></IconButton>;
-  } else if (!props.item.equipped === 'Not Possible') {
-    iconButtonEquip = <div></div>;
   } else if (props.item.type === 'Consumable') {
     iconButtonEquip = <IconButton tooltip='Consume' tooltipPosition='top-left'><ConsumeIcon color="white" /></IconButton>;
   }

@@ -10,7 +10,7 @@ exports.up = function (knex, Promise) {
       table.string('phone', 100).nullable();
       table.text('avatar').nullable();
       table.string('username', 30).nullable();
-      table.integer('levels').nullable();
+      table.integer('level').nullable().defaultTo(0);
       table.timestamps(true, true);
 
     }),

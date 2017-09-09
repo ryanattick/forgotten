@@ -7,7 +7,7 @@ const routes = require('./routes');
 const app = express();
 const db = require('../db');
 const Profile = require('../db/models/profiles.js');
-const Items = require('../db/models/profiles.js');
+const Items = require('../db/models/Items.js');
 const dbUtils = require('../db/lib/utils.js');
 
 app.use(middleware.morgan('dev'));
@@ -45,18 +45,23 @@ app.get('/userInfo', function (req, res) {
 });
 
 
-// app.get('/playerItems', function (req, res) {
-//   Items.forge().fetchAll()
-//       .then(function (results) {
-//         console.log(results._byId)
-//         res.status(200).send(results._byId);
-//       })
-//       .catch(function (err) {
-//         // If this expect statement is reached, there's an error.
-//         console.log('err')
-//       });
-//   //res.status(200).send(req);
-// });
+app.get('/playerItems', function (req, res) {
+  var clean = [];
+
+  Items.forge().fetchAll()
+    .then(function (results) {
+      for (var i = 0; i < results.models.length; i++) {
+        clean.push(results.models[i].attributes);
+      }
+      var strArr = JSON.stringify(clean);
+      res.status(200).send(strArr);
+    })
+    .catch(function (err) {
+      // If this expect statement is reached, there's an error.
+      console.log('err');
+    });
+  //res.status(200).send(req);
+});
 
 
 app.post('/updateAvatar', function (req, res) {
@@ -71,6 +76,8 @@ app.post('/updateAvatar', function (req, res) {
 });
 
 
+
+
 app.post('/updateUsername', function (req, res) {
   console.log(req.body, 'req.body update username exists');
   // Profile.forge({first: "John", last: "Smith"}).save().then(function() {
@@ -82,69 +89,16 @@ app.post('/updateUsername', function (req, res) {
   });
 });
 
-app.get('/playerItems', function(req, res) {
 
-  var items = [
-    {
-      id: 0,
-      name: 'Blue Pill',
-      description: 'Consuming this pill increases the timer on the next quest by 30 seconds',
-      type: 'Consumable', /* Miscellaneous, Reward, etc. */
-      equipped: 'Not Possible', /* Yes, No, Not Possible */
-      img_url: '/assets/items/paper.jpg',
-      puzzle_id: null
-    },
-    {
-      id: 1,
-      name: 'Guide Book #1',
-      description: 'This edition of the Guide Book allows you to have a free hint on each quest',
-      type: 'Support', /* Miscellaneous, Reward, etc. */
-      equipped: 'No', /* Yes, No, Not Possible */
-      img_url: '/assets/items/paper.jpg',
-      puzzle_id: null
-    },
-    {
-      id: 2,
-      name: 'Invitation #1',
-      description: 'Piece of Paper',
-      type: 'Storyline', /* Miscellaneous, Reward, etc. */
-      equipped: 'Not Possible', /* Yes, No, Not Possible */
-      img_url: '/assets/items/paper.jpg',
-      puzzle_id: null
-    },
-    {
-      id: 3,
-      name: 'Invitation #3',
-      description: 'Piece of Paper',
-      type: 'Storyline', /* Miscellaneous, Reward, etc. */
-      equipped: 'Not Possible', /* Yes, No, Not Possible */
-      img_url: '/assets/items/paper.jpg',
-      puzzle_id: null
-    },
-    {
-      id: 4,
-      name: 'Lantern',
-      description: 'Lights up the righteous path',
-      type: 'Support', /* Miscellaneous, Reward, etc. */
-      equipped: 'No', /* Yes, No, Not Possible */
-      img_url: '/assets/items/paper.jpg',
-      puzzle_id: null
-    },
-    {
-      id: 5,
-      name: 'Vision',
-      description: 'You had a vision of a goat',
-      type: 'Miscellaneous', /* Miscellaneous, Reward, etc. */
-      equipped: 'Not Possible', /* Yes, No, Not Possible */
-      img_url: '/assets/items/paper.jpg',
-      puzzle_id: null
-    }
-  ];
+// Sample Items table data
+// id
+// name
+// description
+// img_url
+// user_id
+// puzzle_id
+// equipped
 
-  // retrieve all items that are owned by user based on User Id stored in the request
-  // send all items back to the backpack
-  res.status(200).send(items);
-});
 
 // Sample Items table data
 // id

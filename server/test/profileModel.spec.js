@@ -1,7 +1,7 @@
 const expect = require('chai').expect;
 const Profile = require('../../db/models/profiles.js');
 const dbUtils = require('../../db/lib/utils.js');
-
+const Items = require('../../db/models/Items.js');
 describe('Profile model tests', function () {
   // Deletes all tables, creates new tables, and seeds tables with test data
   beforeEach(function (done) {
@@ -25,6 +25,19 @@ describe('Profile model tests', function () {
         done(err);
       });
   });
+
+  it('should be able to retrieve data from items', function(done) {
+
+    Items.forge().fetchAll()
+      .then(function(results) {
+        expect(results).to.exist;
+        done();
+      })
+      .catch(function(err) {
+        done(err);
+      });
+  });
+
 
   // it('Should verify that all usernames are unique', function (done) {
   //   // Insert a user with a username that's already in existence

@@ -153,19 +153,19 @@ class Map1 extends React.Component {
           levelsRemaining: this.state.levelsRemaining.slice(1)
         }, function() {
           this.colorPuzzles();
-          //save currentQuest to db
-          $.post({
-            url: '/mapData',
-            data: {
-              level: '2' + this.state.currentQuest
-            },
-            success: function(data) {
-              console.log('succeeded');
-            },
-            error: function(err) {
-              console.log(err);
-            }
-          });
+          // //save currentQuest to db
+          // $.post({
+          //   url: '/mapData',
+          //   data: {
+          //     level: '2' + this.state.currentQuest
+          //   },
+          //   success: function(data) {
+          //     console.log('succeeded');
+          //   },
+          //   error: function(err) {
+          //     console.log(err);
+          //   }
+          // });
           this.handleMessageOpen();
         });
       }

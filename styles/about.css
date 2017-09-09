@@ -1,0 +1,46 @@
+.about_header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.about_header img {
+  height: auto;
+  width: 150px;
+}
+
+.about_header_title {
+  font-size: 2vw;
+  font-family: 'Exo Light';
+}
+
+.about_header_subtitle {
+  font-size: 1.5vw;
+  font-family: 'Exo Light';
+}
+
+.about_body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.about_inner_body {
+  color: white;
+  position: absolute;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.64);
+  padding: 20px;
+}
+
+.about_inner_body_title {
+  font-size: 6vw;
+  margin-bottom: 30px;
+  font-family: 'Sue';
+}
+
+.about_inner_body_description {
+  font-size: 2vw;
+  font-family: 'Exo Light';
+}

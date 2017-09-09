@@ -16,9 +16,6 @@ import FlatButton from 'material-ui/FlatButton';
 // Helpers
 import Request from '../../../../helpers/requests';
 
-// TODO: Make it so items are retrieved from DB in alphabetical order
-// TODO: retrieve filters from db
-
 class Backpack extends React.Component {
   constructor(props) {
     super(props);

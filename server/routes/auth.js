@@ -5,6 +5,7 @@ const app = express();
 
 const router = express.Router();
 
+
 router.route('/')
   .get(middleware.auth.verify, (req, res) => {
     // res.render('index.ejs');
@@ -50,6 +51,7 @@ router.route('/logout')
     req.logout();
     res.redirect('/');
   });
+
 
 router.get('/auth/google', middleware.passport.authenticate('google', {
   scope: ['email', 'profile']

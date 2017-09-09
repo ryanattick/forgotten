@@ -66,6 +66,7 @@ app.post('/updateAvatar', function (req, res) {
   // })
   Profile.forge({id: req.body.id}).save({avatar: req.body.avatar}).then(function() { //...
     console.log('avatar saved!!');
+    res.send('201');
   });
 });
 
@@ -77,6 +78,7 @@ app.post('/updateUsername', function (req, res) {
   // })
   Profile.forge({id: req.body.id}).save({username: req.body.username}).then(function() { //...
     console.log('username saved!!');
+    res.send('201'); //I don't know why this works, but it does.
   });
 });
 

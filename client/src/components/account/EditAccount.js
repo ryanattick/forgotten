@@ -3,29 +3,27 @@ import $ from 'jquery';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
-
-
-const style = {
-  margin: 10,
-};
+import editAccountStyle from '../../../../styles/account/editAccount.css';
+import Request from '../../../../helpers/requests';
 
 
 class EditAccount extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userInfo: {},
+      username: '',
       usernameTextField: '',
       id: ''
     };
 
-    this.handleSubmitClick = this.handleSubmitClick.bind(this);
+    this.handleUsernameSubmitClick = this.handleUsernameSubmitClick.bind(this);
     this.handleUsernameTextFieldChange = this.handleUsernameTextFieldChange.bind(this);
   }
 
   componentWillMount () {
     this.setState({
-      userInfo: this.props.userInfo
+      id: this.props.userId,
+      username: this.props.username
     });
   }
 
@@ -34,46 +32,35 @@ class EditAccount extends React.Component {
     this.setState({
       usernameTextField: e.target.value
     });
-  }
+  };
 
-  handleSubmitClick () {
-  // $.post('/updateUsername', {username: this.state.usernameTextField}, () => {
-  //   console.log(data, 'Username update succss');
-  // });
-
-  console.log(this.state.usernameTextField);
-  fetch('/updateUsername', {
-
-
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        username: this.state.usernameTextField,
-        id: this.props.id
-      })
+  handleUsernameSubmitClick () {
+    Request.post('/updateUsername', {
+      username: this.state.usernameTextField,
+      id: this.props.userId
+    }, () => {
+      this.props.backToMainFromUsername(this.state.usernameTextField)
     });
-  }
+  };
 
 
 
   //thesis_devel=# INSERT INTO items (name, description, img_url, puzzle_id, equipped)              VALUES ('Blue Pill', 'Consuming this pill increases the timer on the next quest by 30 seconds', /assets/items/paper.jpg', null, Not Possible');
 
   render() {
-    return (
+  return (
       <MuiThemeProvider>
         <div>
+          <RaisedButton label="Back to Account" onClick={this.props.backToMain}/>
           <h3><u>Edit Account</u></h3><br></br>
           <form>
             <TextField
               hintText="New Username"
-              floatingLabelText={this.state.userInfo.username}
+              floatingLabelText={this.state.username}
               value={this.state.usernameTextField}
               onChange={this.handleUsernameTextFieldChange}
             /><br />
-            <RaisedButton label="Submit Changes" style={style} onClick={this.handleSubmitClick}/>
+          <RaisedButton label="Submit Changes" onClick={this.handleUsernameSubmitClick}/>
           </form>
         </div>
       </MuiThemeProvider>

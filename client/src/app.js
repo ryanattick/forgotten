@@ -47,7 +47,6 @@ class App extends React.Component {
       items: [],
       currentTabIndex: tabIndexBasedOnURL(allReactRoutes, 1)
     };
-
     this.handleTabChange = this.handleTabChange.bind(this);
   }
 
@@ -56,6 +55,7 @@ class App extends React.Component {
       currentTabIndex: value
     });
   }
+
 
   render() {
     return (

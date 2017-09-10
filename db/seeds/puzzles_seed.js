@@ -5,6 +5,7 @@ exports.seed = function (knex, Promise) {
 
   for (var i = 0; i < item.length; i++) {
     models.Puzzles.forge({
+      puzzleID: item[i].id,
       name: item[i].name,
       problem: item[i].problem,
       solution: item[i].solution,
@@ -18,13 +19,14 @@ exports.seed = function (knex, Promise) {
         throw err;
       })
       .catch(() => {
-        console.log('WARNING: defualt items already exists.');
+        console.log('WARNING: defualt puzzle already exists.');
       });
   }
 };
 
 item = [
   {
+    id: 0,
     name: null,
     problem: 'What kind of fish chases a mouse?',
     solution: 'Catfish',
@@ -34,6 +36,7 @@ item = [
 
   },
   {
+    id: 1,
     name: null,
     problem: 'What is easy to get into, but hard to get out of?',
     solution: 'Trouble',
@@ -42,6 +45,7 @@ item = [
     pop_up_image_url: null
   },
   {
+    id: 2,
     name: null,
     problem: 'Everyone has me but no one can lose me. What am I?',
     solution: 'Shadow',
@@ -51,6 +55,7 @@ item = [
 
   },
   {
+    id: 3,
     name: null,
     problem: 'The more you take, the more you leave behind. What am I?',
     solution: 'Footsteps',
@@ -59,6 +64,7 @@ item = [
     pop_up_image_url: null
   },
   {
+    id: 4,
     name: null,
     problem: 'I pass before the sun, yet make no shadow. What am I?',
     solution: 'The wind',
@@ -67,6 +73,7 @@ item = [
     pop_up_image_url: null
   },
   {
+    id: 5,
     name: null,
     problem: 'When I was 10 years old, my brother was half my age. Now I am 100 years old. What’s the age of my brother right now?',
     solution: '95',
@@ -75,6 +82,7 @@ item = [
     pop_up_image_url: null
   },
   {
+    id: 6,
     name: null,
     problem: 'Find a 10-digit number where the first digit is how many zeros in the number, the second digit is how many 1s in the number etc. until the tenth digit which is how many 9s in the number.',
     solution: '6210001000',
@@ -83,6 +91,7 @@ item = [
     message_pop_up: '"Hemlock 14"'
   },
   {
+    id: 7,
     name: null,
     problem: '"five" has "fiv" in alphabetical order, but not "e".',
     solution: 'Forty',
@@ -91,6 +100,7 @@ item = [
     message_pop_up: '"That is never going to work. You’re smarter than that. Although, I guess my last little clue might not have brought back enough memory to help you with that. Maybe this will."'
   },
   {
+    id: 8,
     name: null,
     problem: 'David’s father has three sons: Snap, Crackle and ______?',
     solution: 'David',
@@ -99,6 +109,7 @@ item = [
     message_pop_up: '"There is something you need to know before you open that door. A memory that will be painful to restore. I’m sorry, but it will be easier this way. Once you open that door, remember this. If you don’t hurry we are all going to die. Every single one of us. Including him." \n "Charlie"'
   },
   {
+    id: 9,
     name: null,
     problem: 'Everyone is attracted to me and everyone falls for me?',
     solution: 'Gravity',

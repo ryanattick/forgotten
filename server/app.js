@@ -40,13 +40,19 @@ app.get('/mapsData', function(req, res) {
 
 app.get('/puzzleData', function(req, res) {
   var clean = [];
+  var puzzles = {questions: {}, answers: {}, messages: {}, stories: {}};
   Puzzles.forge().fetchAll()
     .then(function (results) {
       for (var i = 0; i < results.models.length; i++) {
-        clean.push(results.models[i].attributes);
+        puzzles.questions[results.models[i].attributes.puzzleID] = results.models[i].attributes.problem;
+        puzzles.answers[results.models[i].attributes.puzzleID] = results.models[i].attributes.solution;
+        puzzles.messages[results.models[i].attributes.puzzleID] = results.models[i].attributes.message_pop_up;
+        puzzles.stories[results.models[i].attributes.puzzleID] = results.models[i].attributes.story_pop_up;
+        // clean.push(results.models[i].attributes);
       }
-      var strArr = JSON.stringify(clean);
-      res.status(200).send(strArr);
+
+      // var strArr = JSON.stringify(clean);
+      res.status(200).send(JSON.stringify(puzzles));
     })
     .catch(function (err) {
       // If this expect statement is reached, there's an error.
@@ -156,7 +162,5 @@ app.post('/updateUsername', function (req, res) {
     res.send('201'); //I don't know why this works, but it does.
   });
 });
-
-
 
 module.exports = app;

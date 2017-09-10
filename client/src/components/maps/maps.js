@@ -44,6 +44,9 @@ class Maps extends React.Component {
 
   componentWillMount() {
     this.updateCurrentPuzzle();
+    if (this.state.currentLevel === '0') {
+      //popup with first story
+    }
   }
 
   updateCurrentPuzzle() {

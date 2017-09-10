@@ -52,6 +52,18 @@ class Map3 extends React.Component {
           '7': 'Message goes here',
           '8': 'Message goes here',
           '9': 'Message goes here'
+        },
+        stories: {
+          '0': 'Message goes here1',
+          '1': 'Message goes here2',
+          '2': 'Message goes here3',
+          '3': 'Message goes here4',
+          '4': 'Message goes here5',
+          '5': 'Message goes here6',
+          '6': 'Message goes here7',
+          '7': 'Message goes here8',
+          '8': 'Message goes here9',
+          '9': 'Message goes here10'
         }
       },
       items: {
@@ -88,18 +100,11 @@ class Map3 extends React.Component {
         this.colorPuzzles();
       });
     }
-    // // retrieve puzzles from db and set state
-    // $.get({
-    //   url: '/puzzleData',
-    //   success: (data) => {
-    //     this.setState({
-    //       puzzles: data
-    //     });
-    //   },
-    //   error: (err) => {
-    //     console.log(data);
-    //   }
-    // )};
+    Request.get('/puzzleData', (data) => {
+      this.setState({
+        puzzles: data
+      });
+    });
   }
 
   componentDidMount() {
@@ -316,7 +321,7 @@ class Map3 extends React.Component {
               open={this.state.messageOpen}
               onRequestClose={this.handleMessageClose.bind(this)}
             >
-              {`Congrats you have just completed level ${this.state.currentQuest}`}
+              {this.state.puzzles.stories[this.state.completedQuests[this.state.completedQuests.length - 1]]}
             </Dialog>
           </div>
         </div>

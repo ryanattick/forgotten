@@ -23,6 +23,7 @@ exports.up = function (knex, Promise) {
     }),
     knex.schema.createTableIfNotExists('puzzles', function(table) {
       table.increments('id').unsigned().primary();
+      table.integer('puzzleID').nullable();
       table.string('name', 50).nullable().unique();
       table.text('extra_info', 'longtext').nullable();
       table.text('problem', 'longtext').nullable();

@@ -1,5 +1,5 @@
 import React from 'react';
-import NewAvatar from './NewAvatar.js';
+import NewAvatar from './newAvatar.js';
 import $ from 'jquery';
 import EditAccount from './EditAccount.js';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';

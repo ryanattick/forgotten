@@ -31,8 +31,7 @@ const Item = (props) => {
       className={styles.item_tile}
       title={props.item.name}
       subtitle={<span><b>{props.item.description}</b></span>}
-      actionIcon={iconButtonEquip}
-      style={{backgroundImage: `url(${props.item.img_url})`, backgroundSize: 'cover'}}>
+      actionIcon={iconButtonEquip}>
       <IconButton className={styles.inspect_button} tooltip='Inspect' tooltipPosition='bottom-right' onClick={handleItemPopup}><InfoIcon color="white" /></IconButton>
     </GridTile>
   );

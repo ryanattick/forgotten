@@ -1,10 +1,10 @@
 {
   "knex": {
     "connection": {
-      "database": "d465at6fvcf069",
-      "user": "zngreplgmfemic",
-      "password": "ae4c99a51ef6db0d74e9a6be6a39da6ee5198a76ec6226c66055c625aa60ee45",
-      "host": "ec2-54-163-233-201.compute-1.amazonaws.com",
+      "database": "d95s7ucf4ure64",
+      "user": "lsypksmavtujfm",
+      "password": "5483680f4f179b7e762564c8b4a4258f7d77798be051b4873d7f8dd32471a9cc",
+      "host": "ec2-54-225-88-199.compute-1.amazonaws.com",
       "port": 5432
     },
     "debug": false,

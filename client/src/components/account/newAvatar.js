@@ -2,7 +2,7 @@ import React from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {GridList, GridTile} from 'material-ui/GridList';
 import RaisedButton from 'material-ui/RaisedButton';
-import newAvatarStyle from '../../../../styles/account/NewAvatar.css';
+import newAvatarStyle from '../../../../styles/account/newAvatar.css';
 import Request from '../../../../helpers/requests';
 
 

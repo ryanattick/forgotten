@@ -238,7 +238,7 @@ class Map1 extends React.Component {
               open={this.state.storyOpen}
               onRequestClose={this.handleStoryClose.bind(this)}
             >
-              {'This is the story for map 1'}
+              Your head is pounding. You reach up to touch it and as you do you realize you can’t tell if your eyes are open or closed. This startles you and you freeze. Where are you? You don’t know. Who are you? You can’t remember. Your heart starts racing as panic creeps in, slowly at first and then all at once. You take a breath and try to think back. How did you get here? Where is here? You decide to take things one step at a time. What is your name? As soon as that thought enters your mind you feel a vibration in your pocket.
             </Dialog>
           </div>
           <button onClick={() => this.props.handleReturnToMapsClick()}>Return to Maps</button>

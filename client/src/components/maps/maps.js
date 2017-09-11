@@ -38,15 +38,16 @@ class Maps extends React.Component {
       currentlyPlaying: '0',
       levelClicked: false,
       levelOpen: false,
-      finishedMapOpen: false
+      finishedMapOpen: false,
+      firstMapOpen: false
     };
   }
 
   componentWillMount() {
     this.updateCurrentPuzzle();
-    if (this.state.currentLevel === '0') {
-      //popup with first story
-    }
+    // if (this.state.currentLevel === '0') {
+    //   this.handleFirstMapOpen();
+    // }
   }
 
   updateCurrentPuzzle() {
@@ -154,6 +155,14 @@ class Maps extends React.Component {
     this.setState({finishedMapOpen: false});
   }
 
+  handleFirstMapOpen() {
+    this.setState({firstMapOpen: true});
+  }
+
+  handleFirstMapClose() {
+    this.setState({firstMapOpen: false});
+  }
+
   render() {
     const levelActions = [
       <FlatButton
@@ -174,6 +183,13 @@ class Maps extends React.Component {
         onClick={this.handleFinishedMapClose.bind(this)}
       />
     ];
+    const initialMapsActions = [
+      <RaisedButton
+        label="Continue to Maps"
+        primary={true}
+        onClick={this.handleFirstMapClose.bind(this)}
+      />
+    ];
 
     if (!this.state.levelClicked) {
       return (
@@ -186,6 +202,16 @@ class Maps extends React.Component {
               onRequestClose={this.handleFinishedMapClose.bind(this)}
             >
               {`you have finished the map`}
+            </Dialog>
+          </div>
+          <div>
+            <Dialog
+              actions={initialMapsActions}
+              modal={false}
+              open={this.state.firstMapOpen}
+              onRequestClose={this.handleFirstMapClose.bind(this)}
+            >
+              Game intro here
             </Dialog>
           </div>
           <GridList

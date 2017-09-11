@@ -5,7 +5,7 @@
       "user": "zngreplgmfemic",
       "password": "ae4c99a51ef6db0d74e9a6be6a39da6ee5198a76ec6226c66055c625aa60ee45",
       "host": "ec2-54-163-233-201.compute-1.amazonaws.com",
-      "port": 5433
+      "port": 5432
     },
     "debug": false,
     "pool": {

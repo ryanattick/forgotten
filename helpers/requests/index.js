@@ -12,7 +12,11 @@ module.exports.get = (url, callback) => {
     type: 'GET',
     success: (data) => {
       if (callback) {
-        callback(JSON.parse(data));
+        if (typeof data === 'string') {
+          callback(JSON.parse(data));
+        } else {
+          callback(data);
+        }
       }
     },
     error: (error) => {
@@ -30,7 +34,11 @@ module.exports.post = (url, dataToBeSent, callback) => {
     success: (data) => {
       console.log('POST request: success');
       if (callback) {
-        callback(JSON.parse(data));
+        if (typeof data === 'string') {
+          callback(JSON.parse(data));
+        } else {
+          callback(data);
+        }
       }
     },
     error: (error) => {

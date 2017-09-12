@@ -73,7 +73,6 @@ class App extends React.Component {
 
             {/* Index (Default) Route, Redirect keeps on giving warnings and IndexRoute has been deprecated */}
             <Route exact={true} path='/' component={Maps}></Route>
-
             <Route exact={true} path='/account' component={Account}></Route>
             <Route exact={true} path='/maps' component={Maps}></Route>
             <Route exact={true} path='/backpack' component={Backpack}></Route>

@@ -10,6 +10,7 @@ const Puzzles = require('../db/models/puzzles.js');
 const Items = require('../db/models/Items.js');
 const dbUtils = require('../db/lib/utils.js');
 
+
 app.use(middleware.morgan('dev'));
 app.use(middleware.cookieParser());
 app.use(middleware.bodyParser.urlencoded({extended: false}));
@@ -113,8 +114,9 @@ app.post('/mapData', function(req, res) {
 app.use(['/account', '/maps', '/backpack', '/about'], routes.allOtherRoutes);
 
 app.get('/userInfo', function (req, res) {
-  //console.log(req.user, 'req.users exists');
-  res.status(200).send(req.user);
+  console.log(req.user, 'req.users exists');
+  // db.getUsername(req.user);
+  res.status(200).send(JSON.stringify(req.user));
 });
 
 
@@ -161,5 +163,7 @@ app.post('/updateUsername', function (req, res) {
     res.send('201'); //I don't know why this works, but it does.
   });
 });
+
+
 
 module.exports = app;

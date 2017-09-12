@@ -4,6 +4,7 @@
   "scripts": {
     "postinstall": "curl -s https://raw.githubusercontent.com/reactorcore/pomander/master/bin/install & webpack --config webpack.config.js & knex migrate:latest & knex seed:run",
     "test": "NODE_ENV=test grunt test",
+    "test:react": "mocha --compilers js:babel-register ./client/test/test.js",
     "build": "webpack -d --watch",
     "start": "nodemon server & npm run build"
   },

@@ -31,7 +31,7 @@ class EditAccount extends React.Component {
     this.setState({
       usernameTextField: e.target.value
     });
-  };
+  }
 
   handleUsernameSubmitClick () {
     Request.post('/updateUsername', {
@@ -41,9 +41,9 @@ class EditAccount extends React.Component {
       this.props.backToMainFromUsername(this.state.usernameTextField);
     });
   }
-  
+
   render() {
-  return (
+    return (
       <MuiThemeProvider>
         <div>
           <RaisedButton label="Back to Account" onClick={this.props.backToMain}/>

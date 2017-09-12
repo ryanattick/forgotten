@@ -1,4 +1,3 @@
-
 'use strict';
 const express = require('express');
 const path = require('path');
@@ -31,7 +30,7 @@ app.use('/api/profiles', routes.profiles);
 
 app.get('/mapsData', function(req, res) {
   var id = req.user.id;
-  Profile.forge({id:req.user.id}).fetch({columns: 'level'}).then((results) => {
+  Profile.forge({id: req.user.id}).fetch({columns: 'level'}).then((results) => {
     res.send(JSON.stringify(results.attributes.level));
   }).catch((err) => {
     throw err;

@@ -26,19 +26,6 @@ describe('Profile model tests', function () {
       });
   });
 
-  it('should be able to retrieve data from items', function(done) {
-
-    Items.forge().fetchAll()
-      .then(function(results) {
-        expect(results).to.exist;
-        done();
-      })
-      .catch(function(err) {
-        done(err);
-      });
-  });
-
-
   // it('Should verify that all usernames are unique', function (done) {
   //   // Insert a user with a username that's already in existence
   //   Profile.forge({ username: 'TestUser1', password: 'abc' }).save()

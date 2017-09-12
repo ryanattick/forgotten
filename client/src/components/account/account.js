@@ -38,7 +38,6 @@ class Account extends React.Component {
     this.backToMain = this.backToMain.bind(this);
   }
 
-
   componentWillMount () {
     $.get('/userInfo', (data) => {
       this.setState({

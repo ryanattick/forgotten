@@ -1,4 +1,8 @@
 .toolBar {
   height: auto !important;
-  margin-bottom: 50px
+  margin-bottom: 25px;
+}
+
+.toolbar_container {
+  background-color: rgba(57, 62, 65, 0.55);
 }

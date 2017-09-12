@@ -24,7 +24,7 @@ const About = (props) => {
             <div className={styles.about_inner_body_title}>FORGOTTEN</div>
             <div className={styles.about_inner_body_description}>Forgotten is a logic-centered game in which you must solve puzzles and riddles to progress through levels of increasing difficulty. You must complete logic tasks that correspond to the trajectory of the storyline in order to unfold the mystery behind Forgotten.</div>
           </div>
-          <img src='assets/creepy_dark_basement.jpg' alt="" />
+          <img id={styles.about_inner_img} src='assets/creepy_dark_basement.jpg' alt="" />
         </CardMedia>
       </Card>
     </div>

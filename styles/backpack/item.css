@@ -1,6 +1,7 @@
 .inspect_button {
   background: rgba(0, 0, 0, 0.4) !important;
   border-radius: 0 0 10px 0;
+  position: absolute !important;
 }
 
 .item_tile {

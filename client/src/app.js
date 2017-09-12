@@ -63,7 +63,12 @@ class App extends React.Component {
         <Router>
           <div>
             <div>
-              <Tabs className={styles.app} initialSelectedIndex={this.state.currentTabIndex} onChange={this.handleTabChange}>
+              <Tabs
+                className={styles.app}
+                tabItemContainerStyle={{backgroundColor: 'rgba(57, 62, 65, 0.55)'}}
+                initialSelectedIndex={this.state.currentTabIndex}
+                onChange={this.handleTabChange}
+                inkBarStyle={{backgroundColor: '#E94F37'}}>
                 <Tab value={0} label='My Account' containerElement={<Link to='/account'/>}/>
                 <Tab value={1} label='Maps' containerElement={<Link to='/maps'/>}/>
                 <Tab value={2} label='Backpack' containerElement={<Link to='backpack'/>}/>

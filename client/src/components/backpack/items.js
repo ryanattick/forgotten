@@ -82,21 +82,24 @@ class Items extends React.Component {
   render() {
 
     return (
-      <div>
+      <div className={styles.toolbar_container}>
 
         <Toolbar className={styles.toolBar}>
 
           <ToolbarGroup>
             <TextField
               floatingLabelText='Search by name'
-              onChange={this.handleSearchChange}/>
+              onChange={this.handleSearchChange}
+              floatingLabelFocusStyle={{color: '#E94F37'}}
+              underlineFocusStyle={{borderColor: '#E94F37'}}/>
           </ToolbarGroup>
 
           <ToolbarGroup>
             <SelectField
               floatingLabelText='Filter by type'
               value={this.state.filterIndex}
-              onChange={this.handleFilterChange}>
+              onChange={this.handleFilterChange}
+              selectedMenuItemStyle={{color: '#E94F37'}}>
               {this.state.filters.map((filter, id) => (
                 <MenuItem key={id} value={id} primaryText={filter}/>
               ))}

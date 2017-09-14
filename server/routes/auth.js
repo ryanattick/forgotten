@@ -55,6 +55,7 @@ router.route('/logout')
 
 
 
+
 router.get('/auth/google', middleware.passport.authenticate('google', {
   scope: ['email', 'profile']
 }));

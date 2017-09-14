@@ -45,18 +45,21 @@ class EditAccount extends React.Component {
   render() {
     return (
       <MuiThemeProvider>
-        <div>
-          <RaisedButton label="Back to Account" onClick={this.props.backToMain}/>
-          <h3><u>Edit Account</u></h3><br></br>
-          <form>
-            <TextField
-              hintText="New Username"
-              floatingLabelText={this.state.username}
-              value={this.state.usernameTextField}
-              onChange={this.handleUsernameTextFieldChange}
-            /><br />
-            <RaisedButton label="Submit Changes" onClick={this.handleUsernameSubmitClick}/>
-          </form>
+        <div className={editAccountStyle.flexContainer}>
+          <div className={editAccountStyle.innerFlexContainer}>
+            <form>
+              <TextField
+                hintText="New Username"
+                floatingLabelText={this.state.username}
+                value={this.state.usernameTextField}
+                onChange={this.handleUsernameTextFieldChange}
+                floatingLabelStyle={{color:"#393E41"}}
+                underlineFocusStyle={{borderColor:'red'}}
+              /><br />
+            <RaisedButton label="Submit Changes" onClick={this.handleUsernameSubmitClick} backgroundColor='#E94F37' labelColor='#F6F7EB' className={editAccountStyle.button}/> <br></br>
+            <RaisedButton label="Back to Account" onClick={this.props.backToMain} backgroundColor='#E94F37' labelColor='#F6F7EB' className={editAccountStyle.button}/>
+            </form>
+          </div>
         </div>
       </MuiThemeProvider>
     );

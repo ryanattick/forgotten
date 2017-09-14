@@ -3,6 +3,21 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: rgba(0, 0, 0, 0.58);
+  width: 600px;
+  margin: auto;
+}
+
+.innerFlexContainer {
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url('https://i.imgur.com/nZgjYrk.png');
+  padding: 20px;
+  width: 400px;
+  margin: 20px;
+  height: 550px;
 }
 
 .avatarMouseOver {
@@ -11,26 +26,37 @@
   cursor: pointer;
 }
 
+.level {
+  font-size: 20px;
+  margin: 10px;
+  color: black;
+  font-family: 'Roboto', sans-serif;
+}
+
 .gridStyle {
   height: 175px;
   width: 175px;
   border: none;
 }
 
-.text {
+.label {
+  font-weight: bold;
   font-size: 16px;
-  margin: 20px;
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+}
+
+.text {
+  font-size: 14px;
+  color: black;
+  text-align: center;
+  width: 200px;
+  padding: 5px;
+  margin-bottom: 20px;
+  border-radius: 2px;
+  font-family: 'Roboto', sans-serif;
 }
 
 .logoutButton {
-  margin: 10px;
-}
-
-.userInfo {
-  list-style: none;
-}
-
-
-.changeAvatarButton {
   margin: 10px;
 }

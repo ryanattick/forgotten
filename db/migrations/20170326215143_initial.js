@@ -23,7 +23,7 @@ exports.up = function (knex, Promise) {
     }),
     knex.schema.createTableIfNotExists('puzzles', function(table) {
       table.increments('id').unsigned().primary();
-      table.integer('puzzleID').nullable();
+      table.integer('puzzleID').nullable().unique();
       table.string('name', 50).nullable().unique();
       table.text('extra_info', 'longtext').nullable();
       table.text('problem', 'longtext').nullable();
@@ -38,7 +38,7 @@ exports.up = function (knex, Promise) {
       table.text('description', 'longtext').nullable();
       table.string('type', 20).nullable();
       table.text('img_url').nullable();
-      table.integer('puzzle_id').references('puzzles.id').onDelete('CASCADE');
+      table.integer('puzzle_id').references('puzzles.puzzleID').onDelete('CASCADE');
       table.integer('equippable').nullable();
     }),
     knex.schema.createTableIfNotExists('users_items', function(table) {

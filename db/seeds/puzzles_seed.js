@@ -27,7 +27,7 @@ exports.seed = function (knex, Promise) {
         throw err;
       })
       .catch(() => {
-        console.log('WARNING: defualt puzzle already exists.');
+        console.log('WARNING: default puzzle already exists.');
       });
   }
 };
@@ -38,7 +38,7 @@ item = [
     name: null,
     problem: 'What kind of fish chases a mouse?',
     solution: 'Catfish',
-    story_pop_up: `A single overhead bulb suddenly illuminates the small, square room you find yourself in. You immediately close your eyes to the light, but you’re gradually able to open them to take in your surroundings. You’re sitting cross legged on a dirty concrete floor with the phone in your hands. There are no windows or doors that are immediately visible to you. The room is cluttered with old, cobwebbed furniture and junk. You see a table piled with books and papers a few feet away from you to your left. There are cardboard boxes piled against the wall next to to the table. To your right is a bookcase filled with more books that looks like it hasn’t been touched in years. You stand up to look behind you and you’re disappointed to see nothing but more of the cinderblock wall that encloses the room. How did you get in here? What is this place? Who’s sending you messages? You realize the phone isn’t yours. You search your pockets and you find a torn scrap of paper. “Trust me”, it says in scraggly, unfamiliar handwriting. Trust who? You look through the phone and discover that it’s completely empty except for the messages you got from the anonymous sender. You immediately try calling a few numbers from it, but a “Call Failed” message is all you get. You put the scrap of paper in your pocket and walk over to the table.`,
+    story_pop_up: 'A single overhead bulb suddenly illuminates the small, square room you find yourself in. You immediately close your eyes to the light, but you’re gradually able to open them to take in your surroundings. You’re sitting cross legged on a dirty concrete floor with the phone in your hands. There are no windows or doors that are immediately visible to you. The room is cluttered with old, cobwebbed furniture and junk. You see a table piled with books and papers a few feet away from you to your left. There are cardboard boxes piled against the wall next to to the table. To your right is a bookcase filled with more books that looks like it hasn’t been touched in years. You stand up to look behind you and you’re disappointed to see nothing but more of the cinderblock wall that encloses the room. How did you get in here? What is this place? Who’s sending you messages? You realize the phone isn’t yours. You search your pockets and you find a torn scrap of paper. “Trust me”, it says in scraggly, unfamiliar handwriting. Trust who? You look through the phone and discover that it’s completely empty except for the messages you got from the anonymous sender. You immediately try calling a few numbers from it, but a “Call Failed” message is all you get. You put the scrap of paper in your pocket and walk over to the table.',
     message_pop_up: 'Hello, Nice to see that you’re finally awake. It might be nice to see what’s going on, don’t you think? If you can solve this problem, I might be able to help you with that.',
     pop_up_image_url: null
 

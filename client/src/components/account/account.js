@@ -20,12 +20,12 @@ class Account extends React.Component {
       page: 'main',
       open: false,
       id: '',
-      avatar: 'http://i.imgur.com/sDumOv4.png',
+      avatar: 'https://i.imgur.com/sZwuwPk.png',
       firstName: '',
       lastName: '',
       email: '',
       username: '',
-      level: '1'
+      level: ''
     }
 
       this.handleChangeAvatar = this.handleChangeAvatar.bind(this);
@@ -44,6 +44,12 @@ class Account extends React.Component {
 
   componentWillMount () {
     Request.get('/userInfo', (data) => {
+      if (data.username === null) {
+        data.username = 'Choose a username';
+      }
+      if (data.avatar === null) {
+        data.avatar = 'https://i.imgur.com/sZwuwPk.png';
+      }
       this.setState({
           id: data.id,
           firstName: data.first,
@@ -52,7 +58,7 @@ class Account extends React.Component {
           email: data.email,
           avatar: data.avatar,
           username: data.username,
-          level: data.level
+          level: data.level + 1
       });
     });
   }
@@ -99,7 +105,7 @@ class Account extends React.Component {
     });
   }
 
-  backToMainFromUsername (username) {
+    backToMainFromUsername (username) {
     this.setState({
       page: 'main',
       username: username
@@ -144,42 +150,29 @@ class Account extends React.Component {
         {currentPage === 'main' &&
         <MuiThemeProvider>
           <div className={accountStyle.flexContainer}>
-          <GridTile style={{backgroundImage: `url(${this.state.avatar})`, backgroundSize: 'cover', height: '175px', width: '175px', border: 'none'}}
-          ><IconButton tooltip='Change Avatar' tooltipPosition='bottom-right' onClick={this.handleChangeAvatar}><SettingsIcon color="black" /></IconButton></GridTile>
-            <h4>
-            Level {this.state.level}
-            </h4>
-            <ul className={accountStyle.userInfo}>
-              <li className={accountStyle.text}>
-                <strong>First Name</strong>  {this.state.firstName}
-              </li>
-              <li className={accountStyle.text}>
-                <strong>Last Name</strong>  {this.state.lastName}
-              </li>
-              <li className={accountStyle.text}>
-                <strong>Email</strong>  {this.state.email}
-              </li>
-              <li className={accountStyle.text}>
-              <span
-                ><strong>Username</strong> {this.state.username} <IconButton tooltip='Change Username' tooltipPosition='bottom-left' onClick={this.handleEditClick}><SettingsIcon color="black" /></IconButton></span>
-              </li>
-            </ul>
-            <br></br>
-            <div>
-              <RaisedButton href='/' label="Log Out" secondary={true}  className={accountStyle.logoutButton} onClick={this.handleLogoutClick}/>
-              <RaisedButton label="Delete Account" secondary={true} onClick={this.handleOpen} />
-              <Dialog
-                title="Delete Account"
-                actions={actions}
-                modal={false}
-                open={this.state.open}
-                onRequestClose={this.handleClose}
-              >
-        Are you sure you want to delete your Forgotten account? If you do, your account cannot be restored.
-              </Dialog>
+            <div className={accountStyle.innerFlexContainer}>
+            <GridTile style={{backgroundImage: `url(${this.state.avatar})`, backgroundSize: 'cover', height: '150px', width: '150px', border: 'none', borderRadius: '2px'}}
+            ><IconButton tooltip='Change Avatar' tooltipPosition='bottom-right' onClick={this.handleChangeAvatar}><SettingsIcon color="rgba(57, 62, 65, 0.55)" /></IconButton></GridTile>
+          <h4 className={accountStyle.level}>
+              Level {this.state.level}
+              </h4>
+                  <span className={accountStyle.label} style={{marginLeft:'30px'}}>Username <IconButton tooltip='Change Username' tooltipPosition='bottom-left' onClick={this.handleEditClick}><SettingsIcon color="rgba(57, 62, 65, 0.55)" /></IconButton></span> <span className={accountStyle.text}>{this.state.username}</span>
+                <span className={accountStyle.label}>Name</span> <span className={accountStyle.text}>{this.state.firstName + ' ' + this.state.lastName}</span>
+                  <span className={accountStyle.label}>Email</span> <span className={accountStyle.text}>{this.state.email}</span>
+                <RaisedButton href='/' label="Log Out" backgroundColor='#E94F37' labelColor='#F6F7EB' style={{width: '160px'}} className={accountStyle.logoutButton} onClick={this.handleLogoutClick}/>
+                <RaisedButton label="Delete Account" backgroundColor='#E94F37' labelColor='#F6F7EB' onClick={this.handleOpen} />
+                <Dialog
+                  title="Delete Account"
+                  actions={actions}
+                  modal={false}
+                  open={this.state.open}
+                  onRequestClose={this.handleClose}
+                >
+          Are you sure you want to delete your Forgotten account? If you do, your account cannot be restored.
+                </Dialog>
             </div>
-          </div>
-        </MuiThemeProvider>}
+        </div>
+      </MuiThemeProvider>}
       </div>
     );
   }

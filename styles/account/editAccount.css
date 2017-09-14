@@ -1,0 +1,27 @@
+.flexContainer {
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.58);
+  width: 600px;
+  margin: auto;
+}
+
+.innerFlexContainer {
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url('https://i.imgur.com/nZgjYrk.png');
+  padding: 20px;
+  width: 400px;
+  margin: 20px;
+  height: 550px;
+}
+
+.button {
+  width: 170px;
+  margin-bottom: 10px;
+  margin-left: 40px;
+}

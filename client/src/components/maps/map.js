@@ -6,7 +6,7 @@ import Dialog from 'material-ui/Dialog';
 import RaisedButton from 'material-ui/RaisedButton';
 import Request from '../../../../helpers/requests';
 
-class Map2 extends React.Component {
+class Map extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -83,7 +83,7 @@ class Map2 extends React.Component {
     };
   }
   componentWillMount() {
-    if (this.props.currentPuzzleNum >= 20) {
+    if (this.props.currentPuzzleNum >= parseInt(this.props.map + '0') + 10) {
       this.setState({
         completedQuests: ['0'].concat(this.state.levelsRemaining),
         levelsRemaining: [],
@@ -91,11 +91,11 @@ class Map2 extends React.Component {
       }, () => {
         this.colorPuzzles(true);
       });
-    } else if (this.props.currentPuzzleNum !== 10) {
+    } else if (this.props.currentPuzzleNum !== parseInt(this.props.map + '0')) {
       this.setState({
-        currentQuest: this.props.currentPuzzleNum.toString()[1],
-        completedQuests: ['0'].concat(this.state.levelsRemaining.slice(0, this.props.currentPuzzleNum - 11)),
-        levelsRemaining: this.state.levelsRemaining.slice(this.props.currentPuzzleNum - 10)
+        currentQuest: this.props.currentPuzzleNum.toString()[1] || this.props.currentPuzzleNum.toString()[0],
+        completedQuests: ['0'].concat(this.state.levelsRemaining.slice(0, this.props.currentPuzzleNum - parseInt(this.props.map + '1'))),
+        levelsRemaining: this.state.levelsRemaining.slice(this.props.currentPuzzleNum - parseInt(this.props.map + '0'))
       }, () => {
         this.colorPuzzles(true);
       });
@@ -118,7 +118,9 @@ class Map2 extends React.Component {
       for (var i = 0; i < this.state.completedQuests.length; i++) {
         document.getElementById(`circle${this.state.completedQuests[i]}`).style.fill = 'green';
         document.getElementById(`circle${this.state.completedQuests[i]}`).style.display = 'block';
-        document.getElementById(`path${this.state.completedQuests[i]}`).style.display = 'block';
+        if (i < 9) {
+          document.getElementById(`path${this.state.completedQuests[i]}`).style.display = 'block';
+        }
       }
       if (this.state.currentQuest && parseInt(this.state.currentQuest) < 10) {
         document.getElementById(`circle${this.state.currentQuest}`).style.fill = 'red';
@@ -193,7 +195,7 @@ class Map2 extends React.Component {
         this.setState({
           currentQuest: '10'
         }, function() {
-          Promise.resolve(Request.post('/mapData', {level: 20}, (data) => {
+          Promise.resolve(Request.post('/mapData', {level: parseInt(this.props.map + '0') + 10}, (data) => {
           }))
             .then(() => {
               this.props.handleMapFinished();
@@ -206,7 +208,7 @@ class Map2 extends React.Component {
           levelsRemaining: this.state.levelsRemaining.slice(1)
         }, function() {
           this.colorPuzzles();
-          Request.post('/mapData', {level: parseInt('1' + this.state.currentQuest)}, (data) => {
+          Request.post('/mapData', {level: parseInt(this.props.map + this.state.currentQuest)}, (data) => {
           });
           this.handleMessageOpen();
         });
@@ -233,7 +235,7 @@ class Map2 extends React.Component {
     this.setState({messageOpen: false});
     var path = $(`#path${this.state.completedQuests[this.state.completedQuests.length - 1]}`);
     var circle = $(`#circle${this.state.currentQuest}`);
-    circle.add(path).fadeIn(1000);
+    circle.add(path).fadeIn(1500);
   }
 
   handleStoryOpen() {
@@ -245,6 +247,8 @@ class Map2 extends React.Component {
   }
 
   render() {
+    const stories = ['Your head is pounding. You reach up to touch it and as you do you realize you can’t tell if your eyes are open or closed. This startles you and you freeze. Where are you? You don’t know. Who are you? You can’t remember. Your heart starts racing as panic creeps in, slowly at first and then all at once. You take a breath and try to think back. How did you get here? Where is here? You decide to take things one step at a time. What is your name? As soon as that thought enters your mind you feel a vibration in your pocket.'];
+
     const messageActions = [
       <RaisedButton
         label="Ok"
@@ -271,12 +275,12 @@ class Map2 extends React.Component {
               autoScrollBodyContent={true}
               onRequestClose={this.handleStoryClose.bind(this)}
             >
-              {'This is the story for map 2'}
+              {stories[this.props.map]}
             </Dialog>
           </div>
           <button onClick={() => this.props.handleReturnToMapsClick()}>Return to Maps</button>
           <svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 436 290" style={{width: '800px', enableBackground: 'new 0 0 436 290'}} xmlSpace="preserve">
-            <image style={{'overflow': 'visible'}} width="580" height="386" xlinkHref="https://i.pinimg.com/736x/72/03/7a/72037a6578a6747fd6f6ce4e68e680a8--basement-bedrooms-basements.jpg" transform="matrix(0.7517 0 0 0.7513 0 0)">
+            <image style={{'overflow': 'visible'}} width="580" height="386" xlinkHref={`/assets/maps/map${parseInt(this.props.map) + 1}.jpg`} transform="matrix(0.7517 0 0 0.7513 0 0)">
             </image>
             <g>
               <g>
@@ -350,6 +354,7 @@ class Map2 extends React.Component {
               actions={messageActions}
               modal={false}
               open={this.state.messageOpen}
+              autoScrollBodyContent={true}
               onRequestClose={this.handleMessageClose.bind(this)}
             >
               {this.state.puzzles.stories[this.state.completedQuests[this.state.completedQuests.length - 1]]}
@@ -367,4 +372,4 @@ class Map2 extends React.Component {
   }
 }
 
-export default Map2;
+export default Map;

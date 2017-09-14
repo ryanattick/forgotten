@@ -3,6 +3,7 @@ import Map1 from './map1.js';
 import Map2 from './map2.js';
 import Map3 from './map3.js';
 import Map4 from './map4.js';
+import Map from './map.js';
 import {GridList, GridTile} from 'material-ui/GridList';
 import IconButton from 'material-ui/IconButton';
 import Dialog from 'material-ui/Dialog';
@@ -13,16 +14,16 @@ import $ from 'jquery';
 
 const tilesData = [
   {
-    img: '/assets/maps/basement.jpg'
+    img: '/assets/maps/map1.jpg'
   },
   {
-    img: '/assets/maps/abandonedChurch.jpg'
+    img: '/assets/maps/map2.jpg'
   },
   {
-    img: '/assets/maps/level3.jpg'
+    img: '/assets/maps/map3.jpg'
   },
   {
-    img: '/assets/maps/level4.jpg'
+    img: '/assets/maps/map4.jpg'
   }
 ];
 
@@ -78,16 +79,16 @@ class Maps extends React.Component {
         levelClicked: true,
         currentlyPlaying: e.target.id
       });
+    } else if (currentLevel) {
+      this.setState({
+        levelClicked: true,
+        currentlyPlaying: currentLevel
+      });
     } else if (e.target.id < this.state.currentLevel) {
       this.setState({
         completedLevelClicked: e.target.id,
         levelClicked: true,
         currentlyPlaying: e.target.id
-      });
-    } else if (currentLevel) {
-      this.setState({
-        levelClicked: true,
-        currentlyPlaying: this.state.currentLevel
       });
     } else {
       this.handleLevelOpen();
@@ -106,9 +107,7 @@ class Maps extends React.Component {
 
   addBorder() {
     var highlighted = document.getElementById('Grid' + this.state.currentLevel);
-    var parent = $(highlighted).parent()[0];
-    parent.style.borderStyle = 'solid';
-    parent.style.borderColor = 'green';
+    highlighted.style.borderColor = '#44BBA4';
   }
 
   handleMapFinished() {
@@ -199,6 +198,7 @@ class Maps extends React.Component {
               actions={finishedMapActions}
               modal={false}
               open={this.state.finishedMapOpen}
+              autoScrollBodyContent={true}
               onRequestClose={this.handleFinishedMapClose.bind(this)}
             >
               {`you have finished the map`}
@@ -209,17 +209,19 @@ class Maps extends React.Component {
               actions={initialMapsActions}
               modal={false}
               open={this.state.firstMapOpen}
+              autoScrollBodyContent={true}
               onRequestClose={this.handleFirstMapClose.bind(this)}
             >
               Game intro here
             </Dialog>
           </div>
           <GridList
-            cellHeight={180}
+            cellHeight={600}
             cols={4}>
             {this.state.levels.map((item, id) => (
               <GridTile
                 key={id}
+                style={{height: '100%', borderStyle: 'solid', borderColor: '#393E41'}}
                 id={'Grid' + id}
                 title={`Level ${JSON.stringify(parseInt(item) + 1)}`}
                 actionIcon={<IconButton id={id} onClick={(e) => this.handleLevelClick(e)}></IconButton>}>
@@ -232,6 +234,7 @@ class Maps extends React.Component {
               actions={levelActions}
               modal={false}
               open={this.state.levelOpen}
+              autoScrollBodyContent={true}
               onRequestClose={this.handleLevelClose.bind(this)}
             >
               <b>{`Complete Level ${JSON.stringify(parseInt(this.state.currentLevel) + 1)} before moving on!`}</b>
@@ -239,32 +242,40 @@ class Maps extends React.Component {
           </div>
         </div>
       );
-    } else if (this.state.currentLevel === '0' || this.state.completedLevelClicked === '0') {
+    } else {
       return (
         <div>
-          <Map1 handleReturnToMapsClick={this.handleReturnToMapsClick.bind(this)} handleMapFinished={this.handleMapFinished.bind(this)} level={this.state.currentLevel} currentPuzzleNum={this.state.currentPuzzleNum} map={this.state.currentlyPlaying}/>
-        </div>
-      );
-    } else if (this.state.currentLevel === '1' || this.state.completedLevelClicked === '1') {
-      return (
-        <div>
-          <Map2 handleReturnToMapsClick={this.handleReturnToMapsClick.bind(this)} handleMapFinished={this.handleMapFinished.bind(this)} level={this.state.currentLevel} currentPuzzleNum={this.state.currentPuzzleNum} map={this.state.currentlyPlaying}/>
-        </div>
-      );
-    } else if (this.state.currentLevel === '2' || this.state.completedLevelClicked === '2') {
-      return (
-        <div>
-          <Map3 handleReturnToMapsClick={this.handleReturnToMapsClick.bind(this)} handleMapFinished={this.handleMapFinished.bind(this)} level={this.state.currentLevel} currentPuzzleNum={this.state.currentPuzzleNum} map={this.state.currentlyPlaying}/>
-        </div>
-      );
-    } else if (this.state.currentLevel === '3' || this.state.completedLevelClicked === '3') {
-      return (
-        <div>
-          <Map4 handleReturnToMapsClick={this.handleReturnToMapsClick.bind(this)} handleMapFinished={this.handleMapFinished.bind(this)} level={this.state.currentLevel} currentPuzzleNum={this.state.currentPuzzleNum} map={this.state.currentlyPlaying}/>
+          <Map handleReturnToMapsClick={this.handleReturnToMapsClick.bind(this)} handleMapFinished={this.handleMapFinished.bind(this)} level={this.state.currentLevel} currentPuzzleNum={this.state.currentPuzzleNum} map={this.state.currentlyPlaying}/>
         </div>
       );
     }
   }
+  //   } else if (this.state.currentLevel === '0' || this.state.completedLevelClicked === '0') {
+  //     return (
+  //       <div>
+  //         <Map1 handleReturnToMapsClick={this.handleReturnToMapsClick.bind(this)} handleMapFinished={this.handleMapFinished.bind(this)} level={this.state.currentLevel} currentPuzzleNum={this.state.currentPuzzleNum} map={this.state.currentlyPlaying}/>
+  //       </div>
+  //     );
+  //   } else if (this.state.currentLevel === '1' || this.state.completedLevelClicked === '1') {
+  //     return (
+  //       <div>
+  //         <Map2 handleReturnToMapsClick={this.handleReturnToMapsClick.bind(this)} handleMapFinished={this.handleMapFinished.bind(this)} level={this.state.currentLevel} currentPuzzleNum={this.state.currentPuzzleNum} map={this.state.currentlyPlaying}/>
+  //       </div>
+  //     );
+  //   } else if (this.state.currentLevel === '2' || this.state.completedLevelClicked === '2') {
+  //     return (
+  //       <div>
+  //         <Map3 handleReturnToMapsClick={this.handleReturnToMapsClick.bind(this)} handleMapFinished={this.handleMapFinished.bind(this)} level={this.state.currentLevel} currentPuzzleNum={this.state.currentPuzzleNum} map={this.state.currentlyPlaying}/>
+  //       </div>
+  //     );
+  //   } else if (this.state.currentLevel === '3' || this.state.completedLevelClicked === '3') {
+  //     return (
+  //       <div>
+  //         <Map4 handleReturnToMapsClick={this.handleReturnToMapsClick.bind(this)} handleMapFinished={this.handleMapFinished.bind(this)} level={this.state.currentLevel} currentPuzzleNum={this.state.currentPuzzleNum} map={this.state.currentlyPlaying}/>
+  //       </div>
+  //     );
+  //   }
+  // }
 }
 
 export default Maps;

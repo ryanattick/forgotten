@@ -29,6 +29,7 @@
     "grunt": "~0.4.5",
     "grunt-cli": "^1.2.0",
     "grunt-pg": "https://github.com/watsoncj/grunt-pg.git",
+    "imports-loader": "^0.7.1",
     "jquery": "^3.2.1",
     "jsdom": "^11.2.0",
     "knex": "^0.12.9",
@@ -49,6 +50,7 @@
     "react-router-dom": "^4.2.2",
     "redis": "^2.7.1",
     "sessions": "0.0.2-7",
+    "snapsvg": "^0.5.1",
     "style-loader": "^0.18.2"
   },
   "devDependencies": {

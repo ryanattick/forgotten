@@ -43,8 +43,8 @@ class Puzzle extends React.Component {
             {this.props.messages[this.props.currentQuest]}
           </Dialog>
         </div>
-        <button onClick={() => this.props.handleReturntoMapClick()}>Return to Map</button>
-        <div>
+        <button className="button" onClick={() => this.props.handleReturntoMapClick(true)}>Return to Map</button>
+        <div style={{color: '#E94F37'}}>
           {this.props.questions[this.props.currentQuest]}
         </div>
         <input ref="answerInput" onKeyUp={(e) => this.props.handleEnterClick(e)} type="text" id="puzzleAnswer"/>

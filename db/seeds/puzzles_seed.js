@@ -1,5 +1,5 @@
 const models = require('../models');
-const server = require('../../server/app')
+const server = require('../../server/app');
 
 // let username;
 //

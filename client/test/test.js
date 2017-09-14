@@ -1,7 +1,7 @@
 // import React from 'react';
 // import { expect } from 'chai';
 // import { shallow } from 'enzyme';
-// //import Level from '../src/components/level.js';
+// //import Map1 from '../src/components/level.js';
 // import About from '../src/components/about.js';
 // import Account from '../src/components/account.js';
 

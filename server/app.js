@@ -10,7 +10,6 @@ const Puzzles = require('../db/models/puzzles.js');
 const Items = require('../db/models/Items.js');
 const dbUtils = require('../db/lib/utils.js');
 
-
 app.use(middleware.morgan('dev'));
 app.use(middleware.cookieParser());
 app.use(middleware.bodyParser.urlencoded({extended: false}));
@@ -141,14 +140,11 @@ app.get('/playerItems', function (req, res) {
 
 app.post('/updateAvatar', function (req, res) {
   console.log(req.body, 'req.body updateavatar exists');
-  // Profile.forge({first: "John", last: "Smith"}).save().then(function() {
-  //   console.log('saved')
-  // })
-  Profile.forge({id: req.body.id}).save({avatar: req.body.avatar}).then(function() { //...
+   Profile.forge({id: req.body.id}).save({avatar: req.body.avatar}).then(function() { //...
     console.log('avatar saved!!');
-    res.send('201');
   });
-});
+})
+
 
 
 
@@ -167,3 +163,4 @@ app.post('/updateUsername', function (req, res) {
 
 
 module.exports = app;
+

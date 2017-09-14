@@ -25,15 +25,15 @@ describe('Item model tests', function () {
   });
 
   it('should be able to fetch items', function(done) {
-    Items.where({name: 'Blue Pill'}).fetch()
+    Items.where({name: 'Phone'}).fetch()
       .then(function(result) {
-        expect(result.attributes.name).to.equal('Blue Pill');
+        expect(result.attributes.name).to.equal('Phone');
         done();
       });
   });
 
   it('should have a name, type, equippable, img_url, and puzzle_id', function(done) {
-    Items.where({name: 'Blue Pill'}).fetch()
+    Items.where({name: 'Phone'}).fetch()
       .then(function(result) {
         expect(result.attributes.type).to.exist;
         expect(result.attributes.equippable).to.exist;
@@ -53,7 +53,13 @@ describe('Item model tests', function () {
 
 });
 
-// name: 'Blue Pill',
+// name: 'Phone',
+// description: 'A cell phone you wake up holding.',
+// type: 'Consumable', /* Miscellaneous, Reward, etc. */
+// equippable: 0, /* Yes, No, Not Possible */
+// img_url: '/assets/items/paper.jpg',
+// puzzle_id: 0 //0
+// name: 'Phone',
 //    description: 'Consuming this pill increases the timer on the next quest by 30 seconds',
 //    type: 'Consumable',  Miscellaneous, Reward, etc.
 //    equippable: 0, /* Yes, No, Not Possible */
@@ -76,5 +82,3 @@ describe('Item model tests', function () {
 //   .catch(() => {
 //     console.log('WARNING: defualt items already exists.');
 //   });
-
-

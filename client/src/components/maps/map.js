@@ -116,32 +116,32 @@ class Map extends React.Component {
   colorPuzzles(isMounting) {
     if (isMounting) {
       for (var i = 0; i < this.state.completedQuests.length; i++) {
-        document.getElementById(`circle${this.state.completedQuests[i]}`).style.fill = 'green';
+        document.getElementById(`circle${this.state.completedQuests[i]}`).style.fill = '#44BBA4';
         document.getElementById(`circle${this.state.completedQuests[i]}`).style.display = 'block';
         if (i < 9) {
           document.getElementById(`path${this.state.completedQuests[i]}`).style.display = 'block';
         }
       }
       if (this.state.currentQuest && parseInt(this.state.currentQuest) < 10) {
-        document.getElementById(`circle${this.state.currentQuest}`).style.fill = 'red';
+        document.getElementById(`circle${this.state.currentQuest}`).style.fill = '#E94F37';
         document.getElementById(`circle${this.state.currentQuest}`).style.display = 'block';
       }
     } else {
       for (var i = 0; i < this.state.completedQuests.length; i++) {
-        document.getElementById(`circle${this.state.completedQuests[i]}`).style.fill = 'green';
+        document.getElementById(`circle${this.state.completedQuests[i]}`).style.fill = '#44BBA4';
         document.getElementById(`circle${this.state.completedQuests[i]}`).style.display = 'block';
         if (i !== this.state.completedQuests.length - 1) {
           document.getElementById(`path${this.state.completedQuests[i]}`).style.display = 'block';
         }
       }
       if (this.state.currentQuest && parseInt(this.state.currentQuest) < 10) {
-        document.getElementById(`circle${this.state.currentQuest}`).style.fill = 'red';
+        document.getElementById(`circle${this.state.currentQuest}`).style.fill = '#E94F37';
       }
     }
   }
 
   handleMapQuestClick(e) {
-    if (e.target.style.fill === 'green') {
+    if (e.target.style.fill === 'rgb(68, 187, 164)') {
       this.setState({
         greenclickedQuest: e.target.id[e.target.id.length - 1],
         currentQuestBeforeGreenClick: this.state.currentQuest,
@@ -279,75 +279,64 @@ class Map extends React.Component {
             </Dialog>
           </div>
           <button onClick={() => this.props.handleReturnToMapsClick()}>Return to Maps</button>
-          <svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 436 290" style={{width: '800px', enableBackground: 'new 0 0 436 290'}} xmlSpace="preserve">
-            <image style={{'overflow': 'visible'}} width="580" height="386" xlinkHref={`/assets/maps/map${parseInt(this.props.map) + 1}.jpg`} transform="matrix(0.7517 0 0 0.7513 0 0)">
+          <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 800 515" style={{width: '1000px', enableBackground: "new 0 0 800 515"}} xmlSpace="preserve">
+            <image style={{overflow:"visible"}} width="1600" height="1030" xlinkHref={`/assets/maps/basementMap.jpg`} transform="matrix(0.5 0 0 0.5 0 0)">
             </image>
+            <circle className={styles.circle} id="circle0" onClick={(e) => this.handleMapQuestClick(e)} style={{cursor: 'pointer', cursor: 'hand', fill: 'red', stroke: 'black', strokeLinecap: 'round', strokeMiterlimit: '10'}} cx="573.9" cy="112.9" r="7.4"/>
+            <circle className={styles.circle} id="circle1" onClick={(e) => this.handleMapQuestClick(e)} style={{cursor: 'pointer', cursor: 'hand', display: 'none', fill: 'red', stroke: 'black', strokeLinecap: 'round', strokeMiterlimit: '10'}} cx="580.9" cy="132.9" r="7.4"/>
             <g>
               <g>
-                <path className="st0" id="path6" style={{display: 'none', fill: 'red'}} d="M151.4,211.8c10,15.4,32.2,18.4,49,19.8c23.9,2,44.5-14.8,63.9-26.4c1.7-1,0.1-3.6-1.5-2.6c-9.1,5.5-18.2,11.1-27.4,16.4c-9.7,5.5-19.8,10.1-31.2,9.8c-9.3-0.2-19-2.1-27.9-4.5c-8.8-2.4-17.2-6.3-22.3-14.1C153,208.6,150.4,210.1,151.4,211.8L151.4,211.8z"/>
+                <path className="st1" id="path0" style={{display: 'none', fill: 'black'}} d="M576.6,119.8c0.1,2.1,0.5,4.1,1.1,6.1c0.1,0.5,0.9,0.3,0.7-0.2c-0.6-1.9-0.9-3.9-1.1-5.9C577.3,119.3,576.6,119.3,576.6,119.8L576.6,119.8z"/>
+              </g>
+            </g>
+            <ellipse className={styles.circle} id="circle2" onClick={(e) => this.handleMapQuestClick(e)} style={{cursor: 'pointer', cursor: 'hand', display: 'none', fill: 'red', stroke: 'black', strokeLinecap: 'round', strokeMiterlimit: '10'}} cx="521" cy="151" rx="6.5" ry="6.5"/>
+            <g>
+              <g>
+                <path className="st1" id="path1" style={{display: 'none', fill: 'black'}} d="M524.6,145.4c5.7-6.7,16.3-7.7,24.5-8.5c8-0.8,17.1-1.1,25.1,0.1c0.5,0.1,0.7-0.6,0.2-0.7c-8.7-1.4-18.6-1.1-27.3,0.1c-8,1-17.4,2-23,8.5C523.8,145.2,524.3,145.8,524.6,145.4L524.6,145.4z"/>
+              </g>
+            </g>
+            <circle className={styles.circle} id="circle3" onClick={(e) => this.handleMapQuestClick(e)} style={{cursor: 'pointer', cursor: 'hand', display: 'none', fill: 'red', stroke: 'black', strokeLinecap: 'round', strokeMiterlimit: '10'}} cx="442.9" cy="200.9" r="7.4"/>
+            <g>
+              <g>
+                <path className="st1" id="path2" style={{display: 'none', fill: 'black'}} d="M517.7,156.6c-11.3,9.9-24.2,17.3-38.4,22.2c-5.9,2.1-10.8,4.6-16,8.1c-4.5,3.1-10.7,5-14.5,8.9c-0.3,0.3,0.2,0.9,0.5,0.5c2.5-2.5,5.9-3.5,8.9-5.2c2.8-1.6,5.4-3.5,8.1-5.3c6.2-4,13-5.9,19.8-8.7c11.8-4.8,22.5-11.6,32.1-19.9C518.6,156.8,518.1,156.2,517.7,156.6L517.7,156.6z"/>
+              </g>
+            </g>
+            <circle className={styles.circle} id="circle5" onClick={(e) => this.handleMapQuestClick(e)} style={{cursor: 'pointer', cursor: 'hand', display: 'none', fill: 'red', stroke: 'black', strokeLinecap: 'round', strokeMiterlimit: '10'}} cx="307.9" cy="265.9" r="7.4"/>
+            <circle className={styles.circle} id="circle4" onClick={(e) => this.handleMapQuestClick(e)} style={{cursor: 'pointer', cursor: 'hand', display: 'none', fill: 'red', stroke: 'black', strokeLinecap: 'round', strokeMiterlimit: '10'}} cx="330.9" cy="251.9" r="7.4"/>
+            <g>
+              <g>
+                <path className="st1" id="path3" style={{display: 'none', fill: 'black'}} d="M435.2,199.4c-9,0.2-17.5,2.8-25.5,6.6c-4.5,2.2-8.7,4.8-13,7.3c-3.9,2.3-8.7,2.8-12.4,5.3c-3.8,2.6-6.9,5.8-11,8c-4.1,2.2-8.4,4-12.7,5.9c-8.5,3.9-16.2,9-23.4,15c-0.4,0.3,0.2,0.8,0.5,0.5c7.3-6.2,15.2-11.3,24-15.3c7.3-3.3,14.4-6.5,20.6-11.7c3.6-3,7-3.5,11.1-5.3c4.2-1.8,7.9-4.6,11.9-6.8c9.3-5.1,19.2-8.7,29.9-9C435.7,200.2,435.7,199.4,435.2,199.4L435.2,199.4z"/>
               </g>
             </g>
             <g>
               <g>
-                <path className="st1" style={{display: 'block', fill: 'blue'}} d="M43,192.5c1.9,0,1.9-3,0-3C41.1,189.5,41.1,192.5,43,192.5L43,192.5z"/>
+                <path className="st1" id="path4" style={{display: 'none', fill: 'black'}} d="M324.4,255.8c-3.1,2.5-6.6,4.1-9.8,6.4c-0.4,0.3,0,0.9,0.4,0.6c3.2-2.4,6.8-4,10-6.6C325.3,256,324.8,255.5,324.4,255.8L324.4,255.8z"/>
               </g>
             </g>
-            <line className="st2" style={{fill: 'none', stroke: '#000000', strokeMiterlimit: '10'}} x1="-0.5" y1="-0.5" x2="-0.5" y2="290.5"/>
-            <line className="st2" style={{fill: 'none', stroke: '#black', strokeMiterlimit: '10'}} x1="436.5" y1="-0.5" x2="436.5" y2="290.5"/>
-            <line className="st2" style={{fill: 'none', stroke: '#000000', strokeMiterlimit: '10'}} x1="-0.5" y1="-0.5" x2="-0.5" y2="290.5"/>
-            <line className="st2" style={{fill: 'none', stroke: '#000000', strokeMiterlimit: '10'}} x1="436.5" y1="290.5" x2="-0.5" y2="290.5"/>
-            <line className="st2" style={{fill: 'none', stroke: '#000000', strokeMiterlimit: '10'}} x1="-0.5" y1="-0.5" x2="436.5" y2="-0.5"/>
+            <circle className={styles.circle} id="circle6" onClick={(e) => this.handleMapQuestClick(e)} style={{cursor: 'pointer', cursor: 'hand', display: 'none', fill: 'red', stroke: 'black', strokeLinecap: 'round', strokeMiterlimit: '10'}} cx="459.9" cy="352.9" r="7.4"/>
+            <circle className={styles.circle} id="circle7" onClick={(e) => this.handleMapQuestClick(e)} style={{cursor: 'pointer', cursor: 'hand', display: 'none', fill: 'red', stroke: 'black', strokeLinecap: 'round', strokeMiterlimit: '10'}} cx="324.9" cy="296.9" r="7.4"/>
+            <circle className={styles.circle} id="circle9" onClick={(e) => this.handleMapQuestClick(e)} style={{cursor: 'pointer', cursor: 'hand', display: 'none', fill: 'red', stroke: 'black', strokeLinecap: 'round', strokeMiterlimit: '10'}} cx="215.9" cy="414.9" r="7.4"/>
             <g>
               <g>
-                <path className="st0" id="path7" style={{display: 'none', fill: 'red'}} d="M130.8,208.1c-6.3-7.3-17.6-0.8-21.7,5.7c-3,4.7-3.8,10.4-3,15.8c0.4,2.5,1,4.9,2,7.2c1.7,4.1,5.4,8.1,4.3,12.8c-0.4,1.9,2.5,2.7,2.9,0.8c0.7-3.3,0-5.9-1.5-8.9c-2.5-5-4.9-9.5-5.1-15.3c-0.1-5.1,1.6-10.2,5.3-13.8c3.5-3.5,10.6-6.8,14.6-2.2C130,211.7,132.1,209.6,130.8,208.1L130.8,208.1z"/>
+                <path className="st1" id="path5" style={{display: 'none', fill: 'black'}} d="M314.6,270c11.9,4.7,22,12.4,32.6,19.4c10.7,7.1,22.4,11.5,33.8,17.4c24.6,12.8,48.3,28,71.9,42.7c0.4,0.3,0.8-0.4,0.4-0.6c-24-15-48.2-30.7-73.5-43.5c-6.1-3.1-12.5-5.4-18.6-8.5c-5.4-2.8-10.5-6.1-15.6-9.5c-9.9-6.7-19.5-13.7-30.7-18.1C314.4,269.1,314.2,269.8,314.6,270L314.6,270z"/>
               </g>
             </g>
-            <circle className="st3" id="circle7" onClick={(e) => this.handleMapQuestClick(e)} style={{display: 'none', fill: 'red', stroke: '#ED1C24', strokeLinecap: 'round', strokeMiterlimit: '10'}} cx="142.2" cy="199.9" r="15.6"/>
-            <circle className="st3" id="circle0" onClick={(e) => this.handleMapQuestClick(e)} style={{fill: 'red', stroke: '#ED1C24', strokeLinecap: 'round', strokeMiterlimit: '10'}} cx="40.2" cy="194.9" r="15.6"/>
             <g>
               <g>
-                <path className="st0" id="path0" strokeDasharray="5, 5" style={{display: 'none', fill: 'red'}} d="M42,179.7c4.2-9,11.3-16.3,20.4-20.5c11.3-5.3,24.2-4.3,35.8-0.6c4.6,1.5,9,3.1,13.7,1.1c3.7-1.6,6.5-4.9,8.9-8c6-7.8,9.5-16.9,10.8-26.6c0.3-1.9-2.7-1.9-3,0c-1.4,10.7-6.1,22.1-14.3,29.4c-6.2,5.6-12.7,1.7-19.5,0c-5-1.3-10.2-2-15.3-1.9c-17.2,0.2-32.7,10.1-40,25.7C38.6,180,41.2,181.5,42,179.7L42,179.7z"/>
+                <path className="st1" id="path6" style={{display: 'none', fill: 'black'}} d="M458.9,360.3c-3.7,6.5-11.9,0.5-14.9-2.5c-2.4-2.4-4-5.3-5.9-8c-2.7-3.8-5.8-6.3-10-8.4c-10.6-5.3-20.2-12-30.4-17.9c-4.5-2.6-9.1-5-14-6.8c-5.8-2.1-12.1-2.6-17.5-5.6c-10.9-5.9-21.9-9.4-33.9-12.3c-0.5-0.1-0.7,0.6-0.2,0.7c6.8,1.7,13.6,3.3,20.2,5.8c6.2,2.3,11.6,6.3,17.7,8.4c6.8,2.3,13.5,3.4,20.1,6.6c5.9,2.9,11.5,6.4,17,9.9c5.6,3.5,11.1,7.1,17,10.1c3.2,1.6,6.6,3,9.4,5.3c2.7,2.3,4.5,5.5,6.5,8.4c3.4,5,14.5,15.5,19.5,6.7C459.8,360.2,459.2,359.9,458.9,360.3L458.9,360.3z"/>
               </g>
             </g>
-            <circle className="st3" id="circle1" onClick={(e) => this.handleMapQuestClick(e)} style={{display: 'none', fill: 'red', stroke: '#ED1C24', strokeLinecap: 'round', strokeMiterlimit: '10'}} cx="130.2" cy="108.9" r="15.6"/>
+            <circle className={styles.circle} id="circle8" onClick={(e) => this.handleMapQuestClick(e)} style={{cursor: 'pointer', cursor: 'hand', display: 'none', fill: 'red', stroke: 'black', strokeLinecap: 'round', strokeMiterlimit: '10'}} cx="242.9" cy="359.9" r="7.4"/>
             <g>
               <g>
-                <path className="st0" id="path1" style={{display: 'none', fill: 'red'}} d="M114.9,103.6c-4.9-3.5-10.3-5.8-16.3-6.6c-5.6-0.7-16.1,2.5-19.5-3.4c-4.7-8.1,5.7-14.8,11.1-18.6c4.2-2.9,8.1-6,10.3-10.8c0.3-0.8,0.2-1.6-0.5-2.1c-3.8-2.4-7.4-5-10.8-8c-1.4-1.3-3.6,0.8-2.1,2.1c3.6,3.1,7.3,5.9,11.4,8.4c-0.2-0.7-0.4-1.4-0.5-2.1c-4.8,10.6-27.5,15.9-22.1,30.9c2,5.6,7.8,6.6,13.2,6.4c9.1-0.3,16.8,0.6,24.4,6.2C114.9,107.4,116.4,104.8,114.9,103.6L114.9,103.6z"/>
+                <path className="st1" id="path7" style={{display: 'none', fill: 'black'}} d="M318.6,292.5c-8.7-0.6-14.9,5.1-21.7,9.7c-7,4.7-13.7,6.8-17.8,14.6c-4.1,7.7-6.9,15.5-9,24c-2.3,9.4-6,30.6-20,22.4c-0.4-0.2-0.8,0.4-0.4,0.6c16.9,9.9,19.9-19.2,22.8-29.4c2.9-10.1,7.5-21.9,17.1-27.2c4.4-2.4,8.4-4.9,12.5-7.8c5-3.6,10.2-6.6,16.6-6.2C319.1,293.3,319.1,292.6,318.6,292.5L318.6,292.5z"/>
               </g>
             </g>
-            <circle className="st3" id="circle2" onClick={(e) => this.handleMapQuestClick(e)} style={{display: 'none', fill: 'red', stroke: '#ED1C24', strokeLinecap: 'round', strokeMiterlimit: '10'}} cx="76.2" cy="44.9" r="15.6"/>
             <g>
               <g>
-                <path className="st0" id="path2" style={{display: 'none', fill: 'red'}} d="M92.9,41.6c11.3-2.2,22.6-4.7,33.9-6.5c10.9-1.7,21.2-0.8,30.4,5.8c15.3,11,20.1,28.9,26.4,45.6c5.4,14.1,15,26.4,31.5,25.9c8.2-0.2,16.2-3.2,23.2-7.4c6.8-4.1,14.3-9.6,17.9-16.9c4.5-8.9,0.2-17.7-4-25.8c-5.7-10.9-12.3-21.2-19.6-31c-1.1-1.5-3.7,0-2.6,1.5c5.9,7.9,11.3,16,16.1,24.6c5,8.9,12.9,20.4,6.8,30.6c-4.5,7.6-13.1,13.4-21,17.1c-8.1,3.8-17.7,6-26.5,2.9c-16.9-5.8-19.6-26.4-25.5-40.8c-5.4-13.1-14.1-26.3-27.3-32.5c-7.9-3.8-16.3-4.1-24.8-2.8c-12,1.7-23.9,4.5-35.8,6.7C90.2,39.1,91,42,92.9,41.6L92.9,41.6z"/>
+                <path className="st1" id="path8" style={{display: 'none', fill: 'black'}} d="M235.6,357.8c-2.9,0.1-5.7,1.4-5.7,4.7c0,2.1,1.5,3.8,2.5,5.4c2.3,3.4,3.5,7.3,4.9,11.2c2.5,6.6,3.5,12.8,3.7,19.8c0.2,4.6,0.3,9.2-3.2,12.6c-3.8,3.7-9.4,3-14.3,2.9c-0.5,0-0.5,0.7,0,0.8c4.6,0,10.7,0.8,14.5-2.5c4.2-3.6,3.9-9.5,3.7-14.5c-0.3-6-0.7-11.2-2.8-16.8c-1.1-3.1-2.2-6.3-3.5-9.4c-1.1-2.5-9.4-13.2,0.2-13.4C236.1,358.5,236.1,357.8,235.6,357.8L235.6,357.8z"/>
               </g>
             </g>
-            <circle className="st3" id="circle3" onClick={(e) => this.handleMapQuestClick(e)} style={{display: 'none', fill: 'red', stroke: '#ED1C24', strokeLinecap: 'round', strokeMiterlimit: '10'}} cx="227.2" cy="23.9" r="15.6"/>
-            <g>
-              <g>
-                <path className="st0" id="path3" style={{display: 'none', fill: 'red'}} d="M244,24.3c46-4.8,84.7,30.9,103.3,69.9c5,10.5,8.5,23,4.6,34.4c-3.3,9.4-11.2,16-19.9,20.3c-8.9,4.5-18.8,7-28.5,9.1c-12.3,2.7-24.8,4.6-37.5,4.7c-25.1,0.2-50.7-7.2-68.3-25.8c-1.3-1.4-3.4,0.7-2.1,2.1c15.8,16.8,38.2,25,60.9,26.5c13.5,0.9,27-0.5,40.3-3c11.1-2.1,22.4-4.7,32.9-9.2c8.6-3.7,16.8-9.1,21.9-17.1c5.7-9.1,6-20.1,3.3-30.3c-3.1-11.5-9.3-22.2-15.9-32c-6.4-9.5-13.7-18.4-22.2-26.1c-19.7-18-45.8-29.3-72.7-26.5C242.1,21.5,242,24.5,244,24.3L244,24.3z"/>
-              </g>
-            </g>
-            <circle className="st3" id="circle4" onClick={(e) => this.handleMapQuestClick(e)} style={{display: 'none', fill: 'red', stroke: '#ED1C24', strokeLinecap: 'round', strokeMiterlimit: '10'}} cx="187.2" cy="124.9" r="15.6"/>
-            <g>
-              <g>
-                <path className="st0" id="path4" style={{display: 'none', fill: 'red'}} d="M174.6,137.6c0.7,4.4-2.6,7.8-4.5,11.3c-1.3,2.5-2.2,5.2-2.3,8c-0.3,5.7,1.8,11.1,5,15.7c3.5,5,8.1,9.1,13,12.8c4.7,3.6,9.6,7.1,15.9,6.6c1.9-0.1,1.9-3.1,0-3c-6.8,0.5-12.5-4.5-17.4-8.6c-4.4-3.7-8.6-8-11.1-13.2c-3.3-6.8-2.7-13.1,1.1-19.4c2.2-3.6,3.9-6.8,3.2-11.1C177.2,134.9,174.3,135.7,174.6,137.6L174.6,137.6z"/>
-              </g>
-            </g>
-            <circle className="st3" id="circle5" onClick={(e) => this.handleMapQuestClick(e)} style={{display: 'none', fill: 'red', stroke: '#ED1C24', strokeLinecap: 'round', strokeMiterlimit: '10'}} cx="218.2" cy="194.9" r="15.6"/>
-            <g>
-              <g>
-                <path className="st0" id="path5" style={{display: 'none', fill: 'red'}} d="M235.1,193.7c16.9-11.6,37.7-12.7,57.5-11.5c8.1,0.5,22.2,0,28,7c4.4,5.3-4,10.9-8,13.6
-                c-5.3,3.5-11.9,5.1-17.8,1.8c-1.7-0.9-3.2,1.7-1.5,2.6c11.1,6.2,22.1-1.8,29.9-9.5c8.8-8.7-6.8-15.4-14-16.8c-12.4-2.5-26.1-2.7-38.7-1.7c-13.1,1-25.9,4.4-36.8,11.9C232,192.2,233.5,194.8,235.1,193.7L235.1,193.7z"/>
-              </g>
-            </g>
-            <circle className="st3" id="circle6" onClick={(e) => this.handleMapQuestClick(e)} style={{display: 'none', fill: 'red', stroke: '#ED1C24', strokeLinecap: 'round', strokeMiterlimit: '10'}} cx="279.2" cy="202.9" r="15.6"/>
-            <g>
-              <g>
-                <path className="st0" id="path8" style={{display: 'none', fill: 'red'}} d="M127.3,275.4c33.3-1.8,66.4-2.9,99.7-0.7c25.4,1.7,55.8,1,71.7-22.5c1.1-1.6-1.5-3.1-2.6-1.5c-16.9,25-50.6,22.2-76.9,20.5c-30.7-2-61.4-0.4-92,1.2C125.4,272.5,125.4,275.5,127.3,275.4L127.3,275.4z"/>
-              </g>
-            </g>
-            <circle className="st3" id="circle9" onClick={(e) => this.handleMapQuestClick(e)} style={{display: 'none', fill: 'red', stroke: '#ED1C24', strokeLinecap: 'round', strokeMiterlimit: '10'}} cx="304.2" cy="239.9" r="15.6"/>
-            <circle className="st3" id="circle8" onClick={(e) => this.handleMapQuestClick(e)} style={{display: 'none', fill: 'red', stroke: '#ED1C24', strokeLinecap: 'round', strokeMiterlimit: '10'}} cx="111.2" cy="266.9" r="15.6"/>
           </svg>
           <div>
             <Dialog

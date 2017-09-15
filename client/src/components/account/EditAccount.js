@@ -41,7 +41,7 @@ class EditAccount extends React.Component {
       this.props.backToMainFromUsername(this.state.usernameTextField);
     });
   }
-
+  
   render() {
     return (
       <MuiThemeProvider>

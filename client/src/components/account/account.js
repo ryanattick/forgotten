@@ -38,7 +38,6 @@ class Account extends React.Component {
     this.backToMainFromUsername = this.backToMainFromUsername.bind(this);
     this.backToMain = this.backToMain.bind(this);
   }
-  //{id: 3, first: "Matt", last: "Palamos", display: "Matt Palamos", email: "cki.matt@gmail.com", …}
 
 
   componentWillMount () {

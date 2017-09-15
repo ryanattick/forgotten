@@ -115,35 +115,37 @@ app.use(['/account', '/maps', '/backpack', '/about'], routes.allOtherRoutes);
 app.get('/userInfo', function (req, res) {
   console.log(req.user, 'req.users exists');
   // db.getUsername(req.user);
+  console.log('userinfo', req.user);
   res.status(200).send(JSON.stringify(req.user));
 });
 
 
 app.get('/playerItems', function (req, res) {
-  var clean = [];
+  // Profile.forge({id: req.user.id}).fetch({columns: 'level'}).then((results) => {
+  //   res.send(JSON.stringify(results.attributes.level));
+  //model.where('favorite_color', '<>', 'green').fetch().then(function() { //...
+  //model.query({where: {"Date", '>=' , first_date}, orWhere: {"Date", '<=' , last_date}})
 
-  Items.forge().fetchAll()
-    .then(function (results) {
-      for (var i = 0; i < results.models.length; i++) {
-        clean.push(results.models[i].attributes);
-      }
-      var strArr = JSON.stringify(clean);
-      res.status(200).send(strArr);
-    })
-    .catch(function (err) {
-      // If this expect statement is reached, there's an error.
-      console.log('err');
+  console.log('playeritems', req.user.level);
+  Items.fetchAll()
+    .then((results) => {
+      var change = results.map((item) => item.attributes).filter((item) => item.puzzle_id <= req.user.level);
+      console.log(change);
+      res.status(200).send(JSON.stringify(change));
+
+    }).catch((err) => {
+      console.log(err, 'error');
     });
-  //res.status(200).send(req);
+
 });
 
 
 app.post('/updateAvatar', function (req, res) {
   console.log(req.body, 'req.body updateavatar exists');
-   Profile.forge({id: req.body.id}).save({avatar: req.body.avatar}).then(function() { //...
+  Profile.forge({id: req.body.id}).save({avatar: req.body.avatar}).then(function() { //...
     console.log('avatar saved!!');
   });
-})
+});
 
 
 

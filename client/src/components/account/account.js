@@ -82,10 +82,9 @@ class Account extends React.Component {
   }
 
   handleDeleteAccountClick () {
-    // $.post('/deleteUser', {id: this.state.userInfo.id}, (data) => {
-    //   console.log(data, 'Account delete success.')
-    // });
-    console.log('DELETED');
+    Request.post('/deleteUser', {id: this.state.id}, (data) => {
+      console.log(data, 'Account delete success.')
+    });
     this.handleClose();
   }
 

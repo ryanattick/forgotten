@@ -63,7 +63,7 @@ class Puzzle extends React.Component {
             modal={false}
             open={this.state.open}
             onRequestClose={this.handleClose.bind(this)}
-            overlayStyle={{backgroundImage: 'url("https://i.imgur.com/5HnPoOE.png")', borderRadius: '10px', backgroundSize: 'contain', backgroundRepeat: 'no-repeat', margin: 'auto'}}
+            overlayStyle={{backgroundImage: 'url("/assets/backgrounds/messageBG.png")', borderRadius: '10px', backgroundSize: 'contain', backgroundRepeat: 'no-repeat', margin: 'auto'}}
             bodyStyle={{backgroundColor: '#3CABFA', color: 'white', margin: '20px', borderRadius: '10px 10px 10px 0'}}
             actionsContainerStyle={{backgroundColor: 'whie', marginRight: '10px'}}
           >

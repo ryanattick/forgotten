@@ -311,7 +311,7 @@ class Map extends React.Component {
               open={this.state.storyOpen}
               autoScrollBodyContent={true}
               onRequestClose={this.handleStoryClose.bind(this)}
-              bodyStyle={{backgroundImage: 'url("https://i.imgur.com/r1GGeVa.png")', backgroundSize: '100% 100%', border: '0', filter:'brightness(90%)'}}
+              bodyStyle={{backgroundImage: 'url("/assets/backgrounds/storyBG.png")', backgroundSize: '100% 100%', border: '0', filter:'brightness(90%)'}}
             >
               {stories[this.props.map]} <br></br>
             <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '10px'}}>
@@ -384,7 +384,7 @@ class Map extends React.Component {
               modal={false}
               open={this.state.messageOpen}
               autoScrollBodyContent={true}
-              bodyStyle={{backgroundImage: 'url("https://i.imgur.com/r1GGeVa.png")', backgroundSize: '100% 100%', border: '0', filter:'brightness(90%)'}}
+              bodyStyle={{backgroundImage: 'url("/assets/backgrounds/storyBG.png")', backgroundSize: '100% 100%', border: '0', filter:'brightness(90%)'}}
             >
               {this.changeName(this.state.puzzles.stories[this.state.completedQuests[this.state.completedQuests.length - 1]])}
               <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '10px'}}>

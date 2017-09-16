@@ -6,8 +6,15 @@ class Puzzle extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      open: false
+      open: false,
+      playerName: ''
     };
+  }
+
+  componentWillMount() {
+    this.setState({
+      playerName: this.props.playerName
+    })
   }
 
   componentDidMount() {
@@ -40,7 +47,7 @@ class Puzzle extends React.Component {
             open={this.state.open}
             onRequestClose={this.handleClose.bind(this)}
           >
-            {this.props.messages[this.props.currentQuest]}
+            {this.props.changeName(this.props.messages[this.props.currentQuest])}
           </Dialog>
         </div>
         <button className="button" onClick={() => this.props.handleReturntoMapClick(true)}>Return to Map</button>

@@ -51,7 +51,7 @@ app.get('/puzzleData', function(req, res) {
         // clean.push(results.models[i].attributes);
       }
       // var strArr = JSON.stringify(clean);
-      res.status(200).send(JSON.stringify(puzzles));
+      res.status(200).send(JSON.stringify({puzzles: puzzles, playerName:req.user.first}));
     })
     .catch(function (err) {
       // If this expect statement is reached, there's an error.

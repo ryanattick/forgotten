@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Puzzle from './puzzle.js';
 import styles from '../../../../styles/maps/map.css';
@@ -17,7 +16,7 @@ class Map extends React.Component {
       greenclickedQuest: null,
       currentQuestBeforeGreenClick: null,
       clickedQuest: false,
-      playerName: 'Ryan',
+      playerName: '',
       puzzles: {
         questions: {
           '0': 'Question1',
@@ -104,7 +103,8 @@ class Map extends React.Component {
     }
     Request.get('/puzzleData', (data) => {
       this.setState({
-        puzzles: data
+        puzzles: data.puzzles,
+        playerName: data.playerName
       });
     });
   }
@@ -248,6 +248,12 @@ class Map extends React.Component {
     this.setState({storyOpen: false});
   }
 
+  changeName(text) {
+    if (text) {
+      return text.replace('[playerName]', this.state.playerName);
+    }
+  }
+
   render() {
     const stories = ['Your head is pounding. You reach up to touch it and as you do you realize you can’t tell if your eyes are open or closed. This startles you and you freeze. Where are you? You don’t know. Who are you? You can’t remember. Your heart starts racing as panic creeps in, slowly at first and then all at once. You take a breath and try to think back. How did you get here? Where is here? You decide to take things one step at a time. What is your name? As soon as that thought enters your mind you feel a vibration in your pocket.'];
 
@@ -348,7 +354,7 @@ class Map extends React.Component {
               autoScrollBodyContent={true}
               onRequestClose={this.handleMessageClose.bind(this)}
             >
-              {this.state.puzzles.stories[this.state.completedQuests[this.state.completedQuests.length - 1]]}
+              {this.changeName(this.state.puzzles.stories[this.state.completedQuests[this.state.completedQuests.length - 1]])}
             </Dialog>
           </div>
         </div>
@@ -356,7 +362,7 @@ class Map extends React.Component {
     } else {
       return (
         <div>
-          <Puzzle handleReturntoMapClick={this.handleReturntoMapClick.bind(this)} questions={this.state.puzzles.questions} currentQuest={this.state.currentQuest} handlePuzzleSubmit={this.handlePuzzleSubmit.bind(this)} handleEnterClick={this.handleEnterClick.bind(this)} messages={this.state.puzzles.messages}/>
+          <Puzzle playerName={this.state.playerName} changeName={this.changeName.bind(this)} handleReturntoMapClick={this.handleReturntoMapClick.bind(this)} questions={this.state.puzzles.questions} currentQuest={this.state.currentQuest} handlePuzzleSubmit={this.handlePuzzleSubmit.bind(this)} handleEnterClick={this.handleEnterClick.bind(this)} messages={this.state.puzzles.messages}/>
         </div>
       );
     }

@@ -1,31 +1,13 @@
 import React from 'react';
-import Map1 from './map1.js';
-import Map2 from './map2.js';
-import Map3 from './map3.js';
-import Map4 from './map4.js';
 import Map from './map.js';
 import {GridList, GridTile} from 'material-ui/GridList';
 import IconButton from 'material-ui/IconButton';
 import Dialog from 'material-ui/Dialog';
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
+import Snackbar from 'material-ui/Snackbar';
 import Request from '../../../../helpers/requests';
 import $ from 'jquery';
-
-const tilesData = [
-  {
-    img: '/assets/maps/map1.jpg'
-  },
-  {
-    img: '/assets/maps/map2.jpg'
-  },
-  {
-    img: '/assets/maps/map3.jpg'
-  },
-  {
-    img: '/assets/maps/map4.jpg'
-  }
-];
 
 class Maps extends React.Component {
   constructor(props) {
@@ -37,18 +19,17 @@ class Maps extends React.Component {
       currentLevel: '0',
       completedLevelClicked: null,
       currentlyPlaying: '0',
+      currentPuzzleNum: '0',
       levelClicked: false,
       levelOpen: false,
       finishedMapOpen: false,
-      firstMapOpen: false
+      firstMapOpen: false,
+      notificationOpen: false
     };
   }
 
   componentWillMount() {
     this.updateCurrentPuzzle();
-    // if (this.state.currentLevel === '0') {
-    //   this.handleFirstMapOpen();
-    // }
   }
 
   updateCurrentPuzzle() {
@@ -120,6 +101,7 @@ class Maps extends React.Component {
         incompleteLevels: this.state.incompleteLevels.slice(1)
       }, () => {
         this.addBorder();
+
       });
       this.handleFinishedMapOpen();
       this.updateCurrentPuzzle();
@@ -131,6 +113,10 @@ class Maps extends React.Component {
         this.addBorder();
       });
     }
+  }
+
+  checkForFinalLevelItems() {
+    this.handleNotificationOpen();
   }
 
   handleLevelOpen() {
@@ -162,7 +148,30 @@ class Maps extends React.Component {
     this.setState({firstMapOpen: false});
   }
 
+  handleNotificationOpen() {
+    this.setState({notificationOpen: true});
+  }
+
+  handleNotificationClose() {
+    this.setState({notificationOpen: false});
+  }
+
   render() {
+    const tilesData = [
+      {
+        img: '/assets/maps/map1.jpg'
+      },
+      {
+        img: '/assets/maps/map2.jpg'
+      },
+      {
+        img: '/assets/maps/map3.jpg'
+      },
+      {
+        img: '/assets/maps/map4.jpg'
+      }
+    ];
+
     const levelActions = [
       <FlatButton
         label={`Go to level ${parseInt(this.state.currentLevel) + 1}`}
@@ -240,42 +249,23 @@ class Maps extends React.Component {
               <b>{`Complete Level ${JSON.stringify(parseInt(this.state.currentLevel) + 1)} before moving on!`}</b>
             </Dialog>
           </div>
+          <Snackbar
+            bodyStyle={{backgroundColor: '#00BCD4'}}
+            open={this.state.notificationOpen}
+            message="Item added to your backpack"
+            autoHideDuration={3000}
+            onRequestClose={this.handleNotificationClose.bind(this)}
+          />
         </div>
       );
     } else {
       return (
         <div>
-          <Map handleReturnToMapsClick={this.handleReturnToMapsClick.bind(this)} handleMapFinished={this.handleMapFinished.bind(this)} level={this.state.currentLevel} currentPuzzleNum={this.state.currentPuzzleNum} map={this.state.currentlyPlaying}/>
+          <Map handleReturnToMapsClick={this.handleReturnToMapsClick.bind(this)} checkForFinalLevelItems={this.checkForFinalLevelItems.bind(this)} handleMapFinished={this.handleMapFinished.bind(this)} level={this.state.currentLevel} currentPuzzleNum={this.state.currentPuzzleNum} map={this.state.currentlyPlaying}/>
         </div>
       );
     }
   }
-  //   } else if (this.state.currentLevel === '0' || this.state.completedLevelClicked === '0') {
-  //     return (
-  //       <div>
-  //         <Map1 handleReturnToMapsClick={this.handleReturnToMapsClick.bind(this)} handleMapFinished={this.handleMapFinished.bind(this)} level={this.state.currentLevel} currentPuzzleNum={this.state.currentPuzzleNum} map={this.state.currentlyPlaying}/>
-  //       </div>
-  //     );
-  //   } else if (this.state.currentLevel === '1' || this.state.completedLevelClicked === '1') {
-  //     return (
-  //       <div>
-  //         <Map2 handleReturnToMapsClick={this.handleReturnToMapsClick.bind(this)} handleMapFinished={this.handleMapFinished.bind(this)} level={this.state.currentLevel} currentPuzzleNum={this.state.currentPuzzleNum} map={this.state.currentlyPlaying}/>
-  //       </div>
-  //     );
-  //   } else if (this.state.currentLevel === '2' || this.state.completedLevelClicked === '2') {
-  //     return (
-  //       <div>
-  //         <Map3 handleReturnToMapsClick={this.handleReturnToMapsClick.bind(this)} handleMapFinished={this.handleMapFinished.bind(this)} level={this.state.currentLevel} currentPuzzleNum={this.state.currentPuzzleNum} map={this.state.currentlyPlaying}/>
-  //       </div>
-  //     );
-  //   } else if (this.state.currentLevel === '3' || this.state.completedLevelClicked === '3') {
-  //     return (
-  //       <div>
-  //         <Map4 handleReturnToMapsClick={this.handleReturnToMapsClick.bind(this)} handleMapFinished={this.handleMapFinished.bind(this)} level={this.state.currentLevel} currentPuzzleNum={this.state.currentPuzzleNum} map={this.state.currentlyPlaying}/>
-  //       </div>
-  //     );
-  //   }
-  // }
 }
 
 export default Maps;

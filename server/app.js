@@ -40,7 +40,7 @@ app.get('/mapsData', function(req, res) {
 
 app.get('/puzzleData', function(req, res) {
   var clean = [];
-  var puzzles = {questions: {}, answers: {}, messages: {}, stories: {}};
+  var puzzles = {questions: {}, answers: {}, messages: {}, stories: {}, items: {}};
   Puzzles.forge().fetchAll()
     .then(function (results) {
       for (var i = 0; i < results.models.length; i++) {
@@ -48,53 +48,22 @@ app.get('/puzzleData', function(req, res) {
         puzzles.answers[results.models[i].attributes.puzzleID] = results.models[i].attributes.solution;
         puzzles.messages[results.models[i].attributes.puzzleID] = results.models[i].attributes.message_pop_up;
         puzzles.stories[results.models[i].attributes.puzzleID] = results.models[i].attributes.story_pop_up;
-        // clean.push(results.models[i].attributes);
       }
-      // var strArr = JSON.stringify(clean);
-      res.status(200).send(JSON.stringify({puzzles: puzzles, playerName:req.user.first}));
+    })
+    .then(() => {
+      Items.forge().fetchAll()
+        .then((results) => {
+          for (var i = 0; i < results.models.length; i++) {
+            puzzles.items[results.models[i].attributes.id] = {name: results.models[i].attributes.name, puzzleID: results.models[i].attributes.puzzle_id};
+          }
+        })
+        .then(() => {
+          res.status(200).send(JSON.stringify({puzzles: puzzles, playerName:req.user.first}));
+        });
     })
     .catch(function (err) {
-      // If this expect statement is reached, there's an error.
       console.log('err');
     });
-
-  // res.send({questions: {
-  //   '0': 'Question1',
-  //   '1': 'Question2',
-  //   '2': 'Question3',
-  //   '3': 'Question4',
-  //   '4': 'Question5',
-  //   '5': 'Question6',
-  //   '6': 'Question7',
-  //   '7': 'Question8',
-  //   '8': 'Question9',
-  //   '9': 'Question10'
-  //   },
-  //   answers: {
-  //     '0': 'notAnswer',
-  //     '1': 'notAnswer',
-  //     '2': 'notAnswer',
-  //     '3': 'notAnswer',
-  //     '4': 'notAnswer',
-  //     '5': 'notAnswer',
-  //     '6': 'notAnswer',
-  //     '7': 'notAnswer',
-  //     '8': 'notAnswer',
-  //     '9': 'notAnswer'
-  //   },
-  //   messages: {
-  //     '0': 'Message goes here',
-  //     '1': 'Message goes here',
-  //     '2': 'Message goes here',
-  //     '3': 'Message goes here',
-  //     '4': 'Message goes here',
-  //     '5': 'Message goes here',
-  //     '6': 'Message goes here',
-  //     '7': 'Message goes here',
-  //     '8': 'Message goes here',
-  //     '9': 'Message goes here'
-  //   }
-  // });
 });
 
 app.post('/mapData', function(req, res) {
@@ -104,10 +73,6 @@ app.post('/mapData', function(req, res) {
   }).catch((err) => {
     throw err;
   });
-  // retrieve any item from the Items table containing that lvl (puzzle id)
-  // and add that item id along with the user id to the users_items table
-  // and set the users_items table record's 'equipped' column to either
-  // No or Not Possible based on equippable property of the item
 });
 
 app.use(['/account', '/maps', '/backpack', '/about'], routes.allOtherRoutes);

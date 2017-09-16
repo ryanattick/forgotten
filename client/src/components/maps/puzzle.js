@@ -1,13 +1,15 @@
 import React from 'react';
 import Dialog from 'material-ui/Dialog';
 import RaisedButton from 'material-ui/RaisedButton';
+import TextField from 'material-ui/TextField';
 
 class Puzzle extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       open: false,
-      playerName: ''
+      playerName: '',
+      time: 30
     };
   }
 
@@ -19,10 +21,25 @@ class Puzzle extends React.Component {
 
   componentDidMount() {
     this.handleOpen();
+    // this.handleTimer();
   }
 
   handleOpen() {
     this.setState({open: true});
+  }
+
+  handleTimer() {
+    var interval = null;
+    interval = setInterval(() => {
+      this.setState({
+        time: this.state.time - 1
+      }, () => {
+        if (this.state.time === 0) {
+          this.props.handleReturntoMapClick();
+          clearInterval(interval);
+        }
+      });
+    }, 1000);
   }
 
   handleClose() {
@@ -50,7 +67,10 @@ class Puzzle extends React.Component {
             {this.props.changeName(this.props.messages[this.props.currentQuest])}
           </Dialog>
         </div>
-        <button className="button" onClick={() => this.props.handleReturntoMapClick(true)}>Return to Map</button>
+        <RaisedButton className="button" label="Return to Map" onClick={() => this.props.handleReturntoMapClick(true)} backgroundColor='#E94F37' labelColor='#F6F7EB' style={{width: '160px'}}/>
+        {/* <div style={{color: 'black'}}>
+          {this.state.time}
+        </div> */}
         <div style={{color: '#E94F37'}}>
           {this.props.questions[this.props.currentQuest]}
         </div>

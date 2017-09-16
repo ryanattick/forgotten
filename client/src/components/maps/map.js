@@ -4,6 +4,7 @@ import styles from '../../../../styles/maps/map.css';
 import $ from 'jquery';
 import Dialog from 'material-ui/Dialog';
 import RaisedButton from 'material-ui/RaisedButton';
+import Snackbar from 'material-ui/Snackbar';
 import Request from '../../../../helpers/requests';
 
 class Map extends React.Component {
@@ -65,22 +66,23 @@ class Map extends React.Component {
           '7': 'Message goes here8',
           '8': 'Message goes here9',
           '9': 'Message goes here10'
+        },
+        items: {
+          '0': null,
+          '1': null,
+          '2': null,
+          '3': null,
+          '4': null,
+          '5': null,
+          '6': null,
+          '7': null,
+          '8': null,
+          '9': null
         }
       },
-      items: {
-        '0': null,
-        '1': null,
-        '2': null,
-        '3': null,
-        '4': null,
-        '5': null,
-        '6': null,
-        '7': null,
-        '8': null,
-        '9': null
-      },
       messageOpen: false,
-      storyOpen: false
+      storyOpen: false,
+      notificationOpen: false
     };
   }
   componentWillMount() {
@@ -194,17 +196,28 @@ class Map extends React.Component {
         this.handleReturntoMapClick();
       } else if (this.state.currentQuest === '9') {
         this.state.completedQuests.push(this.state.currentQuest);
+        if (this.checkForItems(this.state.currentQuest)) {
+          this.handleNotificationOpen();
+        }
         this.setState({
           currentQuest: '10'
         }, function() {
           Promise.resolve(Request.post('/mapData', {level: parseInt(this.props.map + '0') + 10}, (data) => {
           }))
             .then(() => {
-              this.props.handleMapFinished();
+              if (this.checkForItems(this.state.completedQuests[this.state.completedQuests.length - 1])) {
+                Promise.resolve(this.props.handleMapFinished())
+                  .then(() => this.props.checkForFinalLevelItems());
+              } else {
+                this.props.handleMapFinished();
+              }
             });
         });
       } else {
         this.state.completedQuests.push(this.state.currentQuest);
+        if (this.checkForItems(this.state.currentQuest)) {
+          this.handleNotificationOpen();
+        }
         this.setState({
           currentQuest: this.state.levelsRemaining[0],
           levelsRemaining: this.state.levelsRemaining.slice(1)
@@ -221,6 +234,15 @@ class Map extends React.Component {
     } else {
       document.getElementById('puzzleAnswer').value = '';
     }
+  }
+
+  checkForItems(quest) {
+    for (var key in this.state.puzzles.items) {
+      if (this.state.puzzles.items[key].puzzleID === parseInt(this.props.map + quest)) {
+        return true;
+      }
+    }
+    return false;
   }
 
   handleEnterClick(e) {
@@ -252,6 +274,14 @@ class Map extends React.Component {
     if (text) {
       return text.replace('[playerName]', this.state.playerName);
     }
+  }
+
+  handleNotificationOpen() {
+    this.setState({notificationOpen: true});
+  }
+
+  handleNotificationClose() {
+    this.setState({notificationOpen: false});
   }
 
   render() {
@@ -286,9 +316,8 @@ class Map extends React.Component {
               {stories[this.props.map]}
             </Dialog>
           </div>
-          <button onClick={() => this.props.handleReturnToMapsClick()}>Return to Maps</button>
-          <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 800 515" style={{width: '1000px', enableBackground: "new 0 0 800 515"}} xmlSpace="preserve">
-            <image style={{overflow:"visible"}} width="1600" height="1030" xlinkHref={`/assets/maps/basementMap.jpg`} transform="matrix(0.5 0 0 0.5 0 0)">
+          <svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 800 515" style={{width: '1000px', enableBackground: "new 0 0 800 515"}} xmlSpace="preserve">
+            <image className={styles.background} style={{overflow: 'visible'}} width="1600" height="1030" xlinkHref={`/assets/maps/basementMap.jpg`} transform="matrix(0.5 0 0 0.5 0 0)">
             </image>
             <circle className={styles.circle} id="circle0" onClick={(e) => this.handleMapQuestClick(e)} style={{cursor: 'pointer', cursor: 'hand', fill: 'red', stroke: 'black', strokeLinecap: 'round', strokeMiterlimit: '10'}} cx="573.9" cy="112.9" r="7.4"/>
             <circle className={styles.circle} id="circle1" onClick={(e) => this.handleMapQuestClick(e)} style={{cursor: 'pointer', cursor: 'hand', display: 'none', fill: 'red', stroke: 'black', strokeLinecap: 'round', strokeMiterlimit: '10'}} cx="580.9" cy="132.9" r="7.4"/>
@@ -337,7 +366,7 @@ class Map extends React.Component {
             <circle className={styles.circle} id="circle8" onClick={(e) => this.handleMapQuestClick(e)} style={{cursor: 'pointer', cursor: 'hand', display: 'none', fill: 'red', stroke: 'black', strokeLinecap: 'round', strokeMiterlimit: '10'}} cx="242.9" cy="359.9" r="7.4"/>
             <g>
               <g>
-                <path className="st1" id="path7" style={{display: 'none', fill: 'black'}} d="M318.6,292.5c-8.7-0.6-14.9,5.1-21.7,9.7c-7,4.7-13.7,6.8-17.8,14.6c-4.1,7.7-6.9,15.5-9,24c-2.3,9.4-6,30.6-20,22.4c-0.4-0.2-0.8,0.4-0.4,0.6c16.9,9.9,19.9-19.2,22.8-29.4c2.9-10.1,7.5-21.9,17.1-27.2c4.4-2.4,8.4-4.9,12.5-7.8c5-3.6,10.2-6.6,16.6-6.2C319.1,293.3,319.1,292.6,318.6,292.5L318.6,292.5z"/>
+                <path className="st1" id="path7" style={{display: 'none', fill: 'black'}} d="M319.5,292.1c-8.1-4-15,0-21.2,5.4c-9.4,8.3-19.6,15.8-32.6,16.3c-13,0.5-26.3-6.2-38.4-10.3c-5.1-1.8-10.2-3.3-15.2-5.3c-2.8-1.1-5.7-2.5-7.8-4.7c-3-3.1-2.5-6.7-3-10.6c-0.9-7.2-6.8-13.7-14.1-14.6c-4.8-0.6-12.8,3.2-8.8,9.1c1.8,2.7,5.6,3.5,8.4,4.8c5.1,2.5,8.4,7.1,12.4,11c7.6,7.3,18.1,9.6,27.6,13.4c7.4,2.9,14.6,6.1,21.7,9.7c5.6,2.9,11.8,5.7,16.6,9.9c6.1,5.4,7.7,12.7,5.4,20.5c-2.6,8.4-10.4,17.1-20,12.6c-0.4-0.2-0.8,0.4-0.4,0.6c16.6,7.8,27.5-18.6,19-30.4c-5.7-7.9-16.7-12.2-25.1-16.2c-10.4-5-21.1-8.5-31.8-12.8c-5.9-2.4-10.7-5.8-15.1-10.4c-3.4-3.6-6.5-6.8-11-8.8c-2-0.9-4.8-1.6-6.3-3.3c-5.7-6.4,2.7-8.6,5.7-8.8c2.1-0.2,4.7,0.8,6.5,1.7c6.4,3.4,8.2,9,8.8,15.6c0.7,8,6.8,11.1,13.7,13.6c11.9,4.3,23.9,8.8,36,12.4c11.6,3.5,22.8,2.9,33.6-3c4.9-2.6,9.1-6,13.2-9.7c6.3-5.6,13.2-11.2,21.9-6.8C319.5,293,319.9,292.3,319.5,292.1L319.5,292.1z"/>
               </g>
             </g>
             <g>
@@ -346,6 +375,7 @@ class Map extends React.Component {
               </g>
             </g>
           </svg>
+          <RaisedButton label="Return to Maps" onClick={() => this.props.handleReturnToMapsClick()} backgroundColor='#E94F37' labelColor='#F6F7EB' style={{width: '160px'}}/>
           <div>
             <Dialog
               actions={messageActions}
@@ -357,6 +387,13 @@ class Map extends React.Component {
               {this.changeName(this.state.puzzles.stories[this.state.completedQuests[this.state.completedQuests.length - 1]])}
             </Dialog>
           </div>
+          <Snackbar
+            bodyStyle={{backgroundColor: '#00BCD4'}}
+            open={this.state.notificationOpen}
+            message="Items have been added to your backpack!"
+            autoHideDuration={3000}
+            onRequestClose={this.handleNotificationClose.bind(this)}
+          />
         </div>
       );
     } else {

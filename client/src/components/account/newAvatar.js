@@ -101,7 +101,7 @@ class NewAvatar extends React.Component {
             // }
             ))}
           </GridList>
-          <img src={this.state.currentChoice} className={newAvatarStyle.currentAvatarChoice}/> <br></br>
+          <img src={this.state.currentChoice} className={newAvatarStyle.currentAvatarChoice} style={{height:'200px', width:'200px'}}/> <br></br>
           <RaisedButton label="Submit" className={newAvatarStyle.buttonStyle} backgroundColor='#E94F37' labelColor='#F6F7EB' onClick={this.handleSubmitClick}/>
           {/* <PhotoUpload id={this.props.id}/>/> */}
         </div>

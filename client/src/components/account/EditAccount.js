@@ -6,6 +6,7 @@ import editAccountStyle from '../../../../styles/account/editAccount.css';
 import Request from '../../../../helpers/requests';
 
 
+
 class EditAccount extends React.Component {
   constructor(props) {
     super(props);

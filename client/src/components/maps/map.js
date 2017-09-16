@@ -1,3 +1,4 @@
+
 import React from 'react';
 import Puzzle from './puzzle.js';
 import styles from '../../../../styles/maps/map.css';
@@ -16,6 +17,7 @@ class Map extends React.Component {
       greenclickedQuest: null,
       currentQuestBeforeGreenClick: null,
       clickedQuest: false,
+      playerName: 'Ryan',
       puzzles: {
         questions: {
           '0': 'Question1',

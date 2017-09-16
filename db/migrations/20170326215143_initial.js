@@ -47,8 +47,13 @@ exports.up = function (knex, Promise) {
       table.integer('item_id').references('items.id').
         onDelete('CASCADE');
       table.string('equipped', 15).nullable();
+    }),
+    knex.schema.createTableIfNotExists('users_stories', function(table) {
+      table.increments('id').unsigned().primary();
+      table.integer('user_id').references('profiles.id').onDelete('CASCADE');
+      table.integer('puzzle_id').references('puzzles.id').
+        onDelete('CASCADE');
     })
-
   ]);
 };
 
@@ -56,10 +61,10 @@ exports.down = function (knex, Promise) {
   return Promise.all([
     knex.schema.dropTable('auths'),
     knex.schema.dropTable('users_items'),
+    knex.schema.dropTable('users_stories'),
     knex.schema.dropTable('items'),
     knex.schema.dropTable('puzzles'),
     knex.schema.dropTable('profiles')
-
 
   ]);
 };

@@ -1,3 +1,4 @@
+
 'use strict';
 const express = require('express');
 const path = require('path');
@@ -49,7 +50,6 @@ app.get('/puzzleData', function(req, res) {
         puzzles.stories[results.models[i].attributes.puzzleID] = results.models[i].attributes.story_pop_up;
         // clean.push(results.models[i].attributes);
       }
-
       // var strArr = JSON.stringify(clean);
       res.status(200).send(JSON.stringify(puzzles));
     })
@@ -136,7 +136,6 @@ app.get('/playerItems', function (req, res) {
     }).catch((err) => {
       console.log(err, 'error');
     });
-
 });
 
 
@@ -146,8 +145,6 @@ app.post('/updateAvatar', function (req, res) {
     console.log('avatar saved!!');
   });
 });
-
-
 
 
 
@@ -165,4 +162,3 @@ app.post('/updateUsername', function (req, res) {
 
 
 module.exports = app;
-

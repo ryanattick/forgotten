@@ -1,3 +1,4 @@
+
 import React from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import TextField from 'material-ui/TextField';
@@ -42,7 +43,7 @@ class EditAccount extends React.Component {
       this.props.backToMainFromUsername(this.state.usernameTextField);
     });
   }
-  
+
   render() {
     return (
       <MuiThemeProvider>
@@ -54,11 +55,11 @@ class EditAccount extends React.Component {
                 floatingLabelText={this.state.username}
                 value={this.state.usernameTextField}
                 onChange={this.handleUsernameTextFieldChange}
-                floatingLabelStyle={{color:"#393E41"}}
-                underlineFocusStyle={{borderColor:'red'}}
+                floatingLabelStyle={{color: '#393E41'}}
+                underlineFocusStyle={{borderColor: 'red'}}
               /><br />
-            <RaisedButton label="Submit Changes" onClick={this.handleUsernameSubmitClick} backgroundColor='#E94F37' labelColor='#F6F7EB' className={editAccountStyle.button}/> <br></br>
-            <RaisedButton label="Back to Account" onClick={this.props.backToMain} backgroundColor='#E94F37' labelColor='#F6F7EB' className={editAccountStyle.button}/>
+              <RaisedButton label="Submit Changes" onClick={this.handleUsernameSubmitClick} backgroundColor='#E94F37' labelColor='#F6F7EB' className={editAccountStyle.button}/> <br></br>
+              <RaisedButton label="Back to Account" onClick={this.props.backToMain} backgroundColor='#E94F37' labelColor='#F6F7EB' className={editAccountStyle.button}/>
             </form>
           </div>
         </div>

@@ -26,8 +26,7 @@ class Account extends React.Component {
       email: '',
       username: '',
       level: ''
-    };
-
+    }; //replace with data
     this.handleChangeAvatar = this.handleChangeAvatar.bind(this);
     this.handleEditClick = this.handleEditClick.bind(this);
     this.handleDeleteAccountClick = this.handleDeleteAccountClick.bind(this);

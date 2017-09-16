@@ -307,13 +307,16 @@ class Map extends React.Component {
         <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
           <div>
             <Dialog
-              actions={storyActions}
               modal={false}
               open={this.state.storyOpen}
               autoScrollBodyContent={true}
               onRequestClose={this.handleStoryClose.bind(this)}
+              bodyStyle={{backgroundImage: 'url("https://i.imgur.com/r1GGeVa.png")', backgroundSize: '100% 100%', border: '0', filter:'brightness(90%)'}}
             >
-              {stories[this.props.map]}
+              {stories[this.props.map]} <br></br>
+            <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '10px'}}>
+              <RaisedButton label="Close" onClick={this.handleStoryClose.bind(this)} backgroundColor='black' labelColor='rgb(255, 255, 255)' overlayStyle={{margin:'auto'}}/>
+            </div>
             </Dialog>
           </div>
           <svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 800 515" style={{width: '1000px', enableBackground: "new 0 0 800 515"}} xmlSpace="preserve">
@@ -378,13 +381,15 @@ class Map extends React.Component {
           <RaisedButton label="Return to Maps" onClick={() => this.props.handleReturnToMapsClick()} backgroundColor='#E94F37' labelColor='#F6F7EB' style={{width: '160px'}}/>
           <div>
             <Dialog
-              actions={messageActions}
               modal={false}
               open={this.state.messageOpen}
               autoScrollBodyContent={true}
-              onRequestClose={this.handleMessageClose.bind(this)}
+              bodyStyle={{backgroundImage: 'url("https://i.imgur.com/r1GGeVa.png")', backgroundSize: '100% 100%', border: '0', filter:'brightness(90%)'}}
             >
               {this.changeName(this.state.puzzles.stories[this.state.completedQuests[this.state.completedQuests.length - 1]])}
+              <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '10px'}}>
+                <RaisedButton label="Close" onClick={this.handleMessageClose.bind(this)} backgroundColor='black' labelColor='rgb(255, 255, 255)' overlayStyle={{margin:'auto'}}/>
+              </div>
             </Dialog>
           </div>
           <Snackbar

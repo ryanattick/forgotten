@@ -1,4 +1,3 @@
-
 'use strict';
 const express = require('express');
 const path = require('path');
@@ -58,7 +57,7 @@ app.get('/puzzleData', function(req, res) {
           }
         })
         .then(() => {
-          res.status(200).send(JSON.stringify({puzzles: puzzles, playerName:req.user.first}));
+          res.status(200).send(JSON.stringify({puzzles: puzzles, playerName: req.user.first}));
         });
     })
     .catch(function (err) {
@@ -108,8 +107,20 @@ app.post('/updateAvatar', function (req, res) {
   console.log(req.body, 'req.body updateavatar exists');
   Profile.forge({id: req.body.id}).save({avatar: req.body.avatar}).then(function() { //...
     console.log('avatar saved!!');
-    res.send('201')
   });
+});
+
+
+app.post('/deleteUser', function (req, res) {
+  Profile.forge({id: req.body.id}).destroy()
+    .then(function() {
+      console.log('destroyed');
+      res.send(JSON.stringify(200));
+    })
+    .catch((err) => {
+      console.log('err', err);
+    });
+
 });
 
 

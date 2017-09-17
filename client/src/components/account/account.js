@@ -83,9 +83,9 @@ class Account extends React.Component {
 
   handleDeleteAccountClick () {
     Request.post('/deleteUser', {id: this.state.id}, (data) => {
-      console.log(data, 'Account delete success.')
+      console.log(data, 'Account delete success.');
+      window.location.reload(true);
     });
-    this.handleClose();
   }
 
   backToMain () {
@@ -112,6 +112,7 @@ class Account extends React.Component {
     Request.get('/logout', (data) => {
       console.log('Log Out successful');
     });
+
   }
 
 

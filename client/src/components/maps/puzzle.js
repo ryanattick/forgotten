@@ -41,6 +41,10 @@ class Puzzle extends React.Component {
         time: this.state.time - 1
       }, () => {
         if (this.state.time === 0) {
+          Request.post('/lives', {lives: this.props.lives - 1}, function(data) {
+            console.log(data);
+          });
+          this.props.handleLifeChange(this.props.lives - 1);
           this.props.handleReturntoMapClick(true);
           clearInterval(interval);
         }
@@ -83,6 +87,7 @@ class Puzzle extends React.Component {
             {this.props.changeName(this.props.messages[this.props.currentQuest])}
           </Dialog>
         </div>
+        <div style={{color: 'black', backgroundColor: 'white'}}>{`Lives Remaining ${this.props.lives}`}</div>
         <RaisedButton className="button" label="Return to Map" onClick={() => this.props.handleReturntoMapClick(true)} backgroundColor='#E94F37' labelColor='#F6F7EB' style={{width: '160px'}}/>
         <div style={{color: 'black', backgroundColor: 'white'}}>
           {this.state.time}

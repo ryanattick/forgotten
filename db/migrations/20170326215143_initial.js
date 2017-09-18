@@ -11,6 +11,7 @@ exports.up = function (knex, Promise) {
       table.text('avatar').nullable();
       table.string('username', 30).nullable();
       table.integer('level').nullable().defaultTo(0);
+      table.integer('lives').nullable().defaultTo(5);
       table.timestamps(true, true);
     }),
     knex.schema.createTableIfNotExists('auths', function(table) {

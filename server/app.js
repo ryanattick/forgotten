@@ -31,8 +31,9 @@ app.use('/api/profiles', routes.profiles);
 
 app.get('/mapsData', function(req, res) {
   var id = req.user.id;
-  Profile.forge({id: req.user.id}).fetch({columns: 'level'}).then((results) => {
-    res.send(JSON.stringify(results.attributes.level));
+  Profile.forge({id: req.user.id}).fetch({columns: ['level', 'lives']}).then((results) => {
+    console.log(results.attributes);
+    res.send(JSON.stringify(results.attributes));
   }).catch((err) => {
     throw err;
   });
@@ -73,6 +74,28 @@ app.post('/mapData', function(req, res) {
   }).catch((err) => {
     throw err;
   });
+});
+
+app.post('/lives', function(req, res) {
+  Profile.forge({id: req.user.id}).save({lives: req.body.lives}).then(function() {
+    console.log('lives saved!');
+    res.status(200).send(JSON.stringify('success'));
+  }).catch((err) => {
+    throw err;
+  });
+});
+
+app.post('/removeItems', function(req, res) {
+  Items.where('puzzle_id', '>', req.body.level).fetchAll().then(function(results) {
+    for (var i = 0; i < results.models.length; i++) {
+      userItems.where({'user_id': req.user.id}).where(results.models[i].attributes.puzzle_id, '>', req.body.level).destroy().then(function() {
+      });
+    }
+    res.status(200).send(JSON.stringify('success'));
+  })
+    .catch((err) => {
+      throw err;
+    });
 });
 
 app.use(['/account', '/maps', '/backpack', '/about'], routes.allOtherRoutes);
@@ -146,7 +169,7 @@ app.post('/updateAvatar', function (req, res) {
   console.log(req.body, 'req.body updateavatar exists');
   Profile.forge({id: req.body.id}).save({avatar: req.body.avatar}).then(function() { //...
     console.log('avatar saved!!');
-    res.send('201')
+    res.send('201');
   });
 });
 

@@ -20,6 +20,7 @@ class Maps extends React.Component {
       completedLevelClicked: null,
       currentlyPlaying: '0',
       currentPuzzleNum: '0',
+      lives: 5,
       levelClicked: false,
       levelOpen: false,
       finishedMapOpen: false,
@@ -35,14 +36,15 @@ class Maps extends React.Component {
   updateCurrentPuzzle() {
     Request.get('/mapsData', (data) => {
       var currentLevel;
-      if (data < 10) {
+      if (data.level < 10) {
         currentLevel = '0';
       } else {
-        currentLevel = data.toString()[0];
+        currentLevel = data.level.toString()[0];
       }
       this.setState({
         currentLevel: currentLevel,
-        currentPuzzleNum: data
+        currentPuzzleNum: data.level,
+        lives: data.lives
       }, () => {
         this.addBorder();
       });
@@ -113,6 +115,7 @@ class Maps extends React.Component {
         this.addBorder();
       });
     }
+    clearInterval(interval);
   }
 
   checkForFinalLevelItems() {
@@ -261,7 +264,7 @@ class Maps extends React.Component {
     } else {
       return (
         <div>
-          <Map handleReturnToMapsClick={this.handleReturnToMapsClick.bind(this)} checkForFinalLevelItems={this.checkForFinalLevelItems.bind(this)} handleMapFinished={this.handleMapFinished.bind(this)} level={this.state.currentLevel} currentPuzzleNum={this.state.currentPuzzleNum} map={this.state.currentlyPlaying}/>
+          <Map handleReturnToMapsClick={this.handleReturnToMapsClick.bind(this)} checkForFinalLevelItems={this.checkForFinalLevelItems.bind(this)} lives={this.state.lives} handleMapFinished={this.handleMapFinished.bind(this)} level={this.state.currentLevel} currentPuzzleNum={this.state.currentPuzzleNum} map={this.state.currentlyPlaying}/>
         </div>
       );
     }

@@ -18,6 +18,7 @@ class Map extends React.Component {
       currentQuestBeforeGreenClick: null,
       clickedQuest: false,
       playerName: '',
+      lives: this.props.lives,
       puzzles: {
         questions: {
           '0': 'Question1',
@@ -90,13 +91,15 @@ class Map extends React.Component {
       this.setState({
         completedQuests: ['0'].concat(this.state.levelsRemaining),
         levelsRemaining: [],
-        currentQuest: '10'
+        currentQuest: '10',
+        lives: this.props.lives
       }, () => {
         this.colorPuzzles(true);
       });
     } else if (this.props.currentPuzzleNum !== parseInt(this.props.map + '0')) {
       this.setState({
         currentQuest: this.props.currentPuzzleNum.toString()[1] || this.props.currentPuzzleNum.toString()[0],
+        lives: this.props.lives,
         completedQuests: ['0'].concat(this.state.levelsRemaining.slice(0, this.props.currentPuzzleNum - parseInt(this.props.map + '1'))),
         levelsRemaining: this.state.levelsRemaining.slice(this.props.currentPuzzleNum - parseInt(this.props.map + '0'))
       }, () => {
@@ -181,6 +184,7 @@ class Map extends React.Component {
         this.colorPuzzles();
       });
     }
+    clearInterval(interval);
   }
 
   handlePuzzleSubmit() {
@@ -234,7 +238,6 @@ class Map extends React.Component {
       }
       if (this.state.levelsRemaining.length !== 0 && !this.state.greenclickedQuest) {
         this.handleReturntoMapClick();
-        clearInterval(interval);
       }
     } else {
       document.getElementById('puzzleAnswer').value = '';
@@ -248,6 +251,40 @@ class Map extends React.Component {
       }
     }
     return false;
+  }
+
+  handleLifeChange(lives) {
+    if (lives) {
+      this.setState({
+        lives: lives
+      });
+    } else if (this.props.map === '0') {
+      this.setState({
+        lives: 5,
+        currentQuest: '0',
+        levelsRemaining: ['1', '2', '3', '4', '5', '6', '7', '8', '9'],
+        completedQuests: []
+      });
+      Request.post('/lives', {lives: 5}, function(data) {
+      });
+      Request.post('/mapData', {level: 0}, (data) => {
+      });
+      Request.post('/removeItems', {level: 0}, (data) => {
+      });
+    } else {
+      this.setState({
+        lives: 5,
+        currentQuest: this.props.map + '0',
+        levelsRemaining: ['1', '2', '3', '4', '5', '6', '7', '8', '9'],
+        completedQuests: []
+      });
+      Request.post('/lives', {lives: 5}, function(data) {
+      });
+      Request.post('/mapData', {level: parseInt(this.props.map + '0')}, (data) => {
+      });
+      Request.post('/removeItems', {level: parseInt(this.props.map + '0')}, (data) => {
+      });
+    }
   }
 
   handleEnterClick(e) {
@@ -325,6 +362,7 @@ class Map extends React.Component {
               </div>
             </Dialog>
           </div>
+          <div style={{color: 'black', backgroundColor: 'white'}}>{`Lives Remaining ${this.state.lives}`}</div>
           <svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 800 515" style={{width: '1000px', enableBackground: "new 0 0 800 515"}} xmlSpace="preserve">
             <image className={styles.background} style={{overflow: 'visible'}} width="1600" height="1030" xlinkHref={`/assets/maps/basementMap.jpg`} transform="matrix(0.5 0 0 0.5 0 0)">
             </image>
@@ -410,7 +448,7 @@ class Map extends React.Component {
     } else {
       return (
         <div>
-          <Puzzle playerName={this.state.playerName} changeName={this.changeName.bind(this)} handleReturntoMapClick={this.handleReturntoMapClick.bind(this)} questions={this.state.puzzles.questions} currentQuest={this.state.currentQuest} handlePuzzleSubmit={this.handlePuzzleSubmit.bind(this)} handleEnterClick={this.handleEnterClick.bind(this)} messages={this.state.puzzles.messages}/>
+          <Puzzle playerName={this.state.playerName} handleLifeChange={this.handleLifeChange.bind(this)} changeName={this.changeName.bind(this)} lives={this.state.lives} handleReturntoMapClick={this.handleReturntoMapClick.bind(this)} questions={this.state.puzzles.questions} currentQuest={this.state.currentQuest} handlePuzzleSubmit={this.handlePuzzleSubmit.bind(this)} handleEnterClick={this.handleEnterClick.bind(this)} messages={this.state.puzzles.messages}/>
         </div>
       );
     }

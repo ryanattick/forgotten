@@ -59,6 +59,7 @@ class App extends React.Component {
 
   render() {
     return (
+      <div style={{backgroundImage: 'url("/assets/darkgreen_marble_bg.jpg")', width:'100%', position: 'absolute, top: 0, bottom: 0, left: 0, right: 0'}}>
       <MuiThemeProvider>
         <Router>
           <div>
@@ -85,6 +86,7 @@ class App extends React.Component {
           </div>
         </Router>
       </MuiThemeProvider>
+    </div>
     );
   }
 }

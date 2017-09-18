@@ -146,6 +146,7 @@ app.post('/updateAvatar', function (req, res) {
   console.log(req.body, 'req.body updateavatar exists');
   Profile.forge({id: req.body.id}).save({avatar: req.body.avatar}).then(function() { //...
     console.log('avatar saved!!');
+    res.send('201')
   });
 });
 

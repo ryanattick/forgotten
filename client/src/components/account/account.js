@@ -117,6 +117,7 @@ class Account extends React.Component {
 
 
 
+
   render() {
 
     let currentPage = this.state.page;
@@ -153,7 +154,7 @@ class Account extends React.Component {
               <h4 className={accountStyle.level}>
               Level {this.state.level}
               </h4>
-              <span className={accountStyle.label} style={{marginLeft: '30px'}}>Username <IconButton tooltip='Change Username' tooltipPosition='bottom-left' onClick={this.handleEditClick}><SettingsIcon color="rgba(57, 62, 65, 0.55)" /></IconButton></span> <span className={accountStyle.text}>{this.state.username}</span>
+              <span className={accountStyle.label} style={{marginLeft: '30px'}}>Username<IconButton tooltip='Change Username' tooltipPosition='bottom-left' onClick={this.handleEditClick}><SettingsIcon color="rgba(57, 62, 65, 0.55)" /></IconButton></span> <span className={accountStyle.text}>{this.state.username}</span>
               <span className={accountStyle.label}>Name</span> <span className={accountStyle.text}>{this.state.firstName + ' ' + this.state.lastName}</span>
               <span className={accountStyle.label}>Email</span> <span className={accountStyle.text}>{this.state.email}</span>
               <RaisedButton href='/' label="Log Out" backgroundColor='#E94F37' labelColor='#F6F7EB' style={{width: '160px'}} className={accountStyle.logoutButton} onClick={this.handleLogoutClick}/>

@@ -181,5 +181,20 @@ var items = [
     equippable: 0, /* Yes, No, Not Possible */
     img_url: '/assets/items/paper.jpg',
     puzzle_id: 9
+  },
+  {
+    name: 'Key',
+    description: 'A key you get from room 88.', /* Miscellaneous, Reward, etc. */
+    equippable: 0, /* Yes, No, Not Possible */
+    img_url: '/assets/items/paper.jpg',
+    puzzle_id: 17
+  },
+  {
+    name: 'Key',
+    description: 'A key you get from room 47.',
+    type: 'Miscellaneous', /* Miscellaneous, Reward, etc. */
+    equippable: 0, /* Yes, No, Not Possible */
+    img_url: '/assets/items/paper.jpg',
+    puzzle_id: 18
   }
 ];

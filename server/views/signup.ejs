@@ -1,9 +1,10 @@
 <% include head.ejs%>
 
-    <div class="col-sm-6 col-sm-offset-3">
+<body style="background-image: url('https://i.imgur.com/NN4WmaK.jpg'); background-repeat: no-repeat; background-size: 100%">
 
-        <h1><span class="fa fa-sign-in"></span> Signup</h1>
+    <div class="col-sm-8 col-sm-offset-2" style="background-color: black; opacity: 0.8;">
 
+        <img src="https://i.imgur.com/eHkI8cJ.png" class="col-sm-9 col-sm-offset-2"/><br></br><br></br><br></br><br></br>
         <!-- show any messages that come back with authentication -->
         <% if (message.length > 0) { %>
         <div class="alert alert-danger"><%= message %></div>
@@ -12,19 +13,19 @@
         <!-- LOGIN FORM -->
         <form action="/signup" method="post">
             <div class="form-group">
-                <label>Email</label>
+                <label style="font-family: Sue; color: white; text-align: center;">Email</label>
                 <input type="text" class="form-control" name="email">
             </div>
             <div class="form-group">
-                <label>Password</label>
+                <label style="font-family: Sue; color: white; text-align: center;">Password</label>
                 <input type="password" class="form-control" name="password">
             </div>
 
-            <button type="submit" class="btn btn-warning btn-lg">Signup</button>
+            <button type="submit" class="btn btn-warning btn-lg" style="font-family: Sue; color: white; text-align: center;">Signup</button>
         </form>
 
         <hr>
-        <div>
+        <div style="font-family: Sue; color: white; text-align: center;">
             Or signup with any of the following services:<br />
             <a style="margin-right:15px" href="/auth/facebook"><img src="/assets/fb-logo.png" /></a>
             <a style="margin-left:15px;margin-right:15px" href="/auth/google"><img style="width:29px" src="/assets/google-logo.png" /></a>
@@ -32,9 +33,7 @@
         </div>
         <hr>
 
-        <p>Already have an account? <a href="/login">Login</a></p>
-        <p>Or go <a href="/">home</a>.</p>
-
+        <p style="font-family: Sue; color: white; text-align: center;">Already have an account? <a href="/login">Login</a></p>
     </div>
 
 <% include foot.ejs%>

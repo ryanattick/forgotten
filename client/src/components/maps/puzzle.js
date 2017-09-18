@@ -2,6 +2,7 @@ import React from 'react';
 import Dialog from 'material-ui/Dialog';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
+import Request from '../../../../helpers/requests';
 
 class Puzzle extends React.Component {
   constructor(props) {
@@ -9,19 +10,24 @@ class Puzzle extends React.Component {
     this.state = {
       open: false,
       playerName: '',
-      time: 30
+      time: 30,
+      equipped: []
     };
   }
 
   componentWillMount() {
     this.setState({
       playerName: this.props.playerName
-    })
+    });
+    Request.get('/puzzleItems', (data) => {
+      this.setState({
+        equipped: data
+      });
+    });
   }
 
   componentDidMount() {
     this.handleOpen();
-    // this.handleTimer();
   }
 
   handleOpen() {
@@ -29,22 +35,29 @@ class Puzzle extends React.Component {
   }
 
   handleTimer() {
-    var interval = null;
+    window.interval = null;
     interval = setInterval(() => {
       this.setState({
         time: this.state.time - 1
       }, () => {
         if (this.state.time === 0) {
-          this.props.handleReturntoMapClick();
+          this.props.handleReturntoMapClick(true);
           clearInterval(interval);
         }
       });
     }, 1000);
   }
 
+  handleItemUsage() {
+    // this.setState({
+    //   time: this.state.time + 30
+    // });
+  }
+
   handleClose() {
     this.setState({open: false});
     this.refs.answerInput.focus();
+    this.handleTimer();
   }
   render() {
     const actions = [
@@ -71,9 +84,9 @@ class Puzzle extends React.Component {
           </Dialog>
         </div>
         <RaisedButton className="button" label="Return to Map" onClick={() => this.props.handleReturntoMapClick(true)} backgroundColor='#E94F37' labelColor='#F6F7EB' style={{width: '160px'}}/>
-        {/* <div style={{color: 'black'}}>
+        <div style={{color: 'black', backgroundColor: 'white'}}>
           {this.state.time}
-        </div> */}
+        </div>
         <div style={{color: '#E94F37'}}>
           {this.props.questions[this.props.currentQuest]}
         </div>

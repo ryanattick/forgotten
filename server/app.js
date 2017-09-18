@@ -8,6 +8,7 @@ const db = require('../db');
 const Profile = require('../db/models/profiles.js');
 const Puzzles = require('../db/models/puzzles.js');
 const Items = require('../db/models/Items.js');
+const userItems = require('../db/models/users_items.js');
 const dbUtils = require('../db/lib/utils.js');
 
 app.use(middleware.morgan('dev'));
@@ -94,14 +95,52 @@ app.get('/playerItems', function (req, res) {
   Items.fetchAll()
     .then((results) => {
       var change = results.map((item) => item.attributes).filter((item) => item.puzzle_id <= req.user.level);
-      console.log(change);
       res.status(200).send(JSON.stringify(change));
-
-    }).catch((err) => {
+    })
+    .catch((err) => {
       console.log(err, 'error');
     });
 });
 
+app.post('/userItems', function (req, res) {
+  Items.fetchAll()
+    .then((results) => {
+      var change = results.map((item) => item.attributes).filter((item) => item.puzzle_id === req.user.level);
+      for (var i = 0; i < change.length; i++) {
+        userItems.forge().save({user_id: req.user.id, item_id: change[i].id, equipped: 'no'}).then(() => {
+          console.log('user items saved');
+          res.send('201');
+        });
+      }
+    })
+    .catch((err) => {
+      console.log(err, 'error');
+    });
+});
+
+app.get('/puzzleItems', function (req, res) {
+  userItems.where({'user_id': req.user.id, equipped: 'yes'}).fetchAll()
+    .then((results) => {
+      var items = [];
+      var loop = function() {
+        for (var i = 0; i < results.models.length; i++) {
+          Items.where('id', results.models[i].attributes.item_id).fetchAll()
+            .then((result) => {
+              items.push(result.models[0].attributes);
+            });
+        }
+      };
+      Promise.resolve(loop())
+        .then(() => {
+          setTimeout(() => {
+            res.send(items);
+          }, 100);
+        });
+    })
+    .catch((err) => {
+      throw err;
+    });
+});
 
 app.post('/updateAvatar', function (req, res) {
   console.log(req.body, 'req.body updateavatar exists');

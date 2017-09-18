@@ -195,6 +195,8 @@ class Map extends React.Component {
         });
         this.handleReturntoMapClick();
       } else if (this.state.currentQuest === '9') {
+        Request.post('/userItems', {level: parseInt(this.props.map + this.state.currentQuest)}, (data) => {
+        });
         this.state.completedQuests.push(this.state.currentQuest);
         if (this.checkForItems(this.state.currentQuest)) {
           this.handleNotificationOpen();
@@ -214,6 +216,8 @@ class Map extends React.Component {
             });
         });
       } else {
+        Request.post('/userItems', {level: parseInt(this.props.map + this.state.currentQuest)}, (data) => {
+        });
         this.state.completedQuests.push(this.state.currentQuest);
         if (this.checkForItems(this.state.currentQuest)) {
           this.handleNotificationOpen();
@@ -230,6 +234,7 @@ class Map extends React.Component {
       }
       if (this.state.levelsRemaining.length !== 0 && !this.state.greenclickedQuest) {
         this.handleReturntoMapClick();
+        clearInterval(interval);
       }
     } else {
       document.getElementById('puzzleAnswer').value = '';
@@ -314,9 +319,9 @@ class Map extends React.Component {
               bodyStyle={{backgroundImage: 'url("/assets/backgrounds/storyBG.png")', backgroundSize: '100% 100%', border: '0', filter:'brightness(90%)'}}
             >
               {stories[this.props.map]} <br></br>
-            <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '10px'}}>
-              <RaisedButton label="Close" onClick={this.handleStoryClose.bind(this)} backgroundColor='black' labelColor='rgb(255, 255, 255)' overlayStyle={{margin:'auto'}}/>
-            </div>
+              <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '10px'}}>
+                <RaisedButton label="Close" onClick={this.handleStoryClose.bind(this)} backgroundColor='black' labelColor='rgb(255, 255, 255)' overlayStyle={{margin:'auto'}}/>
+              </div>
             </Dialog>
           </div>
           <svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 800 515" style={{width: '1000px', enableBackground: "new 0 0 800 515"}} xmlSpace="preserve">

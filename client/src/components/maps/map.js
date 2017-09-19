@@ -1,3 +1,4 @@
+
 import React from 'react';
 import Puzzle from './puzzle.js';
 import styles from '../../../../styles/maps/map.css';
@@ -347,9 +348,9 @@ class Map extends React.Component {
   handleNotificationOpen() {
     this.setState({notificationOpen: true},
       Request.get('/playerItems', (data) => {
-          this.props.handleBadgeChange(data);
-        })
-      );
+        this.props.handleBadgeChange(data);
+      })
+    );
   }
 
   handleNotificationClose() {
@@ -359,7 +360,6 @@ class Map extends React.Component {
   render() {
     const stories = ['Your head is pounding. You reach up to touch it and as you do you realize you can’t tell if your eyes are open or closed. This startles you and you freeze. Where are you? You don’t know. Who are you? You can’t remember. Your heart starts racing as panic creeps in, slowly at first and then all at once. You take a breath and try to think back. How did you get here? Where is here? You decide to take things one step at a time. What is your name? As soon as that thought enters your mind you feel a vibration in your pocket.',
       'You finally manage to solve the puzzle given to you by still an unknown sender. However all you care about at the moment is to get out of this underground system and get some fresh air, of which, it seems like, you haven’t gotten in years. You grab your backpack and frantically enter the answer you came up with to solve the last puzzle. The light turns green and you hear a metallic popping sound and feel a little breeze coming from above. The trap door has been unlocked! You jump back onto the chair, push the hatch outwards and climb out onto what seems like a kitchen floor. Right beside the hatch, there is a small refrigerator with a sign that says “Out of order!”. The air is not as fresh as you had hoped, but it’s still better than the air from underground, filled with a foul smell of rotting food supplies, dust and corrosion. Before you are able to take a good look around, your phone buzzes. After taking a deep breath you take a look at the new message.'];
-
     const messageActions = [
       <RaisedButton
         label="Ok"
@@ -384,17 +384,17 @@ class Map extends React.Component {
               open={this.state.storyOpen}
               autoScrollBodyContent={true}
               onRequestClose={this.handleStoryClose.bind(this)}
-              bodyStyle={{backgroundImage: 'url("/assets/backgrounds/storyBG.png")', backgroundSize: '100% 100%', border: '0', filter:'brightness(90%)'}}
+              bodyStyle={{backgroundImage: 'url("/assets/backgrounds/storyBG.png")', backgroundSize: '100% 100%', border: '0', filter: 'brightness(90%)'}}
             >
               {stories[this.props.map]} <br></br>
               <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '10px'}}>
-                <RaisedButton label="Close" onClick={this.handleStoryClose.bind(this)} backgroundColor='black' labelColor='rgb(255, 255, 255)' overlayStyle={{margin:'auto'}}/>
+                <RaisedButton label="Close" onClick={this.handleStoryClose.bind(this)} backgroundColor='black' labelColor='rgb(255, 255, 255)' overlayStyle={{margin: 'auto'}}/>
               </div>
             </Dialog>
           </div>
           <div style={{color: 'black', backgroundColor: 'white'}}>{`Lives Remaining ${this.state.lives}`}</div>
-          <svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 800 515" style={{width: '1000px', enableBackground: "new 0 0 800 515"}} xmlSpace="preserve">
-            <image className={styles.background} style={{overflow: 'visible'}} width="1600" height="1030" xlinkHref={`/assets/maps/basementMap.jpg`} transform="matrix(0.5 0 0 0.5 0 0)">
+          <svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 800 515" style={{width: '1000px', enableBackground: 'new 0 0 800 515'}} xmlSpace="preserve">
+            <image className={styles.background} style={{overflow: 'visible'}} width="1600" height="1030" xlinkHref={'/assets/maps/basementMap.jpg'} transform="matrix(0.5 0 0 0.5 0 0)">
             </image>
             <circle className={styles.circle} id="circle0" onClick={(e) => this.handleMapQuestClick(e)} style={{cursor: 'pointer', cursor: 'hand', fill: '#E94F37', stroke: 'black', strokeLinecap: 'round', strokeMiterlimit: '10'}} cx="573.9" cy="112.9" r="7.4"/>
             <circle className={styles.circle} id="circle1" onClick={(e) => this.handleMapQuestClick(e)} style={{cursor: 'pointer', cursor: 'hand', display: 'none', fill: 'red', stroke: 'black', strokeLinecap: 'round', strokeMiterlimit: '10'}} cx="580.9" cy="132.9" r="7.4"/>
@@ -458,11 +458,11 @@ class Map extends React.Component {
               modal={false}
               open={this.state.messageOpen}
               autoScrollBodyContent={true}
-              bodyStyle={{backgroundImage: 'url("/assets/backgrounds/storyBG.png")', backgroundSize: '100% 100%', border: '0', filter:'brightness(90%)'}}
+              bodyStyle={{backgroundImage: 'url("/assets/backgrounds/storyBG.png")', backgroundSize: '100% 100%', border: '0', filter: 'brightness(90%)'}}
             >
               {this.changeName(this.state.puzzles.stories[this.props.map + this.state.completedQuests[this.state.completedQuests.length - 1]])}
               <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '10px'}}>
-                <RaisedButton label="Close" onClick={this.handleMessageClose.bind(this)} backgroundColor='black' labelColor='rgb(255, 255, 255)' overlayStyle={{margin:'auto'}}/>
+                <RaisedButton label="Close" onClick={this.handleMessageClose.bind(this)} backgroundColor='black' labelColor='rgb(255, 255, 255)' overlayStyle={{margin: 'auto'}}/>
               </div>
             </Dialog>
           </div>
@@ -484,17 +484,17 @@ class Map extends React.Component {
               open={this.state.storyOpen}
               autoScrollBodyContent={true}
               onRequestClose={this.handleStoryClose.bind(this)}
-              bodyStyle={{backgroundImage: 'url("/assets/backgrounds/storyBG.png")', backgroundSize: '100% 100%', border: '0', filter:'brightness(90%)'}}
+              bodyStyle={{backgroundImage: 'url("/assets/backgrounds/storyBG.png")', backgroundSize: '100% 100%', border: '0', filter: 'brightness(90%)'}}
             >
               {stories[this.props.map]} <br></br>
               <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '10px'}}>
-                <RaisedButton label="Close" onClick={this.handleStoryClose.bind(this)} backgroundColor='black' labelColor='rgb(255, 255, 255)' overlayStyle={{margin:'auto'}}/>
+                <RaisedButton label="Close" onClick={this.handleStoryClose.bind(this)} backgroundColor='black' labelColor='rgb(255, 255, 255)' overlayStyle={{margin: 'auto'}}/>
               </div>
             </Dialog>
           </div>
           <div style={{color: 'black', backgroundColor: 'white'}}>{`Lives Remaining ${this.state.lives}`}</div>
-          <svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 800 515" style={{width: '1000px', enableBackground: "new 0 0 800 515"}} xmlSpace="preserve">
-            <image className={styles.background} style={{overflow: 'visible'}} width="1600" height="1030" xlinkHref={`/assets/maps/houseMap.jpg`} transform="matrix(0.5 0 0 0.5 0 0)">
+          <svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 800 515" style={{width: '1000px', enableBackground: 'new 0 0 800 515'}} xmlSpace="preserve">
+            <image className={styles.background} style={{overflow: 'visible'}} width="1600" height="1030" xlinkHref={'/assets/maps/houseMap.jpg'} transform="matrix(0.5 0 0 0.5 0 0)">
             </image>
             <ellipse className={styles.circle} id="circle0" onClick={(e) => this.handleMapQuestClick(e)} style={{cursor: 'pointer', cursor: 'hand', fill: '#E94F37', stroke: 'black', strokeLinecap: 'round', strokeMiterlimit: '10'}} cx="426.8" cy="455.6" rx="6.8" ry="6.9"/>
             <ellipse className={styles.circle} id="circle1" onClick={(e) => this.handleMapQuestClick(e)} style={{cursor: 'pointer', cursor: 'hand', display: 'none', fill: 'red', stroke: 'black', strokeLinecap: 'round', strokeMiterlimit: '10'}} cx="403.8" cy="399.6" rx="6.8" ry="6.9"/>
@@ -640,11 +640,11 @@ class Map extends React.Component {
               modal={false}
               open={this.state.messageOpen}
               autoScrollBodyContent={true}
-              bodyStyle={{backgroundImage: 'url("/assets/backgrounds/storyBG.png")', backgroundSize: '100% 100%', border: '0', filter:'brightness(90%)'}}
+              bodyStyle={{backgroundImage: 'url("/assets/backgrounds/storyBG.png")', backgroundSize: '100% 100%', border: '0', filter: 'brightness(90%)'}}
             >
               {this.changeName(this.state.puzzles.stories[this.props.map + this.state.completedQuests[this.state.completedQuests.length - 1]])}
               <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '10px'}}>
-                <RaisedButton label="Close" onClick={this.handleMessageClose.bind(this)} backgroundColor='black' labelColor='rgb(255, 255, 255)' overlayStyle={{margin:'auto'}}/>
+                <RaisedButton label="Close" onClick={this.handleMessageClose.bind(this)} backgroundColor='black' labelColor='rgb(255, 255, 255)' overlayStyle={{margin: 'auto'}}/>
               </div>
             </Dialog>
           </div>

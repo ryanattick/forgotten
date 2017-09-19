@@ -8,6 +8,7 @@ const db = require('../db');
 const Profile = require('../db/models/profiles.js');
 const Puzzles = require('../db/models/puzzles.js');
 const Items = require('../db/models/Items.js');
+const userStories = require('../db/models/userStories.js');
 const userItems = require('../db/models/users_items.js');
 const dbUtils = require('../db/lib/utils.js');
 
@@ -125,7 +126,7 @@ app.get('/playerItems', function (req, res) {
   Items.fetchAll()
     .then((results) => {
       var change = results.map((item) => item.attributes).filter((item) => item.puzzle_id <= req.user.level);
-      console.log(change, 'CHANGE?')
+      console.log(change, 'CHANGE?');
       res.status(200).send(JSON.stringify(change));
     })
     .catch((err) => {
@@ -148,6 +149,24 @@ app.post('/userItems', function (req, res) {
       console.log(err, 'error');
     });
 });
+
+app.post('/mapData', function(req, res) {
+  Profile.forge({id: req.user.id}).save({level: req.body.level}).then(function() {
+    console.log('level saved!');
+  })
+    .then(() => {
+      userStories.forge().save({puzzle_id: req.body.level, user_id: req.user.id});
+      console.log('user stories saved!!');
+    })
+    .then(() => {
+      res.status(200).send(JSON.stringify('success'));
+    })
+    .catch((err) => {
+      throw err;
+    });
+});
+
+
 
 app.get('/puzzleItems', function (req, res) {
   userItems.where({'user_id': req.user.id, equipped: 'yes'}).fetchAll()
@@ -172,6 +191,70 @@ app.get('/puzzleItems', function (req, res) {
       throw err;
     });
 });
+
+app.get('/userStoryline', function (req, res) {
+  userStories.fetchAll()
+    .then((results) => {
+      var puzzleFilter = [];
+      for (var i = 0; i < results.length; i++) {
+        console.log(results.models[i].attributes);
+        //output all puzzles related to req.user
+        if (results.models[i].attributes.user_id === req.user.id) {
+          puzzleFilter.push(results.models[i].attributes.puzzle_id);
+        }
+      }
+      return puzzleFilter;
+    })
+    .then((results) => {
+      Puzzles.fetchAll().then((puzzles) => {
+
+        var filter = puzzles.models.filter((item) => results.indexOf(item.attributes.puzzleID) !== -1);
+        return filter.reduce((acc, item, index) => {
+          var obj = {};
+          obj['story'] = item.attributes.story_pop_up;
+          obj['message'] = item.attributes.message_pop_up;
+          obj['items'] = '';
+          obj['id'] = item.attributes.puzzleID.toString();
+
+          acc.push(obj);
+          return acc;
+        }, []);
+      }).then((obj) => {
+        Items.fetchAll().then((items) => {
+          var items = items.filter((item) => results.indexOf(item.attributes.puzzle_id) !== -1).reduce((acc, item) => {
+
+            if (!acc[item.attributes.puzzle_id]) {
+              acc[item.attributes.puzzle_id] = [item.attributes.name];
+            } else {
+              acc[item.attributes.puzzle_id].push(item.attributes.name);
+            }
+            return acc;
+          }, {});
+
+          obj.sort((a, b) => {
+            if (a.id > b.id) {
+              return 1;
+            } else {
+              return -1;
+            }
+          });
+
+          for (var i = 0; i < obj.length; i++) {
+            if (Object.keys(items).indexOf(obj[i].id) !== -1) {
+              obj[i].items = items[obj[i].id];
+            } else {
+              obj[i].items = [];
+            }
+            delete(obj[i].id);
+          }
+          console.log('storyObj', obj);
+          res.status(200).send(JSON.stringify(obj));
+        });
+      });
+    });
+
+});
+
 
 app.post('/updateAvatar', function (req, res) {
   console.log(req.body, 'req.body updateavatar exists');
@@ -205,6 +288,8 @@ app.post('/updateUsername', function (req, res) {
     res.send('201'); //I don't know why this works, but it does.
   });
 });
+
+
 
 
 

@@ -32,6 +32,10 @@ class Puzzle extends React.Component {
     this.handleOpen();
   }
 
+  componentWillUnmount() {
+    clearInterval(interval);
+  }
+
   handleOpen() {
     this.setState({open: true});
   }

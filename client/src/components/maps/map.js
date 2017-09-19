@@ -156,7 +156,7 @@ class Map extends React.Component {
   }
 
   handleMapQuestClick(e) {
-    if (e.target.style.fill === 'rgb(233, 79, 55)') {
+    if (e.target.style.fill === 'rgb(68, 187, 164)') {
       this.setState({
         greenclickedQuest: e.target.id[e.target.id.length - 1],
         currentQuestBeforeGreenClick: this.state.currentQuest,
@@ -197,7 +197,7 @@ class Map extends React.Component {
 
   handlePuzzleSubmit() {
     var answer = document.getElementById('puzzleAnswer').value;
-    if ((this.props.map === '0' && this.state.puzzles.answers['0' + this.state.currentQuest] && this.state.puzzles.answers['0' + this.state.currentQuest].toLowerCase() === answer.toLowerCase()) || (this.state.puzzles.answers[this.props.map + this.state.currentQuest] && this.state.puzzles.answers[this.props.map + this.state.currentQuest].toLowerCase() === answer.toLowerCase())) {
+    if (this.state.puzzles.answers[this.props.map + this.state.currentQuest].toLowerCase() === answer.toLowerCase()) {
       if (this.state.greenclickedQuest) {
         this.setState({
           greenclickedQuest: null,
@@ -228,20 +228,21 @@ class Map extends React.Component {
             });
         });
       } else {
-        Request.post('/userItems', {level: parseInt(this.props.map + this.state.currentQuest)}, (data) => {
-        });
-        this.state.completedQuests.push(this.state.currentQuest);
-        if (this.checkForItems(this.state.currentQuest)) {
-          this.handleNotificationOpen();
-        }
-        this.setState({
-          currentQuest: this.state.levelsRemaining[0],
-          levelsRemaining: this.state.levelsRemaining.slice(1)
-        }, function() {
-          this.colorPuzzles();
-          Request.post('/mapData', {level: parseInt(this.props.map + this.state.currentQuest)}, (data) => {
+        Promise.resolve(Request.post('/userItems', {level: parseInt(this.props.map + this.state.currentQuest)}, (data) => {
+        })).then(() => {
+          this.state.completedQuests.push(this.state.currentQuest);
+          if (this.checkForItems(this.state.currentQuest)) {
+            this.handleNotificationOpen();
+          }
+          this.setState({
+            currentQuest: this.state.levelsRemaining[0],
+            levelsRemaining: this.state.levelsRemaining.slice(1)
+          }, function() {
+            this.colorPuzzles();
+            Request.post('/mapData', {level: parseInt(this.props.map + this.state.currentQuest)}, (data) => {
+            });
+            this.handleMessageOpen();
           });
-          this.handleMessageOpen();
         });
       }
       if (this.state.levelsRemaining.length !== 0 && !this.state.greenclickedQuest) {
@@ -282,7 +283,7 @@ class Map extends React.Component {
     } else {
       this.setState({
         lives: 5,
-        currentQuest: this.props.map + '0',
+        currentQuest: '0',
         levelsRemaining: ['1', '2', '3', '4', '5', '6', '7', '8', '9'],
         completedQuests: []
       });
@@ -327,9 +328,6 @@ class Map extends React.Component {
     } else {
       circle.add(path).fadeIn(1500);
     }
-    // var path = $(`#path${this.state.completedQuests[this.state.completedQuests.length - 1]}`);
-    // var circle = $(`#circle${this.state.currentQuest}`);
-    // circle.add(path).fadeIn(1500);
   }
 
   handleStoryOpen() {

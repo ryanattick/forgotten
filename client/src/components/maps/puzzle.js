@@ -3,7 +3,6 @@ import Dialog from 'material-ui/Dialog';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import Request from '../../../../helpers/requests';
-
 import styles from '../../../../styles/maps/puzzle.css';
 
 class Puzzle extends React.Component {

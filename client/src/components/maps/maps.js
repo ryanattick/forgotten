@@ -264,7 +264,9 @@ class Maps extends React.Component {
     } else {
       return (
         <div>
-          <Map handleBadgeChange={this.props.handleBadgeChange} handleReturnToMapsClick={this.handleReturnToMapsClick.bind(this)} checkForFinalLevelItems={this.checkForFinalLevelItems.bind(this)} lives={this.state.lives} handleMapFinished={this.handleMapFinished.bind(this)} level={this.state.currentLevel} currentPuzzleNum={this.state.currentPuzzleNum} map={this.state.currentlyPlaying}/>
+          <Map handleBadgeChange={this.props.handleBadgeChange}
+             avatar={this.props.avatar}
+             handleReturnToMapsClick={this.handleReturnToMapsClick.bind(this)} checkForFinalLevelItems={this.checkForFinalLevelItems.bind(this)} lives={this.state.lives} handleMapFinished={this.handleMapFinished.bind(this)} level={this.state.currentLevel} currentPuzzleNum={this.state.currentPuzzleNum} map={this.state.currentlyPlaying}/>
         </div>
       );
     }

@@ -20,7 +20,8 @@ exports.seed = function (knex, Promise) {
       extra_info: item[i].extra_info,
       message_pop_up: item[i].message_pop_up,
       story_pop_up: item[i].story_pop_up,
-      pop_up_image_url: item[i].pop_up_image_url
+      pop_up_image_url: item[i].pop_up_image_url,
+      time_limit: item[i].time_limit
     }).save()
       .error(err => {
         console.error('ERROR: failed to create items');

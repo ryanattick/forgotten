@@ -203,6 +203,6 @@ var items = [
     type: 'Storyline', /* Miscellaneous, Reward, etc. */
     equippable: 0, /* Yes, No, Not Possible */
     img_url: '/assets/items/paper.jpg',
-    puzzle_id: 20
+    puzzle_id: 19
   }
 ];

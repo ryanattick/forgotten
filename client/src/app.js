@@ -56,20 +56,14 @@ class App extends React.Component {
     this.state = {
       items: [],
       currentTabIndex: tabIndexBasedOnURL(allReactRoutes, 1),
-      numberOfItems: 0
+      numberNewOfItems: 0,
+      level: 0
     };
     this.handleTabChange = this.handleTabChange.bind(this);
     this.handleBadgeToZero = this.handleBadgeToZero.bind(this);
     this.handleBadgeChange = this.handleBadgeChange.bind(this);
   }
 
-  componentWillMount() {
-    Request.get('/playerItems', (data) => {
-      this.setState({
-        numberOfItems: data.length
-      });
-    });
-  }
 
   handleTabChange(value) {
     this.setState({
@@ -79,20 +73,26 @@ class App extends React.Component {
 
   handleBadgeToZero() {
     this.setState({
-      numberOfItems: 0
-    })
+      numberNewOfItems: 0
+    });
   }
 
   handleBadgeChange(num) {
+    let newItemCount = this.state.numberNewOfItems
+    num.forEach((item) => {
+      if (item.puzzle_id === this.state.level) {
+        newItemCount++
+      }
+    });
     this.setState({
-      numberOfItems: num.length
-    })
+      numberNewOfItems: newItemCount
+    });
   }
 
 
   render() {
 
-    let badge = <Badge badgeContent={this.state.numberOfItems} primary={true} badgeStyle={{backgroundColor: '#E94F37', float: 'right'}}/>
+    let badge = <Badge badgeContent={this.state.numberNewOfItems} primary={true} badgeStyle={{backgroundColor: '#E94F37', float: 'right'}}/>
 
     return (
       <MuiThemeProvider>
@@ -107,10 +107,10 @@ class App extends React.Component {
                 inkBarStyle={{backgroundColor: '#E94F37'}}>
                 <Tab value={0} label='My Account' containerElement={<Link to='/account'/>}/>
                 <Tab value={1} label='Maps' containerElement={<Link to='/maps'/>}/>
-                {this.state.numberOfItems > 0 &&
-                  <Tab value={2} label='Backpack' containerElement={<Link to='/backpack'/>} onActive={this.handleBadgeToZero} style={{display: 'flex', flexDirection: 'row-reverse', alignItems: 'center', justifyContent: 'center'}} icon={<div style={{flex: 'none'}}>{badge}</div>}/>
+                {this.state.numberNewOfItems > 0 &&
+                  <Tab value={2} containerElement={<Link to='/backpack'/>} style={{marginTop:'10px'}} onActive={this.handleBadgeToZero} icon={badge}/>
                 }
-                {this.state.numberOfItems <= 0 &&
+                {this.state.numberNewOfItems <= 0 &&
                   <Tab value={2} label='Backpack' containerElement={<Link to='/backpack'/>}/>
                 }
                 <Tab value={3} label='About' containerElement={<Link to='/about'/>}/>
@@ -120,7 +120,7 @@ class App extends React.Component {
             {/* Index (Default) Route, Redirect keeps on giving warnings and IndexRoute has been deprecated */}
             <Route exact={true} path='/' component={Maps}></Route>
             <Route exact={true} path='/account' component={Account}></Route>
-            <Route exact={true} path='/maps' render={(props) => ( <Maps handleBadgeChange={this.handleBadgeChange}/> )}></Route>
+            <Route exact={true} path='/maps' render={(props) => ( <Maps handleBadgeChange={this.handleBadgeChange} /> )}></Route>
             <Route exact={true} path='/backpack' component={Backpack}></Route>
             <Route exact={true} path='/storyline' component={Storyline}></Route>
             <Route exact={true} path='/about' component={About}></Route>

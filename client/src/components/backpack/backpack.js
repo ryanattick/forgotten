@@ -72,7 +72,9 @@ class Backpack extends React.Component {
         <Profile />
         <Items items={this.state.items} filters={this.state.filters} openItemPopUp={this.openItemPopUp}/>
         <Dialog
+          id='item_popup_container'
           titleClassName={styles.item_popup_title}
+          paperClassName={styles.item_popup_dialog_box}
           title={this.state.popUpItem.name}
           actions={actions}
           modal={false}
@@ -80,7 +82,11 @@ class Backpack extends React.Component {
           onRequestClose={this.closeItemPopUp}>
           <div className={styles.item_popup_content}>
             <img src={this.state.popUpItem.img_url}/>
-            <div>{this.state.popUpItem.description}</div>
+            <div className={styles.extrainfo}>
+              <div><span className={styles.extrainfo_subtitles}>Item:</span> {this.state.popUpItem.name}</div>
+              <div><span className={styles.extrainfo_subtitles}>Description:</span> {this.state.popUpItem.description}</div>
+              <div><span className={styles.extrainfo_subtitles}>Type:</span> {this.state.popUpItem.type}</div>
+            </div>
           </div>
         </Dialog>
       </div>

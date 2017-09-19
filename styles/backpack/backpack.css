@@ -2,21 +2,43 @@
   background-color: blue;
 }
 
+.item_popup_dialog_box {
+  border-radius: 10px !important;
+}
+
 .item_popup_content {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: space-around;
   align-items: center;
+  margin-top: 20px;
+  font-family: 'Exo Light';
+  font-size: 2vw;
+  margin-bottom: 10px;
 }
 
 .item_popup_content img {
-  max-width: 200px;
-}
-
-.item_popup_content div {
-  margin-top: 20px;
+  width: 250px;
+  box-shadow: 0 0 10px black;
 }
 
 .item_popup_title {
   text-align: center;
+  background-color: #44BBA4;
+  color: #F6F7EB !important;
+  padding: 10px !important;
+  border-radius: 10px 10px 0 0;
+}
+
+.extrainfo {
+  padding-left: 30px;
+  width: 500px;
+}
+
+.extrainfo div {
+  padding: 10px;
+}
+
+.extrainfo_subtitles {
+  font-family: 'Exo Bold';
 }

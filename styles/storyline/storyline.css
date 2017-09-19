@@ -6,6 +6,7 @@
   font-size: 1.6vw;
   border-radius: 5px;
   box-shadow: 0px 0px 20px black;
+  color: black;
 }
 
 .message {
@@ -23,7 +24,7 @@
   color: white;
   padding: 20px;
   border-radius: 5px;
-  font-size: 1.3vw;
+  font-size: 1.6vw;
   box-shadow: 0px 0px 20px black;
 }
 
@@ -37,8 +38,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 60%;
-  background-color: rgba(57, 62, 65, 0.55)
+  background-color: rgba(57, 62, 65, 0.55);
 }
 
 .storyline_container {

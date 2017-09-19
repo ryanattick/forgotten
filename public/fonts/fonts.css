@@ -12,3 +12,8 @@
     font-family: Exo Light;
     src: url('Exo-Light.ttf');
 }
+
+@font-face {
+    font-family: Exo Bold;
+    src: url('Exo-Bold.ttf');
+}

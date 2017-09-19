@@ -92,7 +92,8 @@ class App extends React.Component {
 
   render() {
 
-    let badge = <Badge badgeContent={this.state.numberNewOfItems} primary={true} badgeStyle={{backgroundColor: '#E94F37', float: 'right'}}/>
+    let badge = <Badge badgeContent={this.state.numberNewOfItems} primary={true} badgeStyle={{backgroundColor: '#E94F37', float: 'right', marginTop: '7px'}}/>
+    let backpackTab = this.state.numberNewOfItems ? <Tab value={2} containerElement={<Link to='/backpack'/>} onActive={this.handleBadgeToZero} icon={badge}/> : <Tab value={2} label='Backpack' containerElement={<Link to='/backpack'/>}/>;
 
     return (
       <MuiThemeProvider>
@@ -107,13 +108,9 @@ class App extends React.Component {
                 inkBarStyle={{backgroundColor: '#E94F37'}}>
                 <Tab value={0} label='My Account' containerElement={<Link to='/account'/>}/>
                 <Tab value={1} label='Maps' containerElement={<Link to='/maps'/>}/>
-                {this.state.numberNewOfItems > 0 &&
-                  <Tab value={2} containerElement={<Link to='/backpack'/>} style={{marginTop:'10px'}} onActive={this.handleBadgeToZero} icon={badge}/>
-                }
-                {this.state.numberNewOfItems <= 0 &&
-                  <Tab value={2} label='Backpack' containerElement={<Link to='/backpack'/>}/>
-                }
-                <Tab value={3} label='About' containerElement={<Link to='/about'/>}/>
+                {backpackTab}
+                <Tab value={3} label='Storyline' containerElement={<Link to='/storyline'/>}/>
+                <Tab value={4} label='About' containerElement={<Link to='/about'/>}/>
               </Tabs>
             </div>
 

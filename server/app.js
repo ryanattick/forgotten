@@ -75,15 +75,6 @@ app.get('/puzzleData', function(req, res) {
     });
 });
 
-app.post('/mapData', function(req, res) {
-  Profile.forge({id: req.user.id}).save({level: req.body.level}).then(function() {
-    console.log('level saved!');
-    res.status(200).send(JSON.stringify('success'));
-  }).catch((err) => {
-    throw err;
-  });
-});
-
 app.post('/lives', function(req, res) {
   Profile.forge({id: req.user.id}).save({lives: req.body.lives}).then(function() {
     console.log('lives saved!');
@@ -197,7 +188,6 @@ app.get('/userStoryline', function (req, res) {
     .then((results) => {
       var puzzleFilter = [];
       for (var i = 0; i < results.length; i++) {
-        console.log(results.models[i].attributes);
         //output all puzzles related to req.user
         if (results.models[i].attributes.user_id === req.user.id) {
           puzzleFilter.push(results.models[i].attributes.puzzle_id);
@@ -247,7 +237,6 @@ app.get('/userStoryline', function (req, res) {
             }
             delete(obj[i].id);
           }
-          console.log('storyObj', obj);
           res.status(200).send(JSON.stringify(obj));
         });
       });

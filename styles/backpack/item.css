@@ -1,9 +1,10 @@
 .inspect_button {
   background: rgba(0, 0, 0, 0.4) !important;
-  border-radius: 0 0 10px 0;
+  border-radius: 10px 0 10px 0;
   position: absolute !important;
 }
 
 .item_tile {
-  border-style: outset;
+  border: 2px solid white;
+  border-radius: 10px;
 }

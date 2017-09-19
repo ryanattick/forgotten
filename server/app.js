@@ -125,6 +125,7 @@ app.get('/playerItems', function (req, res) {
   Items.fetchAll()
     .then((results) => {
       var change = results.map((item) => item.attributes).filter((item) => item.puzzle_id <= req.user.level);
+      console.log(change, 'CHANGE?')
       res.status(200).send(JSON.stringify(change));
     })
     .catch((err) => {
@@ -201,7 +202,6 @@ app.post('/updateUsername', function (req, res) {
   //   console.log('saved')
   // })
   Profile.forge({id: req.body.id}).save({username: req.body.username}).then(function() { //...
-    console.log('username saved!!');
     res.send('201'); //I don't know why this works, but it does.
   });
 });

@@ -55,6 +55,8 @@
   margin-bottom: 20px;
   border-radius: 2px;
   font-family: 'Roboto', sans-serif;
+  border-bottom: 1px solid black;
+
 }
 
 .logoutButton {

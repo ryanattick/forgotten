@@ -196,5 +196,13 @@ var items = [
     equippable: 0, /* Yes, No, Not Possible */
     img_url: '/assets/items/paper.jpg',
     puzzle_id: 18
+  },
+  {
+    name: 'Key',
+    description: 'A key you get from room 0.',
+    type: 'Storyline', /* Miscellaneous, Reward, etc. */
+    equippable: 0, /* Yes, No, Not Possible */
+    img_url: '/assets/items/paper.jpg',
+    puzzle_id: 20
   }
 ];

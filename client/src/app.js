@@ -21,6 +21,14 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 // Styling
 import styles from '../../styles/app.css';
 
+
+//Badges (Notifications)
+import Badge from 'material-ui/Badge';
+import IconButton from 'material-ui/IconButton';
+import NotificationsIcon from 'material-ui/svg-icons/social/notifications';
+import Request from '../../helpers/requests';
+
+
 // All specified react router routes for the front end rendering
 var allReactRoutes = {
   account: 0,
@@ -47,9 +55,20 @@ class App extends React.Component {
     super(props);
     this.state = {
       items: [],
-      currentTabIndex: tabIndexBasedOnURL(allReactRoutes, 1)
+      currentTabIndex: tabIndexBasedOnURL(allReactRoutes, 1),
+      numberOfItems: 0
     };
     this.handleTabChange = this.handleTabChange.bind(this);
+    this.handleBadgeToZero = this.handleBadgeToZero.bind(this);
+    this.handleBadgeChange = this.handleBadgeChange.bind(this);
+  }
+
+  componentWillMount() {
+    Request.get('/playerItems', (data) => {
+      this.setState({
+        numberOfItems: data.length
+      });
+    });
   }
 
   handleTabChange(value) {
@@ -58,10 +77,24 @@ class App extends React.Component {
     });
   }
 
+  handleBadgeToZero() {
+    this.setState({
+      numberOfItems: 0
+    })
+  }
+
+  handleBadgeChange(num) {
+    this.setState({
+      numberOfItems: num.length
+    })
+  }
+
 
   render() {
+
+    let badge = <Badge badgeContent={this.state.numberOfItems} primary={true} badgeStyle={{backgroundColor: '#E94F37', float: 'right'}}/>
+
     return (
-      <div style={{backgroundImage: 'url("/assets/darkgreen_marble_bg.jpg")', width:'100%', position: 'absolute, top: 0, bottom: 0, left: 0, right: 0'}}>
       <MuiThemeProvider>
         <Router>
           <div>
@@ -74,23 +107,26 @@ class App extends React.Component {
                 inkBarStyle={{backgroundColor: '#E94F37'}}>
                 <Tab value={0} label='My Account' containerElement={<Link to='/account'/>}/>
                 <Tab value={1} label='Maps' containerElement={<Link to='/maps'/>}/>
-                <Tab value={2} label='Backpack' containerElement={<Link to='/backpack'/>}/>
-                <Tab value={3} label='Storyline' containerElement={<Link to='/storyline'/>}/>
-                <Tab value={4} label='About' containerElement={<Link to='/about'/>}/>
+                {this.state.numberOfItems > 0 &&
+                  <Tab value={2} label='Backpack' containerElement={<Link to='/backpack'/>} onActive={this.handleBadgeToZero} style={{display: 'flex', flexDirection: 'row-reverse', alignItems: 'center', justifyContent: 'center'}} icon={<div style={{flex: 'none'}}>{badge}</div>}/>
+                }
+                {this.state.numberOfItems <= 0 &&
+                  <Tab value={2} label='Backpack' containerElement={<Link to='/backpack'/>}/>
+                }
+                <Tab value={3} label='About' containerElement={<Link to='/about'/>}/>
               </Tabs>
             </div>
 
             {/* Index (Default) Route, Redirect keeps on giving warnings and IndexRoute has been deprecated */}
             <Route exact={true} path='/' component={Maps}></Route>
             <Route exact={true} path='/account' component={Account}></Route>
-            <Route exact={true} path='/maps' component={Maps}></Route>
+            <Route exact={true} path='/maps' render={(props) => ( <Maps handleBadgeChange={this.handleBadgeChange}/> )}></Route>
             <Route exact={true} path='/backpack' component={Backpack}></Route>
             <Route exact={true} path='/storyline' component={Storyline}></Route>
             <Route exact={true} path='/about' component={About}></Route>
           </div>
         </Router>
       </MuiThemeProvider>
-    </div>
     );
   }
 }

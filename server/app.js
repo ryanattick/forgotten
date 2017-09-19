@@ -45,10 +45,17 @@ app.get('/puzzleData', function(req, res) {
   Puzzles.forge().fetchAll()
     .then(function (results) {
       for (var i = 0; i < results.models.length; i++) {
-        puzzles.questions[results.models[i].attributes.puzzleID] = results.models[i].attributes.problem;
-        puzzles.answers[results.models[i].attributes.puzzleID] = results.models[i].attributes.solution;
-        puzzles.messages[results.models[i].attributes.puzzleID] = results.models[i].attributes.message_pop_up;
-        puzzles.stories[results.models[i].attributes.puzzleID] = results.models[i].attributes.story_pop_up;
+        if (results.models[i].attributes.puzzleID < 10) {
+          puzzles.questions['0' + JSON.stringify(results.models[i].attributes.puzzleID)] = results.models[i].attributes.problem;
+          puzzles.answers['0' + JSON.stringify(results.models[i].attributes.puzzleID)] = results.models[i].attributes.solution;
+          puzzles.messages['0' + JSON.stringify(results.models[i].attributes.puzzleID)] = results.models[i].attributes.message_pop_up;
+          puzzles.stories['0' + JSON.stringify(results.models[i].attributes.puzzleID)] = results.models[i].attributes.story_pop_up;
+        } else {
+          puzzles.questions[results.models[i].attributes.puzzleID] = results.models[i].attributes.problem;
+          puzzles.answers[results.models[i].attributes.puzzleID] = results.models[i].attributes.solution;
+          puzzles.messages[results.models[i].attributes.puzzleID] = results.models[i].attributes.message_pop_up;
+          puzzles.stories[results.models[i].attributes.puzzleID] = results.models[i].attributes.story_pop_up;
+        }
       }
     })
     .then(() => {

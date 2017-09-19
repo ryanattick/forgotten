@@ -84,7 +84,7 @@ class Puzzle extends React.Component {
             bodyStyle={{backgroundColor: '#3CABFA', color: 'white', margin: '20px', borderRadius: '10px 10px 10px 0'}}
             actionsContainerStyle={{backgroundColor: 'whie', marginRight: '10px'}}
           >
-            {this.props.changeName(this.props.messages[this.props.currentQuest])}
+            {this.props.changeName(this.props.messages[this.props.map + this.props.currentQuest])}
           </Dialog>
         </div>
         <div style={{color: 'black', backgroundColor: 'white'}}>{`Lives Remaining ${this.props.lives}`}</div>
@@ -93,7 +93,7 @@ class Puzzle extends React.Component {
           {this.state.time}
         </div>
         <div style={{color: '#E94F37'}}>
-          {this.props.questions[this.props.currentQuest]}
+          {this.props.questions[this.props.map + this.props.currentQuest]}
         </div>
         <input ref="answerInput" onKeyUp={(e) => this.props.handleEnterClick(e)} type="text" id="puzzleAnswer"/>
         <button onClick={() => this.props.handlePuzzleSubmit()}>Submit</button>

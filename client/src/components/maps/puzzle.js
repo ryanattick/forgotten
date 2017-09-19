@@ -4,6 +4,8 @@ import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import Request from '../../../../helpers/requests';
 
+import styles from '../../../../styles/maps/puzzle.css';
+
 class Puzzle extends React.Component {
   constructor(props) {
     super(props);
@@ -66,8 +68,10 @@ class Puzzle extends React.Component {
   render() {
     const actions = [
       <RaisedButton
-        label="Go to the Puzzle"
+        label="Close"
         primary={true}
+        buttonStyle={{backgroundColor: '#F6F7EB'}}
+        labelStyle={{color: '#3F88C5'}}
         onClick={this.handleClose.bind(this)}
       />
     ];
@@ -80,9 +84,8 @@ class Puzzle extends React.Component {
             modal={false}
             open={this.state.open}
             onRequestClose={this.handleClose.bind(this)}
-            overlayStyle={{backgroundImage: 'url("/assets/backgrounds/messageBG.png")', borderRadius: '10px', backgroundSize: 'contain', backgroundRepeat: 'no-repeat', margin: 'auto'}}
-            bodyStyle={{backgroundColor: '#3CABFA', color: 'white', margin: '20px', borderRadius: '10px 10px 10px 0'}}
-            actionsContainerStyle={{backgroundColor: 'whie', marginRight: '10px'}}
+            paperClassName={styles.message}
+            bodyStyle={{color: 'white', fontFamily: 'monospace', fontSize: '2vw'}}
           >
             {this.props.changeName(this.props.messages[this.props.map + this.props.currentQuest])}
           </Dialog>

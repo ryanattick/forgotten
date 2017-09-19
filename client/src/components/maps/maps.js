@@ -253,7 +253,7 @@ class Maps extends React.Component {
             </Dialog>
           </div>
           <Snackbar
-            bodyStyle={{backgroundColor: '#00BCD4'}}
+            bodyStyle={{backgroundColor: '#44BBA4'}}
             open={this.state.notificationOpen}
             message="Item added to your backpack"
             autoHideDuration={3000}

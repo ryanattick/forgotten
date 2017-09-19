@@ -13,6 +13,7 @@ import Account from './components/account/account.js';
 import Maps from './components/maps/maps.js';
 import Backpack from './components/backpack/backpack.js';
 import About from './components/about.js';
+import Storyline from './components/storyline/storyline.js';
 
 // React Router
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
@@ -25,7 +26,8 @@ var allReactRoutes = {
   account: 0,
   maps: 1,
   backpack: 2,
-  about: 3
+  storyline: 3,
+  about: 4
 };
 
 // Handles position of the InkBar in the tabs based on the current urlTabIndex
@@ -72,8 +74,9 @@ class App extends React.Component {
                 inkBarStyle={{backgroundColor: '#E94F37'}}>
                 <Tab value={0} label='My Account' containerElement={<Link to='/account'/>}/>
                 <Tab value={1} label='Maps' containerElement={<Link to='/maps'/>}/>
-                <Tab value={2} label='Backpack' containerElement={<Link to='backpack'/>}/>
-                <Tab value={3} label='About' containerElement={<Link to='/about'/>}/>
+                <Tab value={2} label='Backpack' containerElement={<Link to='/backpack'/>}/>
+                <Tab value={3} label='Storyline' containerElement={<Link to='/storyline'/>}/>
+                <Tab value={4} label='About' containerElement={<Link to='/about'/>}/>
               </Tabs>
             </div>
 
@@ -82,6 +85,7 @@ class App extends React.Component {
             <Route exact={true} path='/account' component={Account}></Route>
             <Route exact={true} path='/maps' component={Maps}></Route>
             <Route exact={true} path='/backpack' component={Backpack}></Route>
+            <Route exact={true} path='/storyline' component={Storyline}></Route>
             <Route exact={true} path='/about' component={About}></Route>
           </div>
         </Router>

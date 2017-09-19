@@ -105,7 +105,7 @@ app.post('/removeItems', function(req, res) {
     });
 });
 
-app.use(['/account', '/maps', '/backpack', '/about'], routes.allOtherRoutes);
+app.use(['/account', '/maps', '/backpack', '/about', '/storyline'], routes.allOtherRoutes);
 
 app.get('/userInfo', function (req, res) {
   console.log(req.user, 'req.users exists');

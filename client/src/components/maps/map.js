@@ -466,7 +466,7 @@ class Map extends React.Component {
             </Dialog>
           </div>
           <Snackbar
-            bodyStyle={{backgroundColor: '#00BCD4'}}
+            bodyStyle={{backgroundColor: '#44BBA4'}}
             open={this.state.notificationOpen}
             message="Items have been added to your backpack!"
             autoHideDuration={3000}

@@ -198,7 +198,7 @@ class Map extends React.Component {
 
   handlePuzzleSubmit() {
     var answer = document.getElementById('puzzleAnswer').value;
-    if (this.state.puzzles.answers['0' + this.state.currentQuest].toLowerCase() === answer.toLowerCase() || this.state.puzzles.answers[this.state.currentQuest].toLowerCase() === answer.toLowerCase()) {
+    if ((this.props.map === '0' && this.state.puzzles.answers['0' + this.state.currentQuest] && this.state.puzzles.answers['0' + this.state.currentQuest].toLowerCase() === answer.toLowerCase()) || (this.state.puzzles.answers[this.props.map + this.state.currentQuest] && this.state.puzzles.answers[this.props.map + this.state.currentQuest].toLowerCase() === answer.toLowerCase())) {
       if (this.state.greenclickedQuest) {
         this.setState({
           greenclickedQuest: null,

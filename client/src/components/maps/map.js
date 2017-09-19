@@ -156,8 +156,7 @@ class Map extends React.Component {
   }
 
   handleMapQuestClick(e) {
-    console.log(this.state);
-    if (e.target.style.fill === 'rgb(68, 187, 164)') {
+    if (e.target.style.fill === 'rgb(233, 79, 55)') {
       this.setState({
         greenclickedQuest: e.target.id[e.target.id.length - 1],
         currentQuestBeforeGreenClick: this.state.currentQuest,
@@ -395,7 +394,7 @@ class Map extends React.Component {
           <svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 800 515" style={{width: '1000px', enableBackground: "new 0 0 800 515"}} xmlSpace="preserve">
             <image className={styles.background} style={{overflow: 'visible'}} width="1600" height="1030" xlinkHref={`/assets/maps/basementMap.jpg`} transform="matrix(0.5 0 0 0.5 0 0)">
             </image>
-            <circle className={styles.circle} id="circle0" onClick={(e) => this.handleMapQuestClick(e)} style={{cursor: 'pointer', cursor: 'hand', fill: 'red', stroke: 'black', strokeLinecap: 'round', strokeMiterlimit: '10'}} cx="573.9" cy="112.9" r="7.4"/>
+            <circle className={styles.circle} id="circle0" onClick={(e) => this.handleMapQuestClick(e)} style={{cursor: 'pointer', cursor: 'hand', fill: '#E94F37', stroke: 'black', strokeLinecap: 'round', strokeMiterlimit: '10'}} cx="573.9" cy="112.9" r="7.4"/>
             <circle className={styles.circle} id="circle1" onClick={(e) => this.handleMapQuestClick(e)} style={{cursor: 'pointer', cursor: 'hand', display: 'none', fill: 'red', stroke: 'black', strokeLinecap: 'round', strokeMiterlimit: '10'}} cx="580.9" cy="132.9" r="7.4"/>
             <g>
               <g>
@@ -495,7 +494,7 @@ class Map extends React.Component {
           <svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 800 515" style={{width: '1000px', enableBackground: "new 0 0 800 515"}} xmlSpace="preserve">
             <image className={styles.background} style={{overflow: 'visible'}} width="1600" height="1030" xlinkHref={`/assets/maps/houseMap.jpg`} transform="matrix(0.5 0 0 0.5 0 0)">
             </image>
-            <ellipse className={styles.circle} id="circle0" onClick={(e) => this.handleMapQuestClick(e)} style={{cursor: 'pointer', cursor: 'hand', fill: 'red', stroke: 'black', strokeLinecap: 'round', strokeMiterlimit: '10'}} cx="426.8" cy="455.6" rx="6.8" ry="6.9"/>
+            <ellipse className={styles.circle} id="circle0" onClick={(e) => this.handleMapQuestClick(e)} style={{cursor: 'pointer', cursor: 'hand', fill: '#E94F37', stroke: 'black', strokeLinecap: 'round', strokeMiterlimit: '10'}} cx="426.8" cy="455.6" rx="6.8" ry="6.9"/>
             <ellipse className={styles.circle} id="circle1" onClick={(e) => this.handleMapQuestClick(e)} style={{cursor: 'pointer', cursor: 'hand', display: 'none', fill: 'red', stroke: 'black', strokeLinecap: 'round', strokeMiterlimit: '10'}} cx="403.8" cy="399.6" rx="6.8" ry="6.9"/>
             <g>
               <g>

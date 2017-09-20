@@ -1,7 +1,10 @@
 const db = require('../');
 
 const Items = db.Model.extend({
-  tableName: 'items'
+  tableName: 'items',
+  user: function() {
+    return this.belongsToMany('Profile').through('userItems');
+  }
 });
 
 

@@ -72,6 +72,16 @@ class App extends React.Component {
   }
 
 
+  componentWillMount() {
+    var phoneId = {
+      id: 0
+    };
+    Request.post('/initialItem', phoneId, (data) => {
+      console.log('Initial item sent');
+    });
+  }
+
+
   handleTabChange(value) {
     this.setState({
       currentTabIndex: value
@@ -106,11 +116,13 @@ class App extends React.Component {
   render() {
     let badge = <Badge badgeContent={this.state.numberNewOfItems} primary={true} badgeStyle={{backgroundColor: '#E94F37', float: 'right'}}/>;
 
-    let muted = <div style={{fontFamily: 'Roboto, sans-serif', fontSize: '11px', color: 'rgba(255, 255, 255, 0.7)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '48px', boxSizing: 'border-box', padding: '30px'}}> Account <NoSoundIcon color='rgba(255, 255, 255, 0.7)'/> </div>
+    let muted = <div style={{fontFamily: 'Roboto, sans-serif', fontSize: '11px', color: 'rgba(255, 255, 255, 0.7)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '48px', boxSizing: 'border-box', padding: '30px'}}> Account <NoSoundIcon color='rgba(255, 255, 255, 0.7)'/> </div>;
 
-    let notMuted = <div style={{fontFamily: 'Roboto, sans-serif', fontSize: '14px', color: 'rgba(255, 255, 255, 0.7)', width: '25%'}}> Account <SoundIcon color='rgba(255, 255, 255, 0.7)'/> </div>
+    let notMuted = <div style={{fontFamily: 'Roboto, sans-serif', fontSize: '14px', color: 'rgba(255, 255, 255, 0.7)', width: '25%'}}> Account <SoundIcon color='rgba(255, 255, 255, 0.7)'/> </div>;
 
-    let accountTab = this.state.musicMuted ? <Tab value={0} icon={muted} containerElement={<Link to='/account'/>}/> : <Tab value={0} icon={notMuted} containerElement={<Link to='/account'/>}/>
+    let accountTab = this.state.musicMuted ? <Tab value={0} icon={muted} containerElement={<Link to='/account'/>}/> : <Tab value={0} icon={notMuted} containerElement={<Link to='/account'/>}/>;
+
+    let backpackTab = this.state.numberNewOfItems ? <Tab value={2} containerElement={<Link to='/backpack'/>} onActive={this.handleBadgeToZero} icon={badge}/> : <Tab value={2} label='Backpack' containerElement={<Link to='/backpack'/>}/>;
 
     return (
       <MuiThemeProvider>
@@ -126,7 +138,7 @@ class App extends React.Component {
                 {accountTab}
                 <Tab value={1} label='Maps' containerElement={<Link to='/maps'/>}/>
                 {this.state.numberNewOfItems > 0 &&
-                  <Tab value={2} containerElement={<Link to='/backpack'/>} style={{marginTop:'10px'}} onActive={this.handleBadgeToZero} icon={badge}/>
+                  <Tab value={2} containerElement={<Link to='/backpack'/>} style={{marginTop: '10px'}} onActive={this.handleBadgeToZero} icon={badge}/>
                 }
                 {this.state.numberNewOfItems <= 0 &&
                   <Tab value={2} label='Backpack' containerElement={<Link to='/backpack'/>}/>

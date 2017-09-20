@@ -4,13 +4,14 @@ exports.seed = function (knex, Promise) {
 
   for (var i = 0; i < items.length; i++) {
     models.Items.forge({
+      id: i,
       name: items[i].name,
       type: items[i].type,
       equippable: items[i].equippable,
       puzzle_id: items[i].puzzle_id,
       description: items[i].description,
       img_url: items[i].img_url
-    }).save()
+    }).save(null, {method: 'insert'})
       .error(err => {
         console.error('ERROR: failed to create items');
         throw err;
@@ -20,7 +21,6 @@ exports.seed = function (knex, Promise) {
       });
   }
 };
-
 var items = [
   {
     name: 'Phone',

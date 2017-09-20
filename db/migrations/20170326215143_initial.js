@@ -35,7 +35,7 @@ exports.up = function (knex, Promise) {
       table.integer('time_limit').nullable();
     }),
     knex.schema.createTableIfNotExists('items', function(table) {
-      table.increments('id').unsigned().primary();
+      table.integer('id').unsigned().primary();
       table.string('name', 50).unsigned().nullable();
       table.text('description', 'longtext').nullable();
       table.string('type', 20).nullable();

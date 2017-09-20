@@ -1,8 +1,14 @@
 const db = require('../');
 
-const User = db.Model.extend({
-  tableName: 'users_items'
+const userItems = db.Model.extend({
+  tableName: 'users_items',
+  user: function() {
+    return this.belongsTo('Profile', 'user_id');
+  },
+  item: function() {
+    return this.belongsTo('Items', 'item_id');
+  }
 });
 
 
-module.exports = db.model('User', User);
+module.exports = db.model('userItems', userItems);

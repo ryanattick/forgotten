@@ -5,6 +5,8 @@ import RaisedButton from 'material-ui/RaisedButton';
 import PhotoUpload from './photoUpload';
 import newAvatarStyle from '../../../../styles/account/newAvatar.css';
 import Request from '../../../../helpers/requests';
+import ReactAudioPlayer from 'react-audio-player';
+
 
 
 class NewAvatar extends React.Component {

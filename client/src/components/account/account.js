@@ -25,8 +25,9 @@ class Account extends React.Component {
       lastName: '',
       email: '',
       username: '',
-      level: ''
-    }; //replace with data
+      level: '',
+      musicMuted: false
+    };
     this.handleChangeAvatar = this.handleChangeAvatar.bind(this);
     this.handleEditClick = this.handleEditClick.bind(this);
     this.handleDeleteAccountClick = this.handleDeleteAccountClick.bind(this);
@@ -36,6 +37,7 @@ class Account extends React.Component {
     this.backToMainFromAvatar = this.backToMainFromAvatar.bind(this);
     this.backToMainFromUsername = this.backToMainFromUsername.bind(this);
     this.backToMain = this.backToMain.bind(this);
+    this.handleAudioClick = this.handleAudioClick.bind(this);
   }
 
 
@@ -74,7 +76,6 @@ class Account extends React.Component {
     });
   }
 
-
   handleEditClick () {
     this.setState({
       page: 'edit'
@@ -112,10 +113,14 @@ class Account extends React.Component {
     Request.get('/logout', (data) => {
       console.log('Log Out successful');
     });
-
   }
 
-
+  handleAudioClick () {
+    this.props.handleMuteToggle();
+    this.setState({
+      musicMuted: !this.state.musicMuted
+    });
+  }
 
 
 
@@ -124,6 +129,7 @@ class Account extends React.Component {
   render() {
 
     let currentPage = this.state.page;
+    let audioButton = this.state.musicMuted ? <RaisedButton label="Unmute Audio" onClick={this.handleAudioClick}/> : <RaisedButton label="Mute Audio" onClick={this.handleAudioClick}/>;
     const actions = [
       <FlatButton
         label="Cancel"
@@ -160,6 +166,7 @@ class Account extends React.Component {
               <span className={accountStyle.label} style={{marginLeft: '30px'}}>Username<IconButton tooltip='Change Username' tooltipPosition='bottom-left' onClick={this.handleEditClick}><SettingsIcon color="rgba(57, 62, 65, 0.55)" /></IconButton></span> <span className={accountStyle.text}>{this.state.username}</span>
               <span className={accountStyle.label}>Name</span> <span className={accountStyle.text}>{this.state.firstName + ' ' + this.state.lastName}</span>
               <span className={accountStyle.label}>Email</span> <span className={accountStyle.text}>{this.state.email}</span>
+              {audioButton}
               <RaisedButton href='/' label="Log Out" backgroundColor='#E94F37' labelColor='#F6F7EB' style={{width: '160px'}} className={accountStyle.logoutButton} onClick={this.handleLogoutClick}/>
               <RaisedButton label="Delete Account" backgroundColor='#E94F37' labelColor='#F6F7EB' onClick={this.handleOpen} />
               <Dialog

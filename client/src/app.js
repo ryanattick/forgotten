@@ -28,6 +28,11 @@ import IconButton from 'material-ui/IconButton';
 import NotificationsIcon from 'material-ui/svg-icons/social/notifications';
 import Request from '../../helpers/requests';
 
+//Music
+import ReactAudioPlayer from 'react-audio-player';
+import SoundIcon from 'material-ui/svg-icons/av/volume-up';
+import NoSoundIcon from 'material-ui/svg-icons/av/volume-off';
+
 
 // All specified react router routes for the front end rendering
 var allReactRoutes = {
@@ -57,11 +62,13 @@ class App extends React.Component {
       items: [],
       currentTabIndex: tabIndexBasedOnURL(allReactRoutes, 1),
       numberNewOfItems: 0,
-      level: 0
+      level: 0,
+      musicMuted: false
     };
     this.handleTabChange = this.handleTabChange.bind(this);
     this.handleBadgeToZero = this.handleBadgeToZero.bind(this);
     this.handleBadgeChange = this.handleBadgeChange.bind(this);
+    this.handleMuteToggle = this.handleMuteToggle.bind(this);
   }
 
 
@@ -89,11 +96,22 @@ class App extends React.Component {
     });
   }
 
+  handleMuteToggle() {
+    this.setState({
+      musicMuted: !this.state.musicMuted
+    });
+  }
+
 
   render() {
 
-    let badge = <Badge badgeContent={this.state.numberNewOfItems} primary={true} badgeStyle={{backgroundColor: '#E94F37', float: 'right', marginTop: '7px'}}/>
-    let backpackTab = this.state.numberNewOfItems ? <Tab value={2} containerElement={<Link to='/backpack'/>} onActive={this.handleBadgeToZero} icon={badge}/> : <Tab value={2} label='Backpack' containerElement={<Link to='/backpack'/>}/>;
+    let badge = <Badge badgeContent={this.state.numberNewOfItems} primary={true} badgeStyle={{backgroundColor: '#E94F37', float: 'right'}}/>
+
+    let muted = <div style={{fontFamily: 'Roboto, sans-serif', fontSize: '11px', color: 'rgba(255, 255, 255, 0.7)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '48px', boxSizing: 'border-box', padding: '30px'}}> Account <NoSoundIcon color='rgba(255, 255, 255, 0.7)'/> </div>
+
+    let notMuted = <div style={{fontFamily: 'Roboto, sans-serif', fontSize: '14px', color: 'rgba(255, 255, 255, 0.7)', width: '25%'}}> Account <SoundIcon color='rgba(255, 255, 255, 0.7)'/> </div>
+
+    let accountTab = this.state.musicMuted ? <Tab value={0} icon={muted} containerElement={<Link to='/account'/>}/> : <Tab value={0} icon={notMuted} containerElement={<Link to='/account'/>}/>
 
     return (
       <MuiThemeProvider>
@@ -106,21 +124,31 @@ class App extends React.Component {
                 initialSelectedIndex={this.state.currentTabIndex}
                 onChange={this.handleTabChange}
                 inkBarStyle={{backgroundColor: '#E94F37'}}>
-                <Tab value={0} label='My Account' containerElement={<Link to='/account'/>}/>
+                {accountTab}
                 <Tab value={1} label='Maps' containerElement={<Link to='/maps'/>}/>
-                {backpackTab}
-                <Tab value={3} label='Storyline' containerElement={<Link to='/storyline'/>}/>
-                <Tab value={4} label='About' containerElement={<Link to='/about'/>}/>
+                {this.state.numberNewOfItems > 0 &&
+                  <Tab value={2} containerElement={<Link to='/backpack'/>} style={{marginTop:'10px'}} onActive={this.handleBadgeToZero} icon={badge}/>
+                }
+                {this.state.numberNewOfItems <= 0 &&
+                  <Tab value={2} label='Backpack' containerElement={<Link to='/backpack'/>}/>
+                }
+                <Tab value={3} label='About' containerElement={<Link to='/about'/>}/>
               </Tabs>
             </div>
 
             {/* Index (Default) Route, Redirect keeps on giving warnings and IndexRoute has been deprecated */}
             <Route exact={true} path='/' component={Maps}></Route>
-            <Route exact={true} path='/account' component={Account}></Route>
+            <Route exact={true} path='/account' render={(props) => ( <Account musicMuted={this.musicMuted} handleMuteToggle={this.handleMuteToggle} /> )}></Route>
             <Route exact={true} path='/maps' render={(props) => ( <Maps handleBadgeChange={this.handleBadgeChange} /> )}></Route>
             <Route exact={true} path='/backpack' component={Backpack}></Route>
             <Route exact={true} path='/storyline' component={Storyline}></Route>
             <Route exact={true} path='/about' component={About}></Route>
+            <ReactAudioPlayer
+              src="/assets/sounds/backgroundMusic.mp3"
+              autoPlay
+              loop
+              muted={this.state.musicMuted}
+            />
           </div>
         </Router>
       </MuiThemeProvider>

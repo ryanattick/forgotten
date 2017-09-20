@@ -117,7 +117,6 @@ app.get('/playerItems', function (req, res) {
   Items.fetchAll()
     .then((results) => {
       var change = results.map((item) => item.attributes).filter((item) => item.puzzle_id <= req.user.level);
-      console.log(change, 'CHANGE?');
       res.status(200).send(JSON.stringify(change));
     })
     .catch((err) => {

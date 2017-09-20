@@ -26,11 +26,23 @@ class Storyline extends React.Component {
       var chronologicalOrder = [];
       for (var i = 0; i < data.length; i++) {
         if (data[i].story) {
-          let domStory = <div className={styles.story}>{data[i].story}</div>;
+          var storyText = '';
+          if (data.name) {
+            storyText = data[i].story.replace('[playerName]', data.name);
+          } else {
+            storyText = data[i].story.replace('[playerName]', 'friend');
+          }
+          let domStory = <div className={styles.story}>{storyText}</div>;
           chronologicalOrder.push(domStory);
         }
         if (data[i].message) {
-          let domMessage = <div className={styles.message}>{data[i].message}</div>
+          var messageText = '';
+          if (data.name) {
+            messageText = data[i].message.replace('[playerName]', data.name);
+          } else {
+            messageText = data[i].message.replace('[playerName]', 'friend');
+          }
+          let domMessage = <div className={styles.message}>{messageText}</div>
           chronologicalOrder.push(domMessage);
         }
         if (data[i].items && data[i].items.length > 0) {
@@ -38,7 +50,7 @@ class Storyline extends React.Component {
 
           for (var k = 0; k < data[i].items.length; k++) {
             if (k === data[i].items.length - 1) {
-              receivedItems += data[i].items[k] + '.';
+              receivedItems += data[i].items[k]+ '.';
             } else {
               receivedItems += data[i].items[k] + ', ';
             }

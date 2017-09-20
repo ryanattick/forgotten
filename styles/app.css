@@ -2,15 +2,6 @@
   margin-bottom: 20px;
 }
 
-.accountTab {
-  font-family: Roboto, sans-serif;
-  font-size: 11px;
-  color: rgba(255, 255, 255, 0.7);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 48px;
-  box-sizing: border-box;
-  padding: 30px;
+.tab {
+  font-family: 'Exo Light' !important;
 }

@@ -35,3 +35,10 @@
   left: 0;
   z-index:0;
 }
+
+.story_pop_up {
+  color: black;
+  font-family: 'Exo Medium';
+  font-size: 1.7vw;
+  padding: 20px;
+}

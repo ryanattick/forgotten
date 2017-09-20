@@ -295,12 +295,16 @@ class Map extends React.Component {
   }
 
   checkForItems(quest) {
+    var countNewItems = 0;
+    var found = false;
     for (var key in this.state.puzzles.items) {
       if (this.state.puzzles.items[key].puzzleID === parseInt(this.props.map + quest)) {
-        return true;
+        countNewItems++;
+        found = true
       }
     }
-    return false;
+    this.props.handleBadgeChange(countNewItems);
+    return found;
   }
 
   handleLifeChange(lives) {
@@ -390,11 +394,7 @@ class Map extends React.Component {
   }
 
   handleNotificationOpen() {
-    this.setState({notificationOpen: true},
-      Request.get('/playerItems', (data) => {
-        this.props.handleBadgeChange(data);
-      })
-    );
+    this.setState({notificationOpen: true});
   }
 
   handleNotificationClose() {
@@ -445,9 +445,11 @@ class Map extends React.Component {
               onRequestClose={this.handleStoryClose.bind(this)}
               bodyStyle={{backgroundImage: 'url("/assets/backgrounds/storyBG.jpg")', backgroundSize: '100% 100%', border: '0', filter: 'brightness(90%)'}}
             >
-              {stories[this.props.map]} <br></br>
+              <div className={styles.story_pop_up}>
+                {stories[this.props.map]} <br></br>
+              </div>
               <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '10px'}}>
-                <RaisedButton label="Close" onClick={this.handleStoryClose.bind(this)} backgroundColor='black' labelColor='rgb(255, 255, 255)' overlayStyle={{margin: 'auto'}}/>
+                <RaisedButton label="Close" onClick={this.handleStoryClose.bind(this)} backgroundColor='#393E41' labelColor='rgb(255, 255, 255)' overlayStyle={{margin: 'auto'}}/>
               </div>
             </Dialog>
             <Dialog
@@ -534,9 +536,11 @@ class Map extends React.Component {
               autoScrollBodyContent={true}
               bodyStyle={{backgroundImage: 'url("/assets/backgrounds/storyBG.jpg")', backgroundSize: '100% 100%', border: '0', filter: 'brightness(90%)'}}
             >
-              {this.changeName(this.state.puzzles.stories[this.props.map + this.state.completedQuests[this.state.completedQuests.length - 1]])}
+              <div className={styles.story_pop_up}>
+                {this.changeName(this.state.puzzles.stories[this.props.map + this.state.completedQuests[this.state.completedQuests.length - 1]])}
+              </div>
               <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '10px'}}>
-                <RaisedButton label="Close" onClick={this.handleMessageClose.bind(this)} backgroundColor='black' labelColor='rgb(255, 255, 255)' overlayStyle={{margin: 'auto'}}/>
+                <RaisedButton label="Close" onClick={this.handleMessageClose.bind(this)} backgroundColor='#393E41' labelColor='rgb(255, 255, 255)' overlayStyle={{margin: 'auto'}}/>
               </div>
             </Dialog>
           </div>
@@ -560,9 +564,11 @@ class Map extends React.Component {
               onRequestClose={this.handleStoryClose.bind(this)}
               bodyStyle={{backgroundImage: 'url("/assets/backgrounds/storyBG.jpg")', backgroundSize: '100% 100%', border: '0', filter: 'brightness(90%)'}}
             >
-              {stories[this.props.map]} <br></br>
+              <div className={styles.story_pop_up}>
+                {stories[this.props.map]} <br></br>
+              </div>
               <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '10px'}}>
-                <RaisedButton label="Close" onClick={this.handleStoryClose.bind(this)} backgroundColor='black' labelColor='rgb(255, 255, 255)' overlayStyle={{margin: 'auto'}}/>
+                <RaisedButton label="Close" onClick={this.handleStoryClose.bind(this)} backgroundColor='#393E41' labelColor='rgb(255, 255, 255)' overlayStyle={{margin: 'auto'}}/>
               </div>
             </Dialog>
             <Dialog
@@ -731,9 +737,11 @@ class Map extends React.Component {
               autoScrollBodyContent={true}
               bodyStyle={{backgroundImage: 'url("/assets/backgrounds/storyBG.jpg")', backgroundSize: '100% 100%', border: '0', filter: 'brightness(90%)'}}
             >
-              {this.changeName(this.state.puzzles.stories[this.props.map + this.state.completedQuests[this.state.completedQuests.length - 1]])}
+              <div className={styles.story_pop_up}>
+                {this.changeName(this.state.puzzles.stories[this.props.map + this.state.completedQuests[this.state.completedQuests.length - 1]])}
+              </div>
               <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '10px'}}>
-                <RaisedButton label="Close" onClick={this.handleMessageClose.bind(this)} backgroundColor='black' labelColor='rgb(255, 255, 255)' overlayStyle={{margin: 'auto'}}/>
+                <RaisedButton label="Close" onClick={this.handleMessageClose.bind(this)} backgroundColor='#393E41' labelColor='rgb(255, 255, 255)' overlayStyle={{margin: 'auto'}}/>
               </div>
             </Dialog>
           </div>

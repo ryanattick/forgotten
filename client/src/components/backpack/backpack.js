@@ -72,7 +72,6 @@ class Backpack extends React.Component {
         <Profile />
         <Items items={this.state.items} filters={this.state.filters} openItemPopUp={this.openItemPopUp}/>
         <Dialog
-          id='item_popup_container'
           titleClassName={styles.item_popup_title}
           paperClassName={styles.item_popup_dialog_box}
           title={this.state.popUpItem.name}

@@ -17,3 +17,8 @@
     font-family: Exo Bold;
     src: url('Exo-Bold.ttf');
 }
+
+@font-face {
+    font-family: Exo Medium;
+    src: url('Exo-Medium.ttf');
+}

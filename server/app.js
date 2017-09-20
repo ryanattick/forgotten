@@ -136,7 +136,7 @@ app.get('/playerItems', function (req, res) {
   //model.query({where: {"Date", '>=' , first_date}, orWhere: {"Date", '<=' , last_date}})
   Profile.where({id: req.user.id}).fetchAll({withRelated: ['items']})
     .then((result) => {
-      console.log('result', result.toJSON()[0].items);
+      console.log('result of /playerItems', result.toJSON()[0].items);
       res.status(200).send(JSON.stringify((result.toJSON()[0].items)));
     });
   // .then((arr) => {
@@ -172,11 +172,13 @@ app.post('/initialItem', function(req, res) {
       if (!result) {
         userItems.forge().save({user_id: req.user.id, item_id: req.body.id, equipped: 'Not Possible'})
           .then(() => {
-            res.status(201).send('Initial Item stored');
+            res.status(201).send(JSON.stringify('Initial Item stored'));
           })
           .catch(() => {
-            res.status(401).send('Initial Item failed to be stored');
+            res.status(401).send(JSON.stringify('Initial Item failed to be stored'));
           });
+      } else {
+        res.status(201).send(JSON.stringify('Initial Item already stored'));
       }
     })
     .catch((error) => {

@@ -25,7 +25,8 @@ class Maps extends React.Component {
       levelOpen: false,
       finishedMapOpen: false,
       firstMapOpen: false,
-      notificationOpen: false
+      notificationOpen: false,
+      comingSoonOpen: false
     };
   }
 
@@ -56,7 +57,9 @@ class Maps extends React.Component {
   }
 
   handleLevelClick(e, currentLevel) {
-    if (e.target.id === this.state.currentLevel) {
+    if ((e.target.id === this.state.currentLevel && this.state.currentLevel > 1) || (e.target.id === '3' && this.state.currentLevel > 1)) {
+      this.handleComingSoonOpen();
+    } else if (e.target.id === this.state.currentLevel) {
       this.setState({
         currentLevel: e.target.id,
         levelClicked: true,
@@ -94,7 +97,7 @@ class Maps extends React.Component {
   }
 
   handleMapFinished() {
-    if (this.state.currentLevel === this.state.currentlyPlaying) {
+    if (this.state.currentLevel === this.state.currentlyPlaying && parseInt(this.state.currentLevel) < 2) {
       this.state.completedLevels.push(this.state.currentLevel);
       this.setState({
         levelClicked: false,
@@ -159,6 +162,14 @@ class Maps extends React.Component {
     this.setState({notificationOpen: false});
   }
 
+  handleComingSoonOpen() {
+    this.setState({comingSoonOpen: true});
+  }
+
+  handleComingSoonClose() {
+    this.setState({comingSoonOpen: false});
+  }
+
   render() {
     const tilesData = [
       {
@@ -194,6 +205,13 @@ class Maps extends React.Component {
         onClick={this.handleFinishedMapClose.bind(this)}
       />
     ];
+    const comingSoonActions = [
+      <RaisedButton
+        label="Ok"
+        primary={true}
+        onClick={this.handleComingSoonClose.bind(this)}
+      />
+    ];
     const initialMapsActions = [
       <RaisedButton
         label="Continue to Maps"
@@ -213,7 +231,18 @@ class Maps extends React.Component {
               autoScrollBodyContent={true}
               onRequestClose={this.handleFinishedMapClose.bind(this)}
             >
-              {`you have finished the map`}
+              {`Congratulations, you have finished the map ${parseInt(this.state.currentLevel)}!`}
+            </Dialog>
+          </div>
+          <div>
+            <Dialog
+              actions={comingSoonActions}
+              modal={false}
+              open={this.state.comingSoonOpen}
+              autoScrollBodyContent={true}
+              onRequestClose={this.handleComingSoonClose.bind(this)}
+            >
+              <b>More Levels Coming Soon!</b>
             </Dialog>
           </div>
           <div>
@@ -265,8 +294,8 @@ class Maps extends React.Component {
       return (
         <div>
           <Map handleBadgeChange={this.props.handleBadgeChange}
-             avatar={this.props.avatar}
-             handleReturnToMapsClick={this.handleReturnToMapsClick.bind(this)} checkForFinalLevelItems={this.checkForFinalLevelItems.bind(this)} lives={this.state.lives} handleMapFinished={this.handleMapFinished.bind(this)} level={this.state.currentLevel} currentPuzzleNum={this.state.currentPuzzleNum} map={this.state.currentlyPlaying}/>
+            avatar={this.props.avatar}
+            handleReturnToMapsClick={this.handleReturnToMapsClick.bind(this)} checkForFinalLevelItems={this.checkForFinalLevelItems.bind(this)} lives={this.state.lives} handleMapFinished={this.handleMapFinished.bind(this)} level={this.state.currentLevel} currentPuzzleNum={this.state.currentPuzzleNum} map={this.state.currentlyPlaying}/>
         </div>
       );
     }

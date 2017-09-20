@@ -42,7 +42,7 @@ app.get('/mapsData', function(req, res) {
 
 app.get('/puzzleData', function(req, res) {
   var clean = [];
-  var puzzles = {questions: {}, answers: {}, messages: {}, stories: {}, items: {}};
+  var puzzles = {questions: {}, answers: {}, messages: {}, stories: {}, items: {}, time: {}};
   Puzzles.forge().fetchAll()
     .then(function (results) {
       for (var i = 0; i < results.models.length; i++) {
@@ -51,11 +51,13 @@ app.get('/puzzleData', function(req, res) {
           puzzles.answers['0' + JSON.stringify(results.models[i].attributes.puzzleID)] = results.models[i].attributes.solution;
           puzzles.messages['0' + JSON.stringify(results.models[i].attributes.puzzleID)] = results.models[i].attributes.message_pop_up;
           puzzles.stories['0' + JSON.stringify(results.models[i].attributes.puzzleID)] = results.models[i].attributes.story_pop_up;
+          puzzles.time['0' + JSON.stringify(results.models[i].attributes.puzzleID)] = results.models[i].attributes.time_limit;
         } else {
           puzzles.questions[results.models[i].attributes.puzzleID] = results.models[i].attributes.problem;
           puzzles.answers[results.models[i].attributes.puzzleID] = results.models[i].attributes.solution;
           puzzles.messages[results.models[i].attributes.puzzleID] = results.models[i].attributes.message_pop_up;
           puzzles.stories[results.models[i].attributes.puzzleID] = results.models[i].attributes.story_pop_up;
+          puzzles.time[results.models[i].attributes.puzzleID] = results.models[i].attributes.time_limit;
         }
       }
     })
@@ -67,11 +69,11 @@ app.get('/puzzleData', function(req, res) {
           }
         })
         .then(() => {
-          res.status(200).send(JSON.stringify({puzzles: puzzles, playerName: req.user.first}));
+          res.status(200).send(JSON.stringify({puzzles: puzzles, playerName: req.user.first, avatar: req.user.avatar}));
         });
     })
     .catch(function (err) {
-      console.log('err');
+      console.log('err', err);
     });
 });
 
@@ -131,9 +133,9 @@ app.post('/userItems', function (req, res) {
       for (var i = 0; i < change.length; i++) {
         userItems.forge().save({user_id: req.user.id, item_id: change[i].id, equipped: 'no'}).then(() => {
           console.log('user items saved');
-          res.send('201');
         });
       }
+      res.send('201');
     })
     .catch((err) => {
       console.log(err, 'error');

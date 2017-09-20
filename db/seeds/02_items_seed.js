@@ -15,8 +15,8 @@ exports.seed = function (knex, Promise) {
         console.error('ERROR: failed to create items');
         throw err;
       })
-      .catch(() => {
-        console.log('WARNING: default items already exists.');
+      .catch((err) => {
+        console.log('WARNING: default items already exists.', err);
       });
   }
 };

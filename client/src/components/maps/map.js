@@ -15,6 +15,7 @@ class Map extends React.Component {
       levelsRemaining: ['1', '2', '3', '4', '5', '6', '7', '8', '9'],
       completedQuests: [],
       currentQuest: '0',
+      avatar: 'https://i.imgur.com/sZwuwPk.png',
       greenclickedQuest: null,
       currentQuestBeforeGreenClick: null,
       clickedQuest: false,
@@ -80,11 +81,25 @@ class Map extends React.Component {
           '7': null,
           '8': null,
           '9': null
+        },
+        time: {
+          '0': null,
+          '1': null,
+          '2': null,
+          '3': null,
+          '4': null,
+          '5': null,
+          '6': null,
+          '7': null,
+          '8': null,
+          '9': null
         }
       },
       messageOpen: false,
       storyOpen: false,
-      notificationOpen: false
+      notificationOpen: false,
+      gameOverOpen: false,
+      attempts: 3
     };
   }
   componentWillMount() {
@@ -108,10 +123,18 @@ class Map extends React.Component {
       });
     }
     Request.get('/puzzleData', (data) => {
-      this.setState({
-        puzzles: data.puzzles,
-        playerName: data.playerName
-      });
+      if (data.avatar) {
+        this.setState({
+          puzzles: data.puzzles,
+          playerName: data.playerName,
+          avatar: data.avatar
+        });
+      } else {
+        this.setState({
+          puzzles: data.puzzles,
+          playerName: data.playerName
+        });
+      }
     });
   }
 
@@ -251,6 +274,23 @@ class Map extends React.Component {
       }
     } else {
       document.getElementById('puzzleAnswer').value = '';
+      this.setState({
+        attempts: this.state.attempts - 1
+      }, () => {
+        if (this.state.attempts === 0) {
+          this.handleReturntoMapClick(true);
+          if (this.state.lives === 0) {
+            this.handleLifeChange();
+            this.state.attempts = 3;
+          } else {
+            Request.post('/lives', {lives: this.props.lives - 1}, function(data) {
+              console.log(data);
+            });
+            this.handleLifeChange(this.state.lives - 1);
+            this.state.attempts = 3;
+          }
+        }
+      });
     }
   }
 
@@ -274,6 +314,8 @@ class Map extends React.Component {
         currentQuest: '0',
         levelsRemaining: ['1', '2', '3', '4', '5', '6', '7', '8', '9'],
         completedQuests: []
+      }, () => {
+        this.handleGameOverOpen();
       });
       Request.post('/lives', {lives: 5}, function(data) {
       });
@@ -287,6 +329,8 @@ class Map extends React.Component {
         currentQuest: '0',
         levelsRemaining: ['1', '2', '3', '4', '5', '6', '7', '8', '9'],
         completedQuests: []
+      }, () => {
+        this.handleGameOverOpen();
       });
       Request.post('/lives', {lives: 5}, function(data) {
       });
@@ -357,6 +401,14 @@ class Map extends React.Component {
     this.setState({notificationOpen: false});
   }
 
+  handleGameOverOpen() {
+    this.setState({gameOverOpen: true});
+  }
+
+  handleGameOverClose() {
+    this.setState({gameOverOpen: false});
+  }
+
   render() {
     const stories = ['Your head is pounding. You reach up to touch it and as you do you realize you can’t tell if your eyes are open or closed. This startles you and you freeze. Where are you? You don’t know. Who are you? You can’t remember. Your heart starts racing as panic creeps in, slowly at first and then all at once. You take a breath and try to think back. How did you get here? Where is here? You decide to take things one step at a time. What is your name? As soon as that thought enters your mind you feel a vibration in your pocket.',
       'You finally manage to solve the puzzle given to you by still an unknown sender. However all you care about at the moment is to get out of this underground system and get some fresh air, of which, it seems like, you haven’t gotten in years. You grab your backpack and frantically enter the answer you came up with to solve the last puzzle. The light turns green and you hear a metallic popping sound and feel a little breeze coming from above. The trap door has been unlocked! You jump back onto the chair, push the hatch outwards and climb out onto what seems like a kitchen floor. Right beside the hatch, there is a small refrigerator with a sign that says “Out of order!”. The air is not as fresh as you had hoped, but it’s still better than the air from underground, filled with a foul smell of rotting food supplies, dust and corrosion. Before you are able to take a good look around, your phone buzzes. After taking a deep breath you take a look at the new message.'];
@@ -371,6 +423,13 @@ class Map extends React.Component {
     const storyActions = [
       <RaisedButton
         label="Ok"
+        primary={true}
+        onClick={this.handleStoryClose.bind(this)}
+      />
+    ];
+    const gameOverActions = [
+      <RaisedButton
+        label="Return to beginning of level"
         primary={true}
         onClick={this.handleStoryClose.bind(this)}
       />
@@ -390,6 +449,21 @@ class Map extends React.Component {
               {stories[this.props.map]} <br></br>
               <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '10px'}}>
                 <RaisedButton label="Close" onClick={this.handleStoryClose.bind(this)} backgroundColor='black' labelColor='rgb(255, 255, 255)' overlayStyle={{margin: 'auto'}}/>
+              </div>
+            </Dialog>
+            <Dialog
+              modal={false}
+              open={this.state.gameOverOpen}
+              autoScrollBodyContent={true}
+              onRequestClose={this.handleGameOverClose.bind(this)}
+              bodyStyle={{backgroundImage: 'url("/assets/backgrounds/storyBG.png")', backgroundSize: '100% 100%', border: '0', filter: 'brightness(90%)'}}
+            >
+              <div className={styles.gameOver_popup_content}>
+                <img style={{backgroundImage: `url(${this.state.avatar})`}} src={'/assets/maps/blood.png'}/>
+                <div>{'GAME OVER'}</div>
+              </div>
+              <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '10px'}}>
+                <RaisedButton label="Close" onClick={this.handleGameOverClose.bind(this)} backgroundColor='black' labelColor='rgb(255, 255, 255)' overlayStyle={{margin: 'auto'}}/>
               </div>
             </Dialog>
           </div>
@@ -490,6 +564,21 @@ class Map extends React.Component {
               {stories[this.props.map]} <br></br>
               <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '10px'}}>
                 <RaisedButton label="Close" onClick={this.handleStoryClose.bind(this)} backgroundColor='black' labelColor='rgb(255, 255, 255)' overlayStyle={{margin: 'auto'}}/>
+              </div>
+            </Dialog>
+            <Dialog
+              modal={false}
+              open={this.state.gameOverOpen}
+              autoScrollBodyContent={true}
+              onRequestClose={this.handleGameOverClose.bind(this)}
+              bodyStyle={{backgroundImage: 'url("/assets/backgrounds/storyBG.png")', backgroundSize: '100% 100%', border: '0', filter: 'brightness(90%)'}}
+            >
+              <div className={styles.gameOver_popup_content}>
+                <img style={{backgroundImage: `url(${this.state.avatar})`}} src={'/assets/maps/blood.png'}/>
+                <div>{'GAME OVER'}</div>
+              </div>
+              <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '10px'}}>
+                <RaisedButton label="Close" onClick={this.handleGameOverClose.bind(this)} backgroundColor='black' labelColor='rgb(255, 255, 255)' overlayStyle={{margin: 'auto'}}/>
               </div>
             </Dialog>
           </div>
@@ -661,7 +750,7 @@ class Map extends React.Component {
     } else if (this.state.clickedQuest) {
       return (
         <div>
-          <Puzzle avatar={this.props.avatar} playerName={this.state.playerName} handleLifeChange={this.handleLifeChange.bind(this)} changeName={this.changeName.bind(this)} lives={this.state.lives} map={this.props.map} handleReturntoMapClick={this.handleReturntoMapClick.bind(this)} questions={this.state.puzzles.questions} currentQuest={this.state.currentQuest} handlePuzzleSubmit={this.handlePuzzleSubmit.bind(this)} handleEnterClick={this.handleEnterClick.bind(this)} messages={this.state.puzzles.messages}/>
+          <Puzzle playerName={this.state.playerName} handleLifeChange={this.handleLifeChange.bind(this)} changeName={this.changeName.bind(this)} lives={this.state.lives} map={this.props.map} time={this.state.puzzles.time} handleReturntoMapClick={this.handleReturntoMapClick.bind(this)} questions={this.state.puzzles.questions} currentQuest={this.state.currentQuest} attempts={this.state.attempts} handlePuzzleSubmit={this.handlePuzzleSubmit.bind(this)} handleEnterClick={this.handleEnterClick.bind(this)} messages={this.state.puzzles.messages}/>
         </div>
       );
     }

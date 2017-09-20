@@ -5,3 +5,33 @@
 .background {
   pointer-events: none;
 }
+
+.gameOver_popup_content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.gameOver_popup_content img {
+  max-width: 200px;
+  background-size: cover;
+  z-index: 1;
+}
+
+.gameOver_popup_content div {
+  margin-top: 20px;
+  font-family: 'Sue';
+  font-size: 7vw;
+}
+
+.gameOver_popup_title {
+  text-align: center;
+}
+
+.pngOver {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index:0;
+}

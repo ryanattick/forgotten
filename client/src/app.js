@@ -85,10 +85,10 @@ class App extends React.Component {
   }
 
   handleBadgeChange(num) {
-    let newItemCount = this.state.numberNewOfItems
+    let newItemCount = this.state.numberNewOfItems;
     num.forEach((item) => {
       if (item.puzzle_id === this.state.level) {
-        newItemCount++
+        newItemCount++;
       }
     });
     this.setState({
@@ -104,8 +104,7 @@ class App extends React.Component {
 
 
   render() {
-
-    let badge = <Badge badgeContent={this.state.numberNewOfItems} primary={true} badgeStyle={{backgroundColor: '#E94F37', float: 'right'}}/>
+    let badge = <Badge badgeContent={this.state.numberNewOfItems} primary={true} badgeStyle={{backgroundColor: '#E94F37', float: 'right'}}/>;
 
     let muted = <div style={{fontFamily: 'Roboto, sans-serif', fontSize: '11px', color: 'rgba(255, 255, 255, 0.7)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '48px', boxSizing: 'border-box', padding: '30px'}}> Account <NoSoundIcon color='rgba(255, 255, 255, 0.7)'/> </div>
 

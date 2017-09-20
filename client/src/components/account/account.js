@@ -26,7 +26,7 @@ class Account extends React.Component {
       email: '',
       username: '',
       level: '',
-      musicMuted: false
+      musicMuted: this.props.musicMuted
     };
     this.handleChangeAvatar = this.handleChangeAvatar.bind(this);
     this.handleEditClick = this.handleEditClick.bind(this);
@@ -116,12 +116,13 @@ class Account extends React.Component {
   }
 
   handleAudioClick () {
-    this.props.handleMuteToggle();
-    this.setState({
-      musicMuted: !this.state.musicMuted
+    Promise.resolve(this.props.handleMuteToggle())
+    .then(() => {
+      this.setState({
+        musicMuted: this.props.musicMuted
+      });
     });
   }
-
 
 
 

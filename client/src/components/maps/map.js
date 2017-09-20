@@ -1,6 +1,7 @@
 
 import React from 'react';
 import Puzzle from './puzzle.js';
+import Lives from './lives.js';
 import styles from '../../../../styles/maps/map.css';
 import $ from 'jquery';
 import Dialog from 'material-ui/Dialog';
@@ -21,6 +22,7 @@ class Map extends React.Component {
       clickedQuest: false,
       playerName: '',
       lives: this.props.lives,
+      lifeImg: [],
       puzzles: {
         questions: {
           '0': 'Question1',
@@ -103,6 +105,7 @@ class Map extends React.Component {
     };
   }
   componentWillMount() {
+    this.handleLives();
     if (this.props.currentPuzzleNum >= parseInt(this.props.map + '0') + 10) {
       this.setState({
         completedQuests: ['0'].concat(this.state.levelsRemaining),
@@ -310,16 +313,22 @@ class Map extends React.Component {
   handleLifeChange(lives) {
     if (lives) {
       this.setState({
-        lives: lives
+        lives: lives,
+        lifeImg: this.state.lifeImg.splice(0, this.state.lifeImg.length - 1)
       });
+      for (var i = 0; i < lives; i++) {
+        this.state.lifeImg.push('/assets/items/valentines-heart.svg')
+      }
     } else if (this.props.map === '0') {
       this.setState({
         lives: 5,
         currentQuest: '0',
         levelsRemaining: ['1', '2', '3', '4', '5', '6', '7', '8', '9'],
-        completedQuests: []
+        completedQuests: [],
+        lifeImg: this.state.lifeImg.splice(0, this.state.lifeImg.length - 1)
       }, () => {
         this.handleGameOverOpen();
+        this.handleLives();
       });
       Request.post('/lives', {lives: 5}, function(data) {
       });
@@ -342,6 +351,12 @@ class Map extends React.Component {
       });
       Request.post('/removeItems', {level: parseInt(this.props.map + '0')}, (data) => {
       });
+    }
+  }
+
+  handleLives() {
+    for (var i = 0; i < this.state.lives; i++) {
+      this.state.lifeImg.push("/assets/items/valentines-heart.svg")
     }
   }
 
@@ -410,6 +425,13 @@ class Map extends React.Component {
   }
 
   render() {
+
+    const lives = this.state.lifeImg.map((life, index) =>
+        <img src={life} key={index} style={{maxHeight:'50px', maxWidth:'50px', marginLeft:'20px'}}/>
+        );
+
+
+
     const stories = ['Your head is pounding. You reach up to touch it and as you do you realize you can’t tell if your eyes are open or closed. This startles you and you freeze. Where are you? You don’t know. Who are you? You can’t remember. Your heart starts racing as panic creeps in, slowly at first and then all at once. You take a breath and try to think back. How did you get here? Where is here? You decide to take things one step at a time. What is your name? As soon as that thought enters your mind you feel a vibration in your pocket.',
       'You finally manage to solve the puzzle given to you by still an unknown sender. However all you care about at the moment is to get out of this underground system and get some fresh air, of which, it seems like, you haven’t gotten in years. You grab your backpack and frantically enter the answer you came up with to solve the last puzzle. The light turns green and you hear a metallic popping sound and feel a little breeze coming from above. The trap door has been unlocked! You jump back onto the chair, push the hatch outwards and climb out onto what seems like a kitchen floor. Right beside the hatch, there is a small refrigerator with a sign that says “Out of order!”. The air is not as fresh as you had hoped, but it’s still better than the air from underground, filled with a foul smell of rotting food supplies, dust and corrosion. Before you are able to take a good look around, your phone buzzes. After taking a deep breath you take a look at the new message.'];
     const messageActions = [
@@ -433,6 +455,7 @@ class Map extends React.Component {
         onClick={this.handleStoryClose.bind(this)}
       />
     ];
+
 
     if (!this.state.clickedQuest && this.props.map === '0') {
       return (
@@ -468,7 +491,9 @@ class Map extends React.Component {
               </div>
             </Dialog>
           </div>
-          <div style={{color: 'black', backgroundColor: 'white'}}>{`Lives Remaining ${this.state.lives}`}</div>
+          <div>
+            {lives}
+          </div>
           <svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 800 515" style={{width: '1000px', enableBackground: 'new 0 0 800 515'}} xmlSpace="preserve">
             <image className={styles.background} style={{overflow: 'visible'}} width="1600" height="1030" xlinkHref={'/assets/maps/basementMap.jpg'} transform="matrix(0.5 0 0 0.5 0 0)">
             </image>

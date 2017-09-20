@@ -2,3 +2,42 @@
   background-color: #3F88C5 !important;
   border-radius: 20px 20px 0px 20px !important;
 }
+
+.toolBar {
+  height: auto !important;
+  margin-bottom: 25px;
+}
+
+.puzzle_container {
+  background-color: rgba(57, 62, 65, 0.55);
+}
+
+.question {
+  background-color: #3F88C5 !important;
+  border-radius: 20px 20px 0px 20px !important;
+  margin: 10px 20px 20px 70px;
+  padding: 30px;
+  color: white;
+  font-family: monospace;
+  font-size: 18px;
+  box-shadow: 0px 0px 20px black;
+}
+
+.button {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.puzzle_inner_container {
+  padding-top: 30px;
+  background: #F6F7EB;
+}
+
+.textField_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

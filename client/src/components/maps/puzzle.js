@@ -4,6 +4,11 @@ import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import Request from '../../../../helpers/requests';
 import styles from '../../../../styles/maps/puzzle.css';
+import { GridList } from 'material-ui/GridList';
+import { Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle } from 'material-ui/Toolbar';
+import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
+
 
 class Puzzle extends React.Component {
   constructor(props) {
@@ -35,6 +40,9 @@ class Puzzle extends React.Component {
 
   componentWillUnmount() {
     clearInterval(interval);
+    window.onbeforeunload = () => {
+      clearInterval(interval);
+    };
   }
 
   handleOpen() {
@@ -44,7 +52,7 @@ class Puzzle extends React.Component {
   handleTimer() {
     window.interval = null;
     if (this.state.time) {
-      document.getElementById('timer').style.display = 'block';
+      document.getElementById('timer').style.display = 'inline-block';
       interval = setInterval(() => {
         this.setState({
           time: this.state.time - 1
@@ -101,19 +109,40 @@ class Puzzle extends React.Component {
             {this.props.changeName(this.props.messages[this.props.map + this.props.currentQuest])}
           </Dialog>
         </div>
-        <div style={{color: 'black', backgroundColor: 'white'}}>{`Lives Remaining ${this.props.lives}`}</div>
-        <RaisedButton className="button" label="Return to Map" onClick={() => this.props.handleReturntoMapClick(true)} backgroundColor='#E94F37' labelColor='#F6F7EB' style={{width: '160px'}}/>
-        <div id='timer' style={{display: 'none', color: 'black', backgroundColor: 'white'}}>
-          {`Time Remaining: ${this.state.time} seconds`}
+        <div><RaisedButton disabledLabelColor={'black'} label={`Lives Remaining: ${this.props.lives}`} disabled={true} style={{float: 'left', marginLeft: 50}} /></div>
+        <div id='timer' style={{float: 'right', display: 'none', marginRight: 50}}><RaisedButton disabledLabelColor={'black'} label={`Time Remaining: ${this.state.time} seconds`} disabled={true} /></div>
+        <div id='attempts' style={{float: 'right', display: 'none', marginRight: 50}}><RaisedButton disabledLabelColor={'black'} label={`Attempts Remaining: ${this.props.attempts}`} disabled={true} /></div>
+        <br />
+        <br />
+        <div>
+          <div className={styles.puzzle_container}>
+            <br />
+            <div className={styles.puzzle_inner_container}>
+              <div className={styles.question}>{this.props.questions[this.props.map + this.props.currentQuest]}</div>
+              <br />
+              <div className={styles.textField_container}>
+                <TextField
+                  ref="answerInput"
+                  id="puzzleAnswer"
+                  hintText='Your answer here'
+                  underlineShow={false}
+                  style={{backgroundColor: 'white', border: '2px solid #44BBA4', width: '95%', paddingLeft: '12px', paddingRight: '12px'}}
+                  fullWidth ={true}
+                  multiLine={true}
+                />
+              </div>
+              <br />
+              <br />
+            </div>
+            <div className={styles.button}>
+              <RaisedButton onClick={() => this.props.handlePuzzleSubmit()} label={'Submit'} style={{width: '200px', display: 'flex', marginBottom: '5px'}}/>
+            </div>
+            <div className={styles.button}>
+              <RaisedButton label="Return to Map" onClick={() => this.props.handleReturntoMapClick(true)} backgroundColor='#E94F37' labelColor='#F6F7EB' style={{width: '200px', display: 'flex'}}/>
+            </div>
+          </div>
         </div>
-        <div id='attempts' style={{display: 'none', color: 'black', backgroundColor: 'white'}}>
-          {`Attempts Remaining: ${this.props.attempts}`}
-        </div>
-        <div style={{color: '#E94F37'}}>
-          {this.props.questions[this.props.map + this.props.currentQuest]}
-        </div>
-        <input ref="answerInput" onKeyUp={(e) => this.props.handleEnterClick(e)} type="text" id="puzzleAnswer"/>
-        <button onClick={() => this.props.handlePuzzleSubmit()}>Submit</button>
+
       </div>
     );
   }

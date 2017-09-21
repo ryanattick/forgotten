@@ -203,7 +203,7 @@ var items = [
     description: 'A key you get from room 0.',
     type: 'Storyline', /* Miscellaneous, Reward, etc. */
     equippable: 0, /* Yes, No, Not Possible */
-    img_url: '/assets/items/paper.jpg',
+    img_url: '/assets/items/key.svg',
     puzzle_id: 19
   }
 ];

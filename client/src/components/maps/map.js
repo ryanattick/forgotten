@@ -303,7 +303,7 @@ class Map extends React.Component {
     var countNewItems = 0;
     var found = false;
     for (var key in this.state.puzzles.items) {
-      if (this.state.puzzles.items[key].puzzleID === parseInt(this.props.map + quest)) {
+      if (this.state.puzzles.items[key].puzzleID === parseInt(this.props.map + quest) + 1) {
         countNewItems++;
         found = true;
       }

@@ -13,13 +13,12 @@ import ConsumeIcon from 'material-ui/svg-icons/maps/restaurant';
 import styles from '../../../../styles/backpack/item.css';
 
 const Item = (props) => {
-
-  let iconButtonEquip = <div></div>;
+  let actionItemIcon = <div></div>;
 
   if (props.item.equippable) {
-    iconButtonEquip = <IconButton tooltip='Equip' tooltipPosition='top-left'><PanToolIcon color="white" /></IconButton>;
+    actionItemIcon = <IconButton tooltip='Equip' tooltipPosition='top-left'><PanToolIcon color="white" /></IconButton>;
   } else if (props.item.type === 'Consumable') {
-    iconButtonEquip = <IconButton tooltip='Consume' tooltipPosition='top-left'><ConsumeIcon color="white" /></IconButton>;
+    actionItemIcon = <IconButton tooltip='Consume' tooltipPosition='top-left'><ConsumeIcon color="white" /></IconButton>;
   }
 
   var handleItemPopup = () => {
@@ -33,7 +32,7 @@ const Item = (props) => {
       subtitle={<span><b>{props.item.description}</b></span>}
       subtitleStyle={{fontFamily: 'Exo Light'}}
       titleStyle={{fontFamily: 'Exo Light'}}
-      actionIcon={iconButtonEquip}
+      actionIcon={actionItemIcon}
       >
       <IconButton
         className={styles.inspect_button}

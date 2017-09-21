@@ -3,6 +3,7 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
+  background-color: #F6F7EB;
 }
 
 .about_header img {

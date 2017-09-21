@@ -130,7 +130,7 @@ class Account extends React.Component {
   render() {
 
     let currentPage = this.state.page;
-    let audioButton = this.state.musicMuted ? <RaisedButton label="Unmute Audio" onClick={this.handleAudioClick}/> : <RaisedButton label="Mute Audio" onClick={this.handleAudioClick}/>;
+    let audioButton = <RaisedButton label={this.state.musicMuted ? 'Unmute Audio' : 'Mute Audio'} style={{width: '160px', boxShadow: '0 0 10px 0px black'}} labelColor={'#393E41'} onClick={this.handleAudioClick}/>;
     const actions = [
       <FlatButton
         label="Cancel"
@@ -159,17 +159,20 @@ class Account extends React.Component {
         <MuiThemeProvider>
           <div className={accountStyle.flexContainer}>
             <div className={accountStyle.innerFlexContainer}>
-              <GridTile style={{backgroundImage: `url(${this.state.avatar})`, backgroundSize: 'cover', height: '150px', width: '150px', border: 'none', borderRadius: '2px'}}
+              <GridTile style={{backgroundImage: `url(${this.state.avatar})`, backgroundSize: 'cover', height: '150px', width: '150px', border: 'none', borderRadius: '2px', boxShadow: '0 0 10px black'}}
               ><IconButton tooltip='Change Avatar' tooltipPosition='bottom-right' onClick={this.handleChangeAvatar}><SettingsIcon color="rgba(57, 62, 65, 0.55)" /></IconButton></GridTile>
               <h4 className={accountStyle.level}>
-              Level {this.state.level}
+              LEVEL {this.state.level}
               </h4>
-              <span className={accountStyle.label} style={{marginLeft: '30px'}}>Username<IconButton tooltip='Change Username' tooltipPosition='bottom-left' onClick={this.handleEditClick}><SettingsIcon color="rgba(57, 62, 65, 0.55)" /></IconButton></span> <span className={accountStyle.text}>{this.state.username}</span>
-              <span className={accountStyle.label}>Name</span> <span className={accountStyle.text}>{this.state.firstName + ' ' + this.state.lastName}</span>
-              <span className={accountStyle.label}>Email</span> <span className={accountStyle.text}>{this.state.email}</span>
-              {audioButton}
-              <RaisedButton href='/' label="Log Out" backgroundColor='#E94F37' labelColor='#F6F7EB' style={{width: '160px'}} className={accountStyle.logoutButton} onClick={this.handleLogoutClick}/>
-              <RaisedButton label="Delete Account" backgroundColor='#E94F37' labelColor='#F6F7EB' onClick={this.handleOpen} />
+              <span className={accountStyle.label} style={{marginLeft: '30px'}}>USERNAME<IconButton className={accountStyle.change_username_iconbutton} tooltip='Change Username' tooltipPosition='bottom-center' onClick={this.handleEditClick}><SettingsIcon color="rgba(57, 62, 65, 0.55)" /></IconButton></span> <span className={accountStyle.text}>{this.state.username}</span>
+              <span className={accountStyle.label}>NAME</span> <span className={accountStyle.text}>{this.state.firstName + ' ' + this.state.lastName}</span>
+              <span className={accountStyle.label}>EMAIL</span> <span className={accountStyle.text}>{this.state.email}</span>
+              <div className={accountStyle.buttons_container}>
+                {audioButton}
+                <RaisedButton href='/' label="Log Out" backgroundColor='#E94F37' labelColor='#F6F7EB' style={{width: '160px', boxShadow: '0 0 10px 0px black'}} className={accountStyle.logoutButton} onClick={this.handleLogoutClick}/>
+                <RaisedButton label="Delete Account" backgroundColor='#E94F37' labelColor='#F6F7EB' style={{width: '160px', boxShadow: '0 0 10px 0px black'}}onClick={this.handleOpen} />
+              </div>
+
               <Dialog
                 title="Delete Account"
                 actions={actions}

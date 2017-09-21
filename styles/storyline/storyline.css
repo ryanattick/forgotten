@@ -4,7 +4,8 @@
   font-family: 'Sue';
   background-image: url('/assets/backgrounds/storyBG.jpg');
   background-size: cover;
-  font-size: 2vw;
+  background-position: center;
+  font-size: 28px;
   border-radius: 5px;
   box-shadow: 0px 0px 20px black;
   color: black;
@@ -12,7 +13,7 @@
 
 .message {
   background-color: #3F88C5;
-  font-size: 1.6vw;
+  font-size: 18px;
   padding: 20px;
   font-family: monospace;
   color: white;
@@ -25,7 +26,7 @@
   color: white;
   padding: 20px;
   border-radius: 5px;
-  font-size: 1.6vw;
+  font-size: 18px;
   box-shadow: 0px 0px 20px black;
 }
 
@@ -47,4 +48,20 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+.empty_storyline_container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: -webkit-linear-gradient(left,rgba(57, 62, 65, 0.05),rgba(57, 62, 65, 0.85),rgba(57, 62, 65, 0.83),rgba(57, 62, 65, 0.05));
+  padding: 40px;
+}
+
+.empty_storyline_content {
+  color: white;
+  font-family: 'Exo Light';
+  font-size: 28px;
 }

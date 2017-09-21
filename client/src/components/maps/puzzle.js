@@ -108,7 +108,7 @@ class Puzzle extends React.Component {
             open={this.state.open}
             onRequestClose={this.handleClose.bind(this)}
             paperClassName={styles.message}
-            bodyStyle={{color: 'white', fontFamily: 'monospace', fontSize: '2vw'}}
+            bodyStyle={{color: 'white', fontFamily: 'monospace', fontSize: '20px'}}
           >
             {this.props.changeName(this.props.messages[this.props.map + this.props.currentQuest])}
           </Dialog>

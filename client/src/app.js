@@ -107,15 +107,14 @@ class App extends React.Component {
 
 
   render() {
-    let badge = <Badge badgeContent={this.state.numberNewOfItems} primary={true} badgeStyle={{backgroundColor: '#E94F37', float: 'right'}}/>;
-
+    let badge = <Badge badgeContent={this.state.numberNewOfItems} primary={true} badgeStyle={{backgroundColor: '#E94F37', float: 'right', marginTop: '7px'}}/>
     let backpackTab = this.state.numberNewOfItems ? <Tab className={styles.tab} value={2} containerElement={<Link to='/backpack'/>} onActive={this.handleBadgeToZero} icon={badge}/> : <Tab className={styles.tab} value={2} label='Backpack' containerElement={<Link to='/backpack'/>}/>;
 
-    let notMuted = <div style={{fontFamily: 'Roboto, sans-serif', fontSize: '14px', color: 'rgba(255, 255, 255, 0.7)', width: '25%'}}> Account <SoundIcon color='rgba(255, 255, 255, 0.7)'/> </div>;
+    let muted = <div className={styles.account_tab_icon_container}><NoSoundIcon color='rgba(255, 255, 255, 0.7)' style={{marginLeft: '10px'}}/> </div>;
 
-    let muted = <div style={{fontFamily: 'Roboto, sans-serif', fontSize: '11px', color: 'rgba(255, 255, 255, 0.7)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '48px', boxSizing: 'border-box', padding: '30px'}}> Account <NoSoundIcon color='rgba(255, 255, 255, 0.7)'/> </div>;
+    let notMuted = <div className={styles.account_tab_icon_container}><SoundIcon color='rgba(255, 255, 255, 0.7)' style={{marginLeft: '10px'}}/> </div>;
 
-    let accountTab = this.state.musicMuted ? <Tab value={0} icon={muted} containerElement={<Link to='/account'/>}/> : <Tab value={0} icon={notMuted} containerElement={<Link to='/account'/>}/>;
+    let accountTab = <Tab className={styles.tab} buttonStyle={{flexDirection: 'row-reverse', height: '48px'}} value={0} label='Account' icon={this.state.musicMuted ? muted : notMuted} containerElement={<Link to='/account'/>}/>;
 
     return (
       <MuiThemeProvider>
@@ -124,15 +123,15 @@ class App extends React.Component {
             <div>
               <Tabs
                 className={styles.app}
-                tabItemContainerStyle={{backgroundColor: 'rgba(57, 62, 65, 0.55)'}}
+                tabItemContainerStyle={{background: '-webkit-linear-gradient(#393E41,rgb(57, 62, 65),rgba(57, 62, 65, 0))', height: '60px'}}
                 initialSelectedIndex={this.state.currentTabIndex}
                 onChange={this.handleTabChange}
                 inkBarStyle={{backgroundColor: '#E94F37'}}>
                 {accountTab}
-                <Tab value={1} label='Maps' containerElement={<Link to='/maps'/>}/>
-                <Tab value={3} label='Storyline' containerElement={<Link to='/storyline'/>}/>
-              {backpackTab}
-                <Tab value={3} label='About' containerElement={<Link to='/about'/>}/>
+                <Tab className={styles.tab} value={1} label='Maps' containerElement={<Link to='/maps'/>}/>
+                {backpackTab}
+                <Tab className={styles.tab} value={3} label='Storyline' containerElement={<Link to='/storyline'/>}/>
+                <Tab className={styles.tab} value={4} label='About' containerElement={<Link to='/about'/>}/>
               </Tabs>
             </div>
 

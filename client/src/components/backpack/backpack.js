@@ -34,6 +34,7 @@ class Backpack extends React.Component {
 
     this.openItemPopUp = this.openItemPopUp.bind(this);
     this.closeItemPopUp = this.closeItemPopUp.bind(this);
+    this.handleConsumeItem = this.handleConsumeItem.bind(this);
   }
 
   openItemPopUp(item) {
@@ -56,6 +57,17 @@ class Backpack extends React.Component {
         items: data
       });
     });
+  }
+
+  handleConsumeItem(itemID) {
+    // Request.post('/remove')
+    // var updatedItemsList = this.state.items.slice(0);
+    // for (var i = 0; i < updatedItemsList.length; i++) {
+    //   if (updatedItemsList[i].id === itemID) {
+    //     updatedItemsList.splice(i, 1);
+    //     break;
+    //   }
+    // }
   }
 
   render() {

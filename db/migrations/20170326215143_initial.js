@@ -2,7 +2,7 @@
 exports.up = function (knex, Promise) {
   return Promise.all([
     knex.schema.createTableIfNotExists('profiles', function (table) {
-      table.increments('id').unsigned().defaultTo(0).primary();
+      table.increments('id').unsigned().primary();
       table.string('first', 100).nullable();
       table.string('last', 100).nullable();
       table.string('display', 100).nullable();
@@ -63,7 +63,7 @@ exports.down = function (knex, Promise) {
   return Promise.all([
     knex.schema.dropTable('auths'),
     knex.schema.dropTable('users_items'),
-    // knex.schema.dropTable('users_stories'),
+    knex.schema.dropTable('users_stories'),
     knex.schema.dropTable('items'),
     knex.schema.dropTable('puzzles'),
     knex.schema.dropTable('profiles')

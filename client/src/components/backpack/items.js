@@ -113,7 +113,7 @@ class Items extends React.Component {
           cols={4}
           padding={50}>
           {this.state.itemsToDisplay.map((item, id) => (
-            <Item key={id} item={item} openItemPopUp={this.handleItemPopup}/>
+            <Item key={id} item={item} openItemPopUp={this.handleItemPopup} handleConsumeItem={this.props.handleConsumeItem} handleEquip={this.props.handleEquip}/>
           ))}
         </GridList>
 

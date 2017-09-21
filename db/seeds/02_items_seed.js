@@ -10,7 +10,8 @@ exports.seed = function (knex, Promise) {
       equippable: items[i].equippable,
       puzzle_id: items[i].puzzle_id,
       description: items[i].description,
-      img_url: items[i].img_url
+      img_url: items[i].img_url,
+      effect: items[i].effect
     }).save(null, {method: 'insert'})
       .error(err => {
         console.error('ERROR: failed to create items');
@@ -28,7 +29,8 @@ var items = [
     type: 'Storyline', /* Miscellaneous, Reward, etc. */
     equippable: 0, /* Yes, No, Not Possible */
     img_url: '/assets/items/phone.svg',
-    puzzle_id: 0 //0
+    puzzle_id: 0,
+    effect: null
   },
   {
     name: 'Scrap of Paper',
@@ -36,7 +38,8 @@ var items = [
     type: 'Storyline', /* Miscellaneous, Reward, etc. */
     equippable: 0, /* Yes, No, Not Possible */
     img_url: '/assets/items/folded-paper.svg',
-    puzzle_id: 1
+    puzzle_id: 1,
+    effect: null
   },
   {
     name: 'Stack of Papers',
@@ -44,7 +47,8 @@ var items = [
     type: 'Storyline', /* Miscellaneous, Reward, etc. */
     equippable: 0, /* Yes, No, Not Possible */
     img_url: '/assets/items/stack-paper.svg',
-    puzzle_id: 2
+    puzzle_id: 2,
+    effect: null
   },
   {
     name: 'Blank Paper',
@@ -52,7 +56,8 @@ var items = [
     type: 'Storyline', /* Miscellaneous, Reward, etc. */
     equippable: 0, /* Yes, No, Not Possible */
     img_url: '/assets/items/folded-paper.svg',
-    puzzle_id: 5
+    puzzle_id: 5,
+    effect: null
   },
   {
     name: 'Pocketknife',
@@ -60,7 +65,8 @@ var items = [
     type: 'Support', /* Miscellaneous, Reward, etc. */
     equippable: 1, /* Yes, No, Not Possible */
     img_url: '/assets/items/pocket-knife.svg',
-    puzzle_id: 5
+    puzzle_id: 5,
+    effect: null
   },
   {
     name: 'Map',
@@ -68,7 +74,8 @@ var items = [
     type: 'Miscellaneous', /* Miscellaneous, Reward, etc. */
     equippable: 0, /* Yes, No, Not Possible */
     img_url: '/assets/items/map.svg',
-    puzzle_id: 5
+    puzzle_id: 5,
+    effect: null
   },
   {
     name: 'Bottle of Water',
@@ -76,7 +83,8 @@ var items = [
     type: 'Consumable', /* Miscellaneous, Reward, etc. */
     equippable: 0, /* Yes, No, Not Possible */
     img_url: '/assets/items/water-bottle.svg',
-    puzzle_id: 8
+    puzzle_id: 8,
+    effect: 'life +1'
   },
   {
     name: 'Bottle of Water',
@@ -84,7 +92,8 @@ var items = [
     type: 'Consumable', /* Miscellaneous, Reward, etc. */
     equippable: 0, /* Yes, No, Not Possible */
     img_url: '/assets/items/water-bottle.svg',
-    puzzle_id: 8
+    puzzle_id: 8,
+    effect: 'life +1'
   },
   {
     name: 'MRE Meal',
@@ -92,7 +101,8 @@ var items = [
     type: 'Consumable', /* Miscellaneous, Reward, etc. */
     equippable: 0, /* Yes, No, Not Possible */
     img_url: '/assets/items/mre-meal.svg',
-    puzzle_id: 8
+    puzzle_id: 8,
+    effect: 'life +1'
   },
   {
     name: 'MRE Meal',
@@ -100,7 +110,8 @@ var items = [
     type: 'Consumable', /* Miscellaneous, Reward, etc. */
     equippable: 0, /* Yes, No, Not Possible */
     img_url: '/assets/items/mre-meal.svg',
-    puzzle_id: 8
+    puzzle_id: 8,
+    effect: 'life +1'
   },
   {
     name: 'MRE Meal',
@@ -108,7 +119,8 @@ var items = [
     type: 'Consumable', /* Miscellaneous, Reward, etc. */
     equippable: 0, /* Yes, No, Not Possible */
     img_url: '/assets/items/mre-meal.svg',
-    puzzle_id: 8
+    puzzle_id: 8,
+    effect: 'life +1'
   },
   {
     name: 'Snack Bar',
@@ -116,7 +128,8 @@ var items = [
     type: 'Consumable', /* Miscellaneous, Reward, etc. */
     equippable: 0, /* Yes, No, Not Possible */
     img_url: '/assets/items/snack-bar.svg',
-    puzzle_id: 8
+    puzzle_id: 8,
+    effect: 'life +1'
   },
   {
     name: 'Snack Bar',
@@ -124,7 +137,8 @@ var items = [
     type: 'Consumable', /* Miscellaneous, Reward, etc. */
     equippable: 0, /* Yes, No, Not Possible */
     img_url: '/assets/items/snack-bar.svg',
-    puzzle_id: 8
+    puzzle_id: 8,
+    effect: 'life +1'
   },
   {
     name: 'Snack Bar',
@@ -132,7 +146,8 @@ var items = [
     type: 'Consumable', /* Miscellaneous, Reward, etc. */
     equippable: 0, /* Yes, No, Not Possible */
     img_url: '/assets/items/snack-bar.svg',
-    puzzle_id: 8
+    puzzle_id: 8,
+    effect: 'life +1'
   },
   {
     name: 'Snack Bar',
@@ -140,7 +155,8 @@ var items = [
     type: 'Consumable', /* Miscellaneous, Reward, etc. */
     equippable: 0, /* Yes, No, Not Possible */
     img_url: '/assets/items/snack-bar.svg',
-    puzzle_id: 8
+    puzzle_id: 8,
+    effect: 'life +1'
   },
   {
     name: 'Snack Bar',
@@ -148,7 +164,8 @@ var items = [
     type: 'Consumable', /* Miscellaneous, Reward, etc. */
     equippable: 0, /* Yes, No, Not Possible */
     img_url: '/assets/items/snack-bar.svg',
-    puzzle_id: 8
+    puzzle_id: 8,
+    effect: 'life +1'
   },
   {
     name: 'Handgun',
@@ -156,15 +173,17 @@ var items = [
     type: 'Support', /* Miscellaneous, Reward, etc. */
     equippable: 1, /* Yes, No, Not Possible */
     img_url: '/assets/items/gun.svg',
-    puzzle_id: 8
+    puzzle_id: 8,
+    effect: null
   },
   {
     name: 'Pen',
     description: 'A pen you found took from a desk in an empty room.',
     type: 'Miscellaneous', /* Miscellaneous, Reward, etc. */
-    equippable: 0, /* Yes, No, Not Possible */
+    equippable: 1, /* Yes, No, Not Possible */
     img_url: '/assets/items/pen.svg',
-    puzzle_id: 8
+    puzzle_id: 8,
+    effect: 'time +30'
   },
   {
     name: 'Pictures',
@@ -172,7 +191,8 @@ var items = [
     type: 'Miscellaneous', /* Miscellaneous, Reward, etc. */
     equippable: 0, /* Yes, No, Not Possible */
     img_url: '/assets/items/pictures.svg',
-    puzzle_id: 9
+    puzzle_id: 9,
+    effect: null
   },
   {
     name: 'Newspaper Clipping',
@@ -180,7 +200,8 @@ var items = [
     type: 'Miscellaneous', /* Miscellaneous, Reward, etc. */
     equippable: 0, /* Yes, No, Not Possible */
     img_url: '/assets/items/folded-paper.svg',
-    puzzle_id: 9
+    puzzle_id: 9,
+    effect: null
   },
   {
     name: 'Key',
@@ -188,7 +209,8 @@ var items = [
     type: 'Storyline',
     equippable: 0, /* Yes, No, Not Possible */
     img_url: '/assets/items/key.svg',
-    puzzle_id: 17
+    puzzle_id: 17,
+    effect: null
   },
   {
     name: 'Key',
@@ -196,7 +218,8 @@ var items = [
     type: 'Storyline', /* Miscellaneous, Reward, etc. */
     equippable: 0, /* Yes, No, Not Possible */
     img_url: '/assets/items/key.svg',
-    puzzle_id: 18
+    puzzle_id: 18,
+    effect: null
   },
   {
     name: 'Key',
@@ -204,6 +227,7 @@ var items = [
     type: 'Storyline', /* Miscellaneous, Reward, etc. */
     equippable: 0, /* Yes, No, Not Possible */
     img_url: '/assets/items/key.svg',
-    puzzle_id: 19
+    puzzle_id: 19,
+    effect: null
   }
 ];

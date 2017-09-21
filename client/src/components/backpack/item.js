@@ -15,15 +15,34 @@ import styles from '../../../../styles/backpack/item.css';
 const Item = (props) => {
   let actionItemIcon = <div></div>;
 
-  if (props.item.equippable) {
-    actionItemIcon = <IconButton tooltip='Equip' tooltipPosition='top-left'><PanToolIcon color="white" /></IconButton>;
-  } else if (props.item.type === 'Consumable') {
-    actionItemIcon = <IconButton tooltip='Consume' tooltipPosition='top-left'><ConsumeIcon color="white" /></IconButton>;
-  }
-
   var handleItemPopup = () => {
     props.openItemPopUp(props.item);
   };
+
+  var handleConsume = () => {
+    props.handleConsumeItem(props.item);
+  };
+
+  var handleEquip = () => {
+    props.handleEquip(props.item);
+  }
+
+  if (props.item.equippable) {
+    actionItemIcon = <IconButton
+      tooltip='Equip'
+      tooltipPosition='top-left'
+      onClick={handleEquip}>
+        <PanToolIcon color="white" />
+      </IconButton>;
+  } else if (props.item.type === 'Consumable') {
+    actionItemIcon = <IconButton
+      tooltip='Consume'
+      tooltipPosition='top-left'
+      onClick={handleConsume}>
+        <ConsumeIcon color="white" />
+      </IconButton>;
+  }
+
 
   return (
     <GridTile

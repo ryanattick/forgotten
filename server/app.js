@@ -331,6 +331,38 @@ app.post('/updateUsername', function (req, res) {
   });
 });
 
+app.post('/consumeItem', function(req, res) {
+  // check if user is at 5 lives,
+  // if yes, don't consume item
+  if (req.user.lives < 5) {
+    userItems.where({'item_id': req.body.itemID}).destroy().then(function() {
+      res.status(201).send(JSON.stringify('Item successfully consumed'));
+      console.log('Item successfully removed from DB');
+    }).then(() => {
+      Profile.forge({id: req.user.id}).save({lives: req.user.lives + 1}).then(function() {
+        console.log('Player gained one more life');
+        res.status(201).send(JSON.stringify('success'));
+      }).catch((err) => {
+        throw err;
+      });
+    });
+  } else {
+    res.status(201).send(JSON.stringify('not possible'));
+  }
+});
 
+app.post('/equipItem', function(req, res) {
+  userItems.where({'item_id': req.body.itemID}).fetch().then((item) => {
+    if (item.attributes.equipped === 'yes') {
+      res.status(201).send(JSON.stringify('already equipped'));
+    } else {
+      userItems.forge({'id': item.id}).save({equipped: 'yes'}).then(() => {
+        res.status(201).send(JSON.stringify('Item successfully euipped'));
+      });
+    }
+  }).catch((err) => {
+    throw err;
+  })
+});
 
 module.exports = app;

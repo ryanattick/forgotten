@@ -42,6 +42,7 @@ exports.up = function (knex, Promise) {
       table.text('img_url').nullable();
       table.integer('puzzle_id').references('puzzles.puzzleID').onDelete('CASCADE');
       table.integer('equippable').nullable();
+      table.string('effect', 50).nullable();
     }),
     knex.schema.createTableIfNotExists('users_items', function(table) {
       table.increments('id').unsigned().primary();

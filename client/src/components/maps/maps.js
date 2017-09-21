@@ -190,18 +190,23 @@ class Maps extends React.Component {
       <FlatButton
         label={`Go to level ${parseInt(this.state.currentLevel) + 1}`}
         primary={true}
+        style={{color:'#E94F37'}}
         onClick={this.handleMoveToCurrentLevel.bind(this)}
       />,
       <FlatButton
         label="Return to Maps"
+        keyboardFocused={true}
         primary={true}
+        style={{color:'#E94F37'}}
         onClick={this.handleLevelClose.bind(this)}
       />
     ];
     const finishedMapActions = [
       <RaisedButton
         label="Ok"
-        primary={true}
+        backgroundColor='#E94F37'
+        labelColor='#F6F7EB'
+        // primary={true}
         onClick={this.handleFinishedMapClose.bind(this)}
       />
     ];
@@ -230,8 +235,10 @@ class Maps extends React.Component {
               open={this.state.finishedMapOpen}
               autoScrollBodyContent={true}
               onRequestClose={this.handleFinishedMapClose.bind(this)}
+              contentStyle={{textAlign: 'center'}}
+              actionsContainerStyle={{textAlign: 'center'}}
             >
-              {`Congratulations, you have finished the map ${parseInt(this.state.currentLevel)}!`}
+              {`Congratulations, you have finished Level ${parseInt(this.state.currentLevel)}!`}
             </Dialog>
           </div>
           <div>
@@ -277,6 +284,8 @@ class Maps extends React.Component {
               open={this.state.levelOpen}
               autoScrollBodyContent={true}
               onRequestClose={this.handleLevelClose.bind(this)}
+              contentStyle={{textAlign: 'center'}}
+              actionsContainerStyle={{textAlign: 'center'}}
             >
               <b>{`Complete Level ${JSON.stringify(parseInt(this.state.currentLevel) + 1)} before moving on!`}</b>
             </Dialog>

@@ -134,13 +134,15 @@ class Account extends React.Component {
     const actions = [
       <FlatButton
         label="Cancel"
+        keyboardFocused={true}
         primary={true}
+        style={{color:'#E94F37'}}
         onClick={this.handleClose}
       />,
       <FlatButton
         label="Delete"
         primary={true}
-        keyboardFocused={true}
+        style={{color:'#E94F37'}}
         onClick={this.handleDeleteAccountClick}
       />,
     ];
@@ -160,7 +162,7 @@ class Account extends React.Component {
           <div className={accountStyle.flexContainer}>
             <div className={accountStyle.innerFlexContainer}>
               <GridTile style={{backgroundImage: `url(${this.state.avatar})`, backgroundSize: 'cover', height: '150px', width: '150px', border: 'none', borderRadius: '2px', boxShadow: '0 0 10px black'}}
-              ><IconButton tooltip='Change Avatar' tooltipPosition='bottom-right' onClick={this.handleChangeAvatar}><SettingsIcon color="rgba(57, 62, 65, 0.55)" /></IconButton></GridTile>
+              ><IconButton tooltip='Change Avatar' tooltipPosition='bottom-right' onClick={this.handleChangeAvatar}><SettingsIcon color="rgba(57, 62, 65, 0.55)" style={{background: 'white !important'}} /></IconButton></GridTile>
               <h4 className={accountStyle.level}>
               LEVEL {this.state.level}
               </h4>
@@ -179,6 +181,8 @@ class Account extends React.Component {
                 modal={false}
                 open={this.state.open}
                 onRequestClose={this.handleClose}
+                titleStyle={{textAlign: 'center'}}
+                actionsContainerStyle={{textAlign: 'center'}}
               >
           Are you sure you want to delete your Forgotten account? If you do, your account cannot be restored.
               </Dialog>

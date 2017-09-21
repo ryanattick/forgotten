@@ -16,7 +16,7 @@ class Storyline extends React.Component {
     super(props);
     this.state = {
       storyline: []
-    }
+    };
   }
 
   componentWillMount() {
@@ -24,6 +24,7 @@ class Storyline extends React.Component {
     Request.get('/userStoryline', (data) => {
       // data is an array of objects containing stories and messages and items
       var chronologicalOrder = [];
+      console.log(data);
       for (var i = 0; i < data.length; i++) {
         if (data[i].story) {
           var storyText = '';
@@ -42,7 +43,7 @@ class Storyline extends React.Component {
           } else {
             messageText = data[i].message.replace('[playerName]', 'friend');
           }
-          let domMessage = <div className={styles.message}>{messageText}</div>
+          let domMessage = <div className={styles.message}>{messageText}</div>;
           chronologicalOrder.push(domMessage);
         }
         if (data[i].items && data[i].items.length > 0) {
@@ -50,12 +51,12 @@ class Storyline extends React.Component {
 
           for (var k = 0; k < data[i].items.length; k++) {
             if (k === data[i].items.length - 1) {
-              receivedItems += data[i].items[k]+ '.';
+              receivedItems += data[i].items[k] + '.';
             } else {
               receivedItems += data[i].items[k] + ', ';
             }
           }
-          let domItems = <div className={styles.notifications}>{receivedItems}</div>
+          let domItems = <div className={styles.notifications}>{receivedItems}</div>;
           chronologicalOrder.push(domItems);
         }
       }

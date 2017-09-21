@@ -2,7 +2,7 @@
 exports.up = function (knex, Promise) {
   return Promise.all([
     knex.schema.createTableIfNotExists('profiles', function (table) {
-      table.increments('id').unsigned().primary();
+      table.increments('id').unsigned().defaultTo(0).primary();
       table.string('first', 100).nullable();
       table.string('last', 100).nullable();
       table.string('display', 100).nullable();
@@ -23,7 +23,7 @@ exports.up = function (knex, Promise) {
       table.integer('profile_id').references('profiles.id').onDelete('CASCADE');
     }),
     knex.schema.createTableIfNotExists('puzzles', function(table) {
-      table.increments('id').unsigned().primary();
+      table.integer('id').unsigned().primary();
       table.integer('puzzleID').nullable().unique();
       table.string('name', 50).nullable().unique();
       table.text('extra_info', 'longtext').nullable();

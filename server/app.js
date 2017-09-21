@@ -138,6 +138,9 @@ app.get('/playerItems', function (req, res) {
     .then((result) => {
       console.log('result of /playerItems', result.toJSON()[0].items);
       res.status(200).send(JSON.stringify((result.toJSON()[0].items)));
+    })
+    .catch((err) => {
+      console.log(err, 'err');
     });
   // .then((arr) => {
   //   var result = [];
@@ -151,7 +154,6 @@ app.get('/playerItems', function (req, res) {
   // }).then((result) => {
   //   console.log(result);
   // })
-
   //console.log('playeritems', req.user.level);
   // Items.fetchAll()
   //   .then((results) => {
@@ -164,6 +166,24 @@ app.get('/playerItems', function (req, res) {
   //   });
 });
 
+
+
+app.post('/userItems', function (req, res) {
+  Items.fetchAll()
+    .then((results) => {
+      var change = results.map((item) => item.attributes).filter((item) => item.puzzle_id === req.user.level + 1);
+      console.log(change);
+      for (var i = 0; i < change.length; i++) {
+        userItems.forge().save({user_id: req.user.id, item_id: change[i].id, equipped: 'no'}).then(() => {
+          console.log('user items saved');
+          res.send('201');
+        });
+      }
+    })
+    .catch((err) => {
+      console.log(err, 'error');
+    });
+});
 
 app.post('/initialItem', function(req, res) {
   userItems.where({user_id: req.user.id, item_id: req.body.id})
@@ -180,29 +200,31 @@ app.post('/initialItem', function(req, res) {
       } else {
         res.status(201).send(JSON.stringify('Initial Item already stored'));
       }
-    })
-    .catch((error) => {
-      console.log('PHONE DOESNT EXIST', error);
     });
 });
-
-
-app.post('/userItems', function (req, res) {
-  Items.fetchAll()
-    .then((results) => {
-      var change = results.map((item) => item.attributes).filter((item) => item.puzzle_id === req.user.level + 1);
-      console.log(change);
-      for (var i = 0; i < change.length; i++) {
-        userItems.forge().save({user_id: req.user.id, item_id: change[i].id, equipped: 'no'}).then(() => {
-          console.log('user items saved');
-        });
-      }
-    res.send('201');
+// Get request to '/userStoryline'
+// 1. grab puzzle ids from user_stories that correspond to the current user id
+// 2. grab puzzles from puzzles table that correspond to the puzzle ids
+// 3. then for every puzzle id, create an object containing puzzle's story and message and then grab all items from the items table that reference that puzzle id and push the items names into an array and store that array in the created object and then push that object into an array
+// 4. then send the stringified array in the response
+// and store the item
+app.post('/mapData', function(req, res) {
+  Profile.forge({id: req.user.id}).save({level: req.body.level}).then(function() {
+    console.log('level saved!');
+  })
+    .then(() => {
+      userStories.forge().save({puzzle_id: req.body.level, user_id: req.user.id});
+      console.log('user stories saved!!');
+    })
+    .then(() => {
+      res.status(200).send(JSON.stringify('success'));
     })
     .catch((err) => {
-      console.log(err, 'error');
+      throw err;
     });
 });
+
+
 
 app.get('/puzzleItems', function (req, res) {
   userItems.where({'user_id': req.user.id, equipped: 'yes'}).fetchAll()
@@ -229,7 +251,6 @@ app.get('/puzzleItems', function (req, res) {
 });
 
 
-
 app.get('/userStoryline', function (req, res) {
   userStories.fetchAll()
     .then((results) => {
@@ -237,9 +258,10 @@ app.get('/userStoryline', function (req, res) {
       for (var i = 0; i < results.length; i++) {
         //output all puzzles related to req.user
         if (results.models[i].attributes.user_id === req.user.id) {
-          puzzleFilter.push(results.models[i].attributes.puzzle_id);
+          puzzleFilter.push(results.models[i].attributes.puzzle_id - 1);
         }
       }
+      console.log('puzzleFilter', puzzleFilter);
       return puzzleFilter;
     })
     .then((results) => {
@@ -257,8 +279,10 @@ app.get('/userStoryline', function (req, res) {
           return acc;
         }, []);
       }).then((obj) => {
+
+        console.log(obj);
         Items.fetchAll().then((items) => {
-          var items = items.filter((item) => results.indexOf(item.attributes.puzzle_id) !== -1).reduce((acc, item) => {
+          var items = items.filter((item) => results.indexOf(item.attributes.puzzle_id + 1) !== -1).reduce((acc, item) => {
 
             if (!acc[item.attributes.puzzle_id]) {
               acc[item.attributes.puzzle_id] = [item.attributes.name];
@@ -269,12 +293,16 @@ app.get('/userStoryline', function (req, res) {
           }, {});
 
           obj.sort((a, b) => {
-            if (a.id > b.id) {
+            if (parseInt(a.id) > parseInt(b.id)) {
               return 1;
             } else {
               return -1;
             }
           });
+
+          console.log('sorted', obj);
+
+
 
           for (var i = 0; i < obj.length; i++) {
             if (Object.keys(items).indexOf(obj[i].id) !== -1) {
@@ -282,8 +310,8 @@ app.get('/userStoryline', function (req, res) {
             } else {
               obj[i].items = [];
             }
-            delete(obj[i].id);
           }
+          //console.log(obj);
           res.status(200).send(JSON.stringify(obj));
         });
       });

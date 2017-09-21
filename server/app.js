@@ -172,7 +172,6 @@ app.post('/userItems', function (req, res) {
   Items.fetchAll()
     .then((results) => {
       var change = results.map((item) => item.attributes).filter((item) => item.puzzle_id === req.user.level + 1);
-      console.log(change);
       for (var i = 0; i < change.length; i++) {
         userItems.forge().save({user_id: req.user.id, item_id: change[i].id, equipped: 'no'}).then(() => {
           console.log('user items saved');
@@ -362,7 +361,7 @@ app.post('/equipItem', function(req, res) {
     }
   }).catch((err) => {
     throw err;
-  })
+  });
 });
 
 module.exports = app;

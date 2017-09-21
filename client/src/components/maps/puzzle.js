@@ -30,6 +30,15 @@ class Puzzle extends React.Component {
     Request.get('/puzzleItems', (data) => {
       this.setState({
         equipped: data
+      }, () => {
+        Promise.resolve(this.handleItemUsage())
+          .then((time) => {
+            if (this.state.time) {
+              this.setState({
+                time: this.state.time + time
+              });              
+            }
+          });
       });
     });
   }
@@ -68,15 +77,18 @@ class Puzzle extends React.Component {
         });
       }, 1000);
     } else {
-      // document.getElementById('timer').style.display = 'none';
       document.getElementById('attempts').style.display = 'block';
     }
   }
 
   handleItemUsage() {
-    // this.setState({
-    //   time: this.state.time + 30
-    // });
+    var totalTimeAdded = 0;
+    for (var i = 0; i < this.state.equipped.length; i++) {
+      if (this.state.equipped[i].effect) {
+        totalTimeAdded += parseInt(this.state.equipped[i].effect.slice(6));
+      }
+    }
+    return totalTimeAdded;
   }
 
   handleClose() {
@@ -137,6 +149,7 @@ class Puzzle extends React.Component {
                   style={{backgroundColor: 'white', border: '2px solid #44BBA4', width: '95%', paddingLeft: '12px', paddingRight: '12px'}}
                   fullWidth ={true}
                   multiLine={true}
+                  onKeyUp={(e) => this.props.handleEnterClick(e)}
                 />
               </div>
               <br />

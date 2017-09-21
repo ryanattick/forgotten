@@ -195,7 +195,6 @@ class Maps extends React.Component {
       />,
       <FlatButton
         label="Return to Maps"
-        keyboardFocused={true}
         primary={true}
         style={{color:'#E94F37'}}
         onClick={this.handleLevelClose.bind(this)}

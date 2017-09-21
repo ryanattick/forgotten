@@ -276,25 +276,23 @@ class Map extends React.Component {
       }
     } else {
       document.getElementById('puzzleAnswer').value = '';
-      if (!this.state.puzzles.time[this.props.map + this.state.currentQuest]) {
-        this.setState({
-          attempts: this.state.attempts - 1
-        }, () => {
-          if (this.state.attempts === 0) {
-            this.handleReturntoMapClick(true);
-            if (this.state.lives === 0) {
-              this.handleLifeChange();
-              this.state.attempts = 3;
-            } else {
-              Request.post('/lives', {lives: this.props.lives - 1}, function(data) {
-                console.log(data);
-              });
-              this.handleLifeChange(this.state.lives - 1);
-              this.state.attempts = 3;
-            }
+      this.setState({
+        attempts: this.state.attempts - 1
+      }, () => {
+        if (this.state.attempts === 0) {
+          this.handleReturntoMapClick(true);
+          if (this.state.lives === 0) {
+            this.handleLifeChange();
+            this.state.attempts = 3;
+          } else {
+            Request.post('/lives', {lives: this.props.lives - 1}, function(data) {
+              console.log(data);
+            });
+            this.handleLifeChange(this.state.lives - 1);
+            this.state.attempts = 3;
           }
-        });
-      }
+        }
+      });
     }
   }
 
@@ -304,7 +302,7 @@ class Map extends React.Component {
     for (var key in this.state.puzzles.items) {
       if (this.state.puzzles.items[key].puzzleID === parseInt(this.props.map + quest) + 1) {
         countNewItems++;
-        found = true;
+        found = true
       }
     }
     this.props.handleBadgeChange(countNewItems);
@@ -318,7 +316,7 @@ class Map extends React.Component {
         lifeImg: this.state.lifeImg.splice(0, this.state.lifeImg.length - 1)
       });
       for (var i = 0; i < lives; i++) {
-        this.state.lifeImg.push('/assets/items/valentines-heart.svg');
+        this.state.lifeImg.push('/assets/items/valentines-heart.svg')
       }
     } else if (this.props.map === '0') {
       this.setState({
@@ -359,14 +357,12 @@ class Map extends React.Component {
 
   handleLives() {
     for (var i = 0; i < this.state.lives; i++) {
-      this.state.lifeImg.push("/assets/items/valentines-heart.svg");
+      this.state.lifeImg.push("/assets/items/valentines-heart.svg")
     }
   }
 
   handleEnterClick(e) {
     if (e.keyCode === 13) {
-      var val = document.getElementById('puzzleAnswer').value;
-      document.getElementById('puzzleAnswer').value = val.slice(0, val.length - 1);
       this.handlePuzzleSubmit();
     }
   }

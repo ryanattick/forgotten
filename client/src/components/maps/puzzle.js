@@ -95,6 +95,10 @@ class Puzzle extends React.Component {
       />
     ];
 
+    const lives = this.props.lifeImages.map((life, index) =>
+      <img src={life} key={index} style={{maxHeight:'50px', maxWidth:'50px', marginLeft:'20px'}}/>
+    );
+
     return (
       <div>
         <div>
@@ -109,11 +113,15 @@ class Puzzle extends React.Component {
             {this.props.changeName(this.props.messages[this.props.map + this.props.currentQuest])}
           </Dialog>
         </div>
-        <div><RaisedButton disabledLabelColor={'black'} label={`Lives Remaining: ${this.props.lives}`} disabled={true} style={{float: 'left', marginLeft: 50}} /></div>
-        <div id='timer' style={{float: 'right', display: 'none', marginRight: 50}}><RaisedButton disabledLabelColor={'black'} label={`Time Remaining: ${this.state.time} seconds`} disabled={true} /></div>
-        <div id='attempts' style={{float: 'right', display: 'none', marginRight: 50}}><RaisedButton disabledLabelColor={'black'} label={`Attempts Remaining: ${this.props.attempts}`} disabled={true} /></div>
-        <br />
-        <br />
+        <div style={{marginBottom: 10}}>
+          <div style={{float: 'left', marginLeft: 50}}>
+            {lives}
+          </div>
+          <div id='timer' style={{float: 'right', display: 'none', marginRight: 50}}><RaisedButton disabledLabelColor={'black'} label={`Time Remaining: ${this.state.time} seconds`} disabled={true} /></div>
+          <div id='attempts' style={{float: 'right', display: 'none', marginRight: 50}}><RaisedButton disabledLabelColor={'black'} label={`Attempts Remaining: ${this.props.attempts}`} disabled={true} /></div>
+          <br />
+          <br />
+        </div>
         <div>
           <div className={styles.puzzle_container}>
             <br />

@@ -343,9 +343,11 @@ class Map extends React.Component {
         lives: 5,
         currentQuest: '0',
         levelsRemaining: ['1', '2', '3', '4', '5', '6', '7', '8', '9'],
-        completedQuests: []
+        completedQuests: [],
+        lifeImg: this.state.lifeImg.splice(0, this.state.lifeImg.length - 1)
       }, () => {
         this.handleGameOverOpen();
+        this.handleLives();
       });
       Request.post('/lives', {lives: 5}, function(data) {
       });
@@ -603,7 +605,7 @@ class Map extends React.Component {
               open={this.state.gameOverOpen}
               autoScrollBodyContent={true}
               onRequestClose={this.handleGameOverClose.bind(this)}
-              bodyStyle={{backgroundImage: 'url("/assets/backgrounds/storyBG.png")', backgroundSize: '100% 100%', border: '0', filter: 'brightness(90%)'}}
+              bodyStyle={{backgroundImage: 'url("/assets/backgrounds/storyBG.jpg")', backgroundSize: '100% 100%', border: '0', filter: 'brightness(90%)'}}
             >
               <div className={styles.gameOver_popup_content}>
                 <img style={{backgroundImage: `url(${this.state.avatar})`}} src={'/assets/maps/blood.png'}/>
@@ -786,7 +788,7 @@ class Map extends React.Component {
     } else if (this.state.clickedQuest) {
       return (
         <div>
-          <Puzzle playerName={this.state.playerName} handleLifeChange={this.handleLifeChange.bind(this)} changeName={this.changeName.bind(this)} lives={this.state.lives} map={this.props.map} time={this.state.puzzles.time} handleReturntoMapClick={this.handleReturntoMapClick.bind(this)} questions={this.state.puzzles.questions} currentQuest={this.state.currentQuest} attempts={this.state.attempts} handlePuzzleSubmit={this.handlePuzzleSubmit.bind(this)} handleEnterClick={this.handleEnterClick.bind(this)} messages={this.state.puzzles.messages}/>
+          <Puzzle playerName={this.state.playerName} handleLifeChange={this.handleLifeChange.bind(this)} changeName={this.changeName.bind(this)} lives={this.state.lives} map={this.props.map} time={this.state.puzzles.time} handleReturntoMapClick={this.handleReturntoMapClick.bind(this)} questions={this.state.puzzles.questions} currentQuest={this.state.currentQuest} lifeImages={this.state.lifeImg} attempts={this.state.attempts} handlePuzzleSubmit={this.handlePuzzleSubmit.bind(this)} handleEnterClick={this.handleEnterClick.bind(this)} messages={this.state.puzzles.messages}/>
         </div>
       );
     }

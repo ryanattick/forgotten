@@ -1,6 +1,7 @@
 import React from 'react';
 import NewAvatar from './newAvatar.js';
 import EditAccount from './EditAccount.js';
+import EditName from './editName.js';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
 import Dialog from 'material-ui/Dialog';
@@ -38,6 +39,8 @@ class Account extends React.Component {
     this.backToMainFromUsername = this.backToMainFromUsername.bind(this);
     this.backToMain = this.backToMain.bind(this);
     this.handleAudioClick = this.handleAudioClick.bind(this);
+    this.handleNameEditClick = this.handleNameEditClick.bind(this);
+    this.backToMainFromName = this.backToMainFromName.bind(this);
   }
 
 
@@ -51,8 +54,8 @@ class Account extends React.Component {
       }
       this.setState({
         id: data.id,
-        firstName: data.first,
-        lastName: data.last,
+        firstName: data.first || 'Player',
+        lastName: data.last || 'One',
         display: data.display,
         email: data.email,
         avatar: data.avatar,
@@ -109,6 +112,14 @@ class Account extends React.Component {
     });
   }
 
+  backToMainFromName (name) {
+    this.setState({
+      page: 'main',
+      firstName: name.firstName,
+      lastName: name.lastName
+    });
+  }
+
   handleLogoutClick () {
     Request.get('/logout', (data) => {
       console.log('Log Out successful');
@@ -121,6 +132,12 @@ class Account extends React.Component {
       this.setState({
         musicMuted: this.props.musicMuted
       });
+    });
+  }
+
+  handleNameEditClick () {
+    this.setState({
+      page: 'editName'
     });
   }
 
@@ -150,6 +167,9 @@ class Account extends React.Component {
 
     return (
       <div>
+        {currentPage === 'editName' &&
+          <EditName backToMainFromName={this.backToMainFromName} backToMain={this.backToMain} userId={this.state.id} firstName={this.state.firstName} lastName={this.state.lastName} />
+        }
         {currentPage === 'edit' &&
           <EditAccount backToMainFromUsername={this.backToMainFromUsername} backToMain={this.backToMain} userId={this.state.id} username={this.state.username} />
         }
@@ -166,8 +186,10 @@ class Account extends React.Component {
               <h4 className={accountStyle.level}>
               LEVEL {this.state.level}
               </h4>
-              <span className={accountStyle.label} style={{marginLeft: '30px'}}>USERNAME<IconButton className={accountStyle.change_username_iconbutton} tooltip='Change Username' tooltipPosition='bottom-center' onClick={this.handleEditClick}><SettingsIcon color="rgba(57, 62, 65, 0.55)" /></IconButton></span> <span className={accountStyle.text}>{this.state.username}</span>
-              <span className={accountStyle.label}>NAME</span> <span className={accountStyle.text}>{this.state.firstName + ' ' + this.state.lastName}</span>
+              <span className={accountStyle.label} style={{marginLeft: '30px'}}>USERNAME<IconButton className={accountStyle.change_username_iconbutton} tooltip='Change Username' tooltipPosition='bottom-center' onClick={this.handleEditClick}><SettingsIcon color="rgba(57, 62, 65, 0.55)" /></IconButton></span>
+              <span className={accountStyle.text}>{this.state.username}</span>
+              <span className={accountStyle.label} style={{marginLeft: '30px'}}>NAME<IconButton className={accountStyle.change_username_iconbutton} tooltip='Change Name' tooltipPosition='bottom-center' onClick={this.handleNameEditClick}><SettingsIcon color="rgba(57, 62, 65, 0.55)" /></IconButton></span>
+              <span className={accountStyle.text}>{this.state.firstName} {this.state.lastName}</span>
               <span className={accountStyle.label}>EMAIL</span> <span className={accountStyle.text}>{this.state.email}</span>
               <div className={accountStyle.buttons_container}>
                 {audioButton}

@@ -96,6 +96,18 @@ app.post('/mapData', function(req, res) {
     });
 });
 
+app.post('/updateName', function (req, res) {
+  console.log(req.body, 'req.body update NAME exists');
+  // Profile.forge({first: "John", last: "Smith"}).save().then(function() {
+  //   console.log('saved')
+  // })
+  Profile.forge({id: req.body.id}).save({first: req.body.firstName,
+    last: req.body.lastName
+  }).then(function() { //...
+    res.send('201'); //I don't know why this works, but it does.
+  });
+});
+
 
 app.post('/lives', function(req, res) {
   Profile.forge({id: req.user.id}).save({lives: req.body.lives}).then(function() {

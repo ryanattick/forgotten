@@ -188,7 +188,7 @@ class Maps extends React.Component {
 
     const levelActions = [
       <FlatButton
-        label={`Go to level ${parseInt(this.state.currentLevel) + 1}`}
+        label={`Go to map ${parseInt(this.state.currentLevel) + 1}`}
         primary={true}
         style={{color:'#E94F37'}}
         onClick={this.handleMoveToCurrentLevel.bind(this)}
@@ -242,7 +242,7 @@ class Maps extends React.Component {
               contentStyle={{textAlign: 'center'}}
               actionsContainerStyle={{textAlign: 'center'}}
             >
-              {`Congratulations, you have finished Level ${parseInt(this.state.currentLevel)}!`}
+              {`Congratulations, you have finished Map ${parseInt(this.state.currentLevel)}!`}
             </Dialog>
           </div>
           <div>
@@ -253,7 +253,7 @@ class Maps extends React.Component {
               autoScrollBodyContent={true}
               onRequestClose={this.handleComingSoonClose.bind(this)}
             >
-              <b>More Levels Coming Soon!</b>
+              <b>More Maps Coming Soon!</b>
             </Dialog>
           </div>
           <div>
@@ -273,9 +273,9 @@ class Maps extends React.Component {
             {this.state.levels.map((item, id) => (
               <GridTile
                 key={id}
-                style={{height: '100%', borderStyle: 'solid', borderColor: '#393E41'}}
+                style={{height: '100%', borderStyle: 'solid', borderColor: '#393E41', fontFamily: 'Exo Light'}}
                 id={'Grid' + id}
-                title={`Level ${JSON.stringify(parseInt(item) + 1)}`}
+                title={`MAP ${JSON.stringify(parseInt(item) + 1)}`}
                 actionIcon={<IconButton id={id} onClick={(e) => this.handleLevelClick(e)}></IconButton>}>
                 <img id={id} onClick={(e) => this.handleLevelClick(e)} style={{cursor: 'pointer'}} src={tilesData[id].img}/>
               </GridTile>
@@ -291,7 +291,7 @@ class Maps extends React.Component {
               contentStyle={{textAlign: 'center'}}
               actionsContainerStyle={{textAlign: 'center'}}
             >
-              <b>{`Complete Level ${JSON.stringify(parseInt(this.state.currentLevel) + 1)} before moving on!`}</b>
+              <b>{`Complete Map ${JSON.stringify(parseInt(this.state.currentLevel) + 1)} before moving on!`}</b>
             </Dialog>
           </div>
           <Snackbar

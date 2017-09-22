@@ -76,7 +76,7 @@ class Storyline extends React.Component {
 
     let emptyStoryline = <div className={styles.empty_storyline_container}>
       <div className={styles.empty_storyline_content}>
-        Your story is yet to begin! Start by clicking on the first Map.
+        Your story is yet to begin! Start by clicking on the first map.
       </div>
     </div>;
 

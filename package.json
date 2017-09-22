@@ -2,7 +2,7 @@
   "name": "course.thesis",
   "version": "1.0.0",
   "scripts": {
-    "postinstall": "curl -s https://raw.githubusercontent.com/reactorcore/pomander/master/bin/install & webpack --config webpack.config.js & knex migrate:rollback & knex migrate:latest & knex seed:run",
+    "postinstall": "curl -s https://raw.githubusercontent.com/reactorcore/pomander/master/bin/install & webpack --config webpack.config.js",
     "test": "NODE_ENV=test grunt test",
     "test:react": "mocha --compilers js:babel-register ./client/test/test.js",
     "build": "webpack -d --watch",
